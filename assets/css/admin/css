@@ -225,7 +225,7 @@ li {
 .popup-outer .popup-box {
   position: fixed;
   left: 50%;
-  top: 70px;
+  top: 100px;
   transform: translateX(-50%);
   width: 500px;
   max-width: 94%;
@@ -272,26 +272,6 @@ li {
   line-height: 30px;
   padding: 0 10px;
   background-color: #fff;
-  color: #070506;
-}
-.popup-outer .popup-box form .form-group select {
-  height: 30px;
-  line-height: 30px;
-  border-radius: 5px;
-}
-.popup-outer .popup-box form .form-group select option {
-  padding: 10px 0;
-  border-radius: 5px;
-  background: #070506;
-  color: #ffaf08;
-  outline: none;
-  border-color: #070506;
-}
-.popup-outer .popup-box form .form-group select option:focus {
-  border-color: #ffaf08;
-}
-.popup-outer .popup-box form .form-group select option:hover {
-  background-color: #ffaf08;
   color: #070506;
 }
 .popup-outer .popup-box .bottom {
@@ -933,24 +913,6 @@ main .view-category {
   width: 100%;
   height: auto;
 }
-main .view-category .insert_cat {
-  background: #070506;
-  border: 2px solid #070506;
-  padding: 5px 10px;
-  color: #ffaf08;
-  border-radius: 5px;
-  margin-bottom: 5px;
-}
-main .view-category .insert_cat i {
-  padding-right: 5px;
-}
-main .view-category .insert_cat span {
-  font-weight: 600;
-}
-main .view-category .insert_cat:hover {
-  background-color: transparent;
-  color: #070506;
-}
 main .view-category .wrapper {
   border-radius: 5px;
   width: 100%;
@@ -1013,4 +975,4 @@ main .view-category .wrapper #example tbody tr:hover td:last-child button {
   color: #ffaf08;
 }
 
-/*# sourceMappingURL=admin.css.map */
+/*# sourceMappingURL=css.map */

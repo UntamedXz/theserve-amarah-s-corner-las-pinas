@@ -78,6 +78,10 @@ require_once '../includes/database_conn.php';
             background: #070506 !important;
         }
 
+        .dataTables_wrapper .dataTables_length label {
+            color: #936500 !important;
+        }
+
         table thead tr th:first-child {
             border-top-left-radius: 5px !important;
         }
@@ -104,8 +108,8 @@ require_once '../includes/database_conn.php';
         <div class="progress"></div>
     </div>
 
-    <!-- VIEW -->
-    <div id="popup-outer" class="popup-outer view-modal">
+    <!-- DELETE -->
+    <div id="popup-outer" class="popup-outer delete-modal">
         <div id="popup-box" class="popup-box">
             <div id="popup-box" class="popup-box">
                 <div class="top">
@@ -113,14 +117,12 @@ require_once '../includes/database_conn.php';
                     <div id="modalClose" class="fa-solid fa-xmark"></div>
                 </div>
                 <hr>
-                <form enctype="multipart/form-data">
-                    <h5>Category: <span style="color: #ffaf08; padding-left: 5px;" id="category_title_view"></span></h5>
-                    <h5>Category Thumbnail: <br> <img id="category_thumbnail_view" style="width: 150px; margin-top: 5px;" src=""></h5>
-                </form>
+                <p style="padding: 20px;">Are you sure, you want to delete this subcategory?</p>
                 <hr>
                 <div class="bottom">
                     <div class="buttons">
                         <button id="modalClose" type="button" class="cancel">CLOSE</button>
+                        <button id="deleteSubCategory" type="button" class="save">DELETE</button>
                     </div>
                 </div>
             </div>
@@ -131,26 +133,33 @@ require_once '../includes/database_conn.php';
     <div id="popup-outer" class="popup-outer edit-modal">
         <div id="popup-box" class="popup-box">
             <div class="top">
-                <h3>Edit Category</h3>
+                <h3>Edit Subcategory</h3>
                 <div id="modalClose" class="fa-solid fa-xmark"></div>
             </div>
             <hr>
-            <form enctype="multipart/form-data" id="edit-category">
+            <form id="edit-category">
                 <div style="display: none;" class="form-group">
                     <span>Category ID</span>
-                    <input type="text" id="update_category_id" name="update_category_id" value="">
+                    <input type="text" id="update_subcategory_id" name="update_subcategory_id" value="">
                 </div>
                 <div class="form-group">
-                    <span>Category Title</span>
-                    <input type="text" id="update_category_title" name="update_category_title" value="">
+                    <span id="cat">Select Category</span>
+                    <select name="update_category-list" id="update_category-list">
+                        <option value="">CATEGORY</option>
+                        <?php
+                        $getCategoryList = mysqli_query($conn, "SELECT * FROM category");
+
+                        foreach ($getCategoryList as $row) {
+                        ?>
+                            <option value="<?php echo $row['category_title'] ?>"><?php echo strtoupper($row['category_title']) ?></option>
+                        <?php
+                        }
+                        ?>
+                    </select>
                 </div>
                 <div class="form-group">
-                    <span>Category Image Name:</span>
-                    <input style="background-color: #3b3b3b; color: #949494;" type="text" class="file" name="category_thumbnailDB" id="category_thumbnailDB" readonly>
-                </div>
-                <div class="form-group">
-                    <span>Select Category Image</span>
-                    <input type="file" accept=".jpg, .jpeg, .png" class="file" name="update_category_thumbnail" id="update_category_thumbnail">
+                    <span>Subcategory Title</span>
+                    <input type="text" name="update-subcategory" id="update-subcategory" placeholder="Enter sub category title">
                 </div>
                 <hr>
                 <div class="bottom">
@@ -167,18 +176,29 @@ require_once '../includes/database_conn.php';
     <div id="popup-outer" class="popup-outer insert-modal">
         <div id="popup-box" class="popup-box">
             <div class="top">
-                <h3>INSERT Category</h3>
+                <h3>Insert Sub Category</h3>
                 <div id="modalClose" class="fa-solid fa-xmark"></div>
             </div>
             <hr>
-            <form enctype="multipart/form-data" id="insert-category">
+            <form id="insert-category">
                 <div class="form-group">
-                    <span>Category Title</span>
-                    <input type="text" id="insert_category_title" name="insert_category_title" value="">
+                    <span id="cat">Select Category</span>
+                    <select name="category-list" id="category-list">
+                        <option value="">CATEGORY</option>
+                        <?php
+                        $getCategoryList = mysqli_query($conn, "SELECT * FROM category");
+
+                        foreach ($getCategoryList as $row) {
+                        ?>
+                            <option value="<?php echo $row['category_title'] ?>"><?php echo strtoupper($row['category_title']) ?></option>
+                        <?php
+                        }
+                        ?>
+                    </select>
                 </div>
                 <div class="form-group">
-                    <span>Select Category Image</span>
-                    <input type="file" accept=".jpg, .jpeg, .png" class="file" name="insert_category_thumbnail" id="insert_category_thumbnail">
+                    <span>Sub Category Title</span>
+                    <input type="text" name="insert-subcategory" id="insert-subcategory" placeholder="Enter sub category title">
                 </div>
                 <hr>
                 <div class="bottom">
@@ -195,20 +215,20 @@ require_once '../includes/database_conn.php';
 
     <!-- MAIN -->
     <main>
-        <h1 class="title">View Category</h1>
+        <h1 class="title">View Sub Category</h1>
         <ul class="breadcrumbs">
             <li><a href="index">Home</a></li>
             <li class="divider">/</li>
             <li><a href="view-category" class="active">View Category</a></li>
         </ul>
         <section class="view-category">
-            <button id="getInsert" class="insert_cat" type="button"><i class="fa-solid fa-plus"></i> <span>INSERT CATEGORY</span> </button>
+            <button id="getInsert" class="insert_cat" type="button"><i class="fa-solid fa-plus"></i> <span>INSERT SUB CATEGORY</span> </button>
             <div class="wrapper">
                 <table id="example" class="table table-bordered table-striped">
                     <thead>
                         <tr>
                             <th>Category Title</th>
-                            <th>Category Thumbnail</th>
+                            <th>Sub Category Title</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -218,7 +238,6 @@ require_once '../includes/database_conn.php';
 
 
         <script>
-            // DATA TABLES
             var dataTable = $('#example').DataTable({
                 "processing": true,
                 "serverSide": true,
@@ -232,7 +251,7 @@ require_once '../includes/database_conn.php';
                 ],
                 "iDisplayLength": 5,
                 "ajax": {
-                    url: "category-table",
+                    url: "subcategory-table",
                     type: "post"
                 }
             });
@@ -259,18 +278,17 @@ require_once '../includes/database_conn.php';
             // GET EDIT
             $(document).on('click', '#getEdit', function(e) {
                 e.preventDefault();
-                var category_id_edit = $(this).data('id');
+                var subcategory_id_edit = $(this).data('id');
                 $.ajax({
                     url: 'processing',
                     type: 'POST',
-                    data: 'category_id_edit=' + category_id_edit,
+                    data: 'subcategory_id_edit=' + subcategory_id_edit,
                     success: function(res) {
                         var obj = JSON.parse(res);
                         $(".edit-modal").addClass("active");
-                        $("#update_category_id").val(obj.category_id);
-                        $("#update_category_title").val(obj.category_title);
-                        $("#category_thumbnailDB").val(obj.category_thumbnail);
-                        $("#update_category_thumbnail").attr("src", "../assets/images/" + obj.category_thumbnail);
+                        $("#update_subcategory_id").val(obj.subcategory_id);
+                        $("#update_category-list").val(obj.category_title).change;
+                        $("#update-subcategory").val(obj.subcategory_title);
                     }
                 })
             });
@@ -281,11 +299,18 @@ require_once '../includes/database_conn.php';
                 $('.insert-modal').addClass('active');
             });
 
+            // GET DELETE
+            $(document).on('click', '#getDelete', function(e) {
+                e.preventDefault();
+                $('.delete-modal').addClass('active');
+            })
+
             // CLOSE MODAL
             $(document).on('click', '#modalClose', function() {
                 $('.edit-modal').removeClass("active");
                 $('.view-modal').removeClass("active");
                 $('.insert-modal').removeClass("active");
+                $('.delete-modal').removeClass("active");
                 $("#edit-category")[0].reset();
                 $("#insert-category")[0].reset();
             })

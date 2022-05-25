@@ -3,10 +3,11 @@ require_once '../includes/database_conn.php';
 
 $request = $_REQUEST;
 $col = array(
-    0   =>  'category_id',
-    1   =>  'category_title',
+    // 0   =>  'category_id',
+    0   =>  'category_title',
     1   =>  'categoty_thumbnail',
-);  //create column like table in database
+);
+//create column like table in database
 
 $sql = "SELECT * FROM category";
 $query = mysqli_query($conn, $sql);
@@ -24,8 +25,8 @@ if (!empty($request['search']['value'])) {
 $query = mysqli_query($conn, $sql);
 $totalData = mysqli_num_rows($query);
 
-// Order
-$sql .= "  LIMIT " .
+//Order
+$sql .= " ORDER BY " . $col[$request['order'][0]['column']] . "   " . $request['order'][0]['dir'] . "  LIMIT " .
     $request['start'] . "  ," . $request['length'] . "  ";
 
 $query = mysqli_query($conn, $sql);

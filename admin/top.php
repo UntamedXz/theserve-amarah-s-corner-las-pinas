@@ -19,24 +19,12 @@
         <li><a href="#"><i class='bx bx-chat icon'></i>Messages</a></li>
         <li class="divider" data-text="categories">Categories</li>
         <li>
-            <a href="#"><i class='bx bxs-category icon'></i>Category <i class="bx bx-chevron-right icon-right"></i></a>
-            <ul class="side-dropdown">
-                <li><a href="insert-category">Insert Category</a></li>
-                <li><a href="category">View Category</a></li>
-            </ul>
-        </li>
-        <li>
-            <a href="#"><i class='bx bxs-category-alt icon'></i>Sub Category <i
-                    class="bx bx-chevron-right icon-right"></i></a>
-            <ul class="side-dropdown">
-                <li><a href="#">Insert Sub Category</a></li>
-                <li><a href="#">View Sub Category</a></li>
-            </ul>
+        <li><a href="category"><i class='bx bxs-category icon'></i>Category</a></li>
+        <li><a href="subcategory"><i class='bx bxs-category-alt icon'></i>Sub Category</a></li>
         </li>
         <li class="divider" data-text="social">Product</li>
         <li>
-            <a href="#"><i class='bx bx-list-ul icon'></i>Product Attributes <i
-                    class="bx bx-chevron-right icon-right"></i></a>
+            <a href="#"><i class='bx bx-list-ul icon'></i>Product Attributes <i class="bx bx-chevron-right icon-right"></i></a>
             <ul class="side-dropdown">
                 <li><a href="#">Insert Product Attributes</a></li>
                 <li><a href="#">View Product Attributes</a></li>

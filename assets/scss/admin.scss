@@ -249,7 +249,7 @@ li {
   .popup-box {
     position: fixed;
     left: 50%;
-    top: 100px;
+    top: 70px;
     transform: translateX(-50%);
     width: 500px;
     max-width: 94%;
@@ -302,6 +302,30 @@ li {
           padding: 0 10px;
           background-color: #fff;
           color: #070506;
+        }
+
+        select {
+          height: 30px;
+          line-height: 30px;
+          border-radius: 5px;
+
+          option {
+            padding: 10px 0;
+            border-radius: 5px;
+            background: #070506;
+            color: #ffaf08;
+            outline: none;
+            border-color: #070506;
+
+            &:focus {
+              border-color: #ffaf08;
+            }
+
+            &:hover {
+              background-color: #ffaf08;
+              color: #070506;
+            }
+          }
         }
       }
     }
@@ -1035,6 +1059,28 @@ main {
   .view-category {
     width: 100%;
     height: auto;
+
+    .insert_cat {
+      background: #070506;
+      border: 2px solid #070506;
+      padding: 5px 10px;
+      color: #ffaf08;
+      border-radius: 5px;
+      margin-bottom: 5px;
+
+      i {
+        padding-right: 5px;
+      }
+
+      span {
+        font-weight: 600;
+      }
+
+      &:hover {
+        background-color: transparent;
+        color: #070506;
+      }
+    }
 
     .wrapper {
       border-radius: 5px;

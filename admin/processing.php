@@ -48,76 +48,7 @@ if (isset($_POST['login'])) {
     }
 }
 
-// INSERT CATEGORY
-if (isset($_POST['category'])) {
-    $category_title = $_POST['category_title'];
-
-    if (empty($category_title) && $_FILES['category_thumbnail']['error'] === 4) {
-        $_SESSION['status'] = "empty field";
-        echo '<script>
-            window.location.replace("insert-category")
-        </script>';
-    } else if (empty($category_title)) {
-        $_SESSION['status'] = "empty category title";
-        echo '<script>
-            window.location.replace("insert-category")
-        </script>';
-    } else if ($_FILES['category_thumbnail']['error'] === 4) {
-        $_SESSION['status'] = "image does not exist";
-        echo '<script>
-            window.location.replace("insert-category")
-        </script>';
-    } else {
-        $category_thumbnail_name = $_FILES['category_thumbnail']['name'];
-        $category_thumbnail_size = $_FILES['category_thumbnail']['size'];
-        $category_thumbnail_tmpname = $_FILES['category_thumbnail']['tmp_name'];
-
-        $valid_img_ext = ['jpg', 'jpeg', 'png'];
-        $img_ext = explode('.', $category_thumbnail_name);
-        $img_ext = strtolower(end($img_ext));
-
-        if (!in_array($img_ext, $valid_img_ext)) {
-            $_SESSION['status'] = "invalid img ext";
-            echo '<script>
-                window.location.replace("insert-category")
-            </script>';
-        } else if ($category_thumbnail_size > 10485760) {
-            $_SESSION['status'] = "too large";
-            echo '<script>
-                window.location.replace("insert-category")
-            </script>';
-        } else {
-            $new_category_thumbnail_name = uniqid() . '-' . $category_thumbnail_name;
-
-            move_uploaded_file($category_thumbnail_tmpname, '../assets/images/' . $new_category_thumbnail_name);
-
-            $check = mysqli_query($conn, "SELECT * FROM category WHERE category_title = '$category_title'");
-
-            if (mysqli_num_rows($check) > 0) {
-                $_SESSION['status'] = "category title exist";
-                echo '<script>
-            window.location.replace("insert-category")
-        </script>';
-            } else {
-                $insert_category = mysqli_query($conn, "INSERT INTO category VALUES ('', '$category_title', '$new_category_thumbnail_name')");
-
-                if ($insert_category) {
-                    $_SESSION['status'] = "Successfully added!";
-                    echo '<script>
-                    window.location.replace("insert-category")
-                </script>';
-                } else {
-                    $_SESSION['status'] = "Something went wrong!";
-                    echo '<script>
-                    window.location.replace("insert-category")
-                </script>';
-                }
-            }
-        }
-    }
-}
-
-// EDIT
+// EDIT CATEGORY MODAL
 if (isset($_REQUEST['category_id_edit'])) {
     $category_id = $_REQUEST['category_id_edit'];
     $get_category = mysqli_query($conn, "SELECT * FROM category WHERE category_id = '$category_id'");
@@ -132,7 +63,7 @@ if (isset($_REQUEST['category_id_edit'])) {
     echo json_encode($result_array);
 }
 
-// VIEW
+// VIEW CATEGORY MODAL
 if (isset($_REQUEST['category_id_view'])) {
     $category_id = $_REQUEST['category_id_view'];
     $get_category = mysqli_query($conn, "SELECT category_title, categoty_thumbnail FROM category WHERE category_id = '$category_id'");
@@ -146,6 +77,21 @@ if (isset($_REQUEST['category_id_view'])) {
     echo json_encode($result_array);
 }
 
-// if($_FILES['update_category_thumbnail']['error'] === 4) {
-//     echo 'all fields are required';
-// }
+// EDIT SUB CATEGORY MODAL
+if (isset($_REQUEST['subcategory_id_edit'])) {
+    $subcategory_id = $_REQUEST['subcategory_id_edit'];
+    $get_subcategory = mysqli_query($conn, "SELECT category.category_title, subcategory.subcategory_id, subcategory.subcategory_title
+    FROM subcategory
+    INNER JOIN category
+    ON subcategory.category_id=category.category_id
+    WHERE subcategory.subcategory_id = $subcategory_id");
+
+    $result_array = array();
+    while($result=mysqli_fetch_assoc($get_subcategory)) {
+        $result_array['category_title'] = $result['category_title'];
+        $result_array['subcategory_id'] = $result['subcategory_id'];
+        $result_array['subcategory_title'] = $result['subcategory_title'];
+    }
+
+    echo json_encode($result_array);
+}
