@@ -209,23 +209,10 @@ li {
     right: 100%;
   }
 }
-.popup-outer {
+.popup-box {
   position: fixed;
-  width: 100%;
-  height: 100vh;
-  top: 0;
-  background-color: rgba(0, 0, 0, 0.788);
-  z-index: 300;
-  display: block;
-  opacity: 0;
-  pointer-events: none;
-  transition: all 0.6s ease;
-  padding: 0 10%;
-}
-.popup-outer .popup-box {
-  position: fixed;
+  top: -100%;
   left: 50%;
-  top: 70px;
   transform: translateX(-50%);
   width: 500px;
   max-width: 94%;
@@ -233,38 +220,41 @@ li {
   background-color: var(--black);
   border-radius: 5px;
   color: #fff;
+  z-index: 400;
+  border: 1px solid #fff;
+  transition: all 0.6s ease;
 }
-.popup-outer .popup-box .top {
+.popup-box .top {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 13px 20px;
 }
-.popup-outer .popup-box .top .bx {
+.popup-box .top .bx {
   font-size: 24px;
 }
-.popup-outer .popup-box .top .bx:hover {
+.popup-box .top .bx:hover {
   color: var(--primary);
 }
-.popup-outer .popup-box .top h3 {
+.popup-box .top h3 {
   font-weight: 500;
   color: var(--primary);
 }
-.popup-outer .popup-box form {
+.popup-box form {
   padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
-.popup-outer .popup-box form .form-group {
+.popup-box form .form-group {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
-.popup-outer .popup-box form .form-group span {
+.popup-box form .form-group span {
   font-size: 14px;
 }
-.popup-outer .popup-box form .form-group input {
+.popup-box form .form-group input {
   border: none;
   outline: none;
   border-radius: 3px;
@@ -274,12 +264,12 @@ li {
   background-color: #fff;
   color: #070506;
 }
-.popup-outer .popup-box form .form-group select {
+.popup-box form .form-group select {
   height: 30px;
   line-height: 30px;
   border-radius: 5px;
 }
-.popup-outer .popup-box form .form-group select option {
+.popup-box form .form-group select option {
   padding: 10px 0;
   border-radius: 5px;
   background: #070506;
@@ -287,26 +277,26 @@ li {
   outline: none;
   border-color: #070506;
 }
-.popup-outer .popup-box form .form-group select option:focus {
+.popup-box form .form-group select option:focus {
   border-color: #ffaf08;
 }
-.popup-outer .popup-box form .form-group select option:hover {
+.popup-box form .form-group select option:hover {
   background-color: #ffaf08;
   color: #070506;
 }
-.popup-outer .popup-box .bottom {
+.popup-box .bottom {
   display: flex;
   align-items: center;
   justify-content: end;
 }
-.popup-outer .popup-box .bottom .buttons {
+.popup-box .bottom .buttons {
   padding: 13px 20px;
   display: flex;
   align-items: center;
   gap: 5px;
 }
-.popup-outer .popup-box .bottom .buttons button,
-.popup-outer .popup-box .bottom .buttons input {
+.popup-box .bottom .buttons button,
+.popup-box .bottom .buttons input {
   color: var(--black);
   background-color: var(--primary);
   padding: 7px 18px;
@@ -317,35 +307,34 @@ li {
   white-space: nowrap;
   border: 1px solid var(--primary);
 }
-.popup-outer .popup-box .bottom .buttons .cancel {
+.popup-box .bottom .buttons .cancel {
   border: 1px solid #fff;
   background-color: #fff;
   cursor: pointer;
   transition: all 0.6s ease;
 }
-.popup-outer .popup-box .bottom .buttons .cancel:hover {
+.popup-box .bottom .buttons .cancel:hover {
   background-color: #070506;
   color: #fff;
 }
-.popup-outer .popup-box .bottom .buttons .save {
+.popup-box .bottom .buttons .save {
   border: 1px solid #ffaf08;
   background-color: #ffaf08;
 }
-.popup-outer .popup-box .bottom .buttons .save:hover {
+.popup-box .bottom .buttons .save:hover {
   background-color: #070506;
   color: var(--primary);
 }
-.popup-outer .popup-box .bottom .buttons .close {
+.popup-box .bottom .buttons .close {
   border: 1px solid #ffaf08;
   background-color: #ffaf08;
 }
-.popup-outer .popup-box .bottom .buttons .close:hover {
+.popup-box .bottom .buttons .close:hover {
   background-color: #070506;
   color: var(--primary);
 }
-.popup-outer.active {
-  opacity: 1;
-  pointer-events: visible;
+.popup-box.active {
+  top: 70px;
 }
 
 .login-form-container {
@@ -1011,6 +1000,259 @@ main .view-category .wrapper #example tbody tr:hover td:last-child button {
   background: #070506;
   border: 1px solid #070506;
   color: #ffaf08;
+}
+main .insert-product {
+  overflow: hidden;
+}
+main .insert-product span {
+  font-size: 14px;
+}
+main .insert-product .insert-product-wrapper {
+  padding: 20px;
+  background-color: #070506;
+  color: #ffaf08;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border-radius: 5px;
+}
+main .insert-product .insert-product-wrapper .panel-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+@media (min-width: 992px) {
+  main .insert-product .insert-product-wrapper .panel-wrapper {
+    flex-direction: row;
+  }
+}
+main .insert-product .insert-product-wrapper .panel-wrapper .left-panel {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+@media (min-width: 992px) {
+  main .insert-product .insert-product-wrapper .panel-wrapper .left-panel {
+    width: 70%;
+  }
+}
+main .insert-product .insert-product-wrapper .panel-wrapper .left-panel .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+main .insert-product .insert-product-wrapper .panel-wrapper .left-panel .form-group input {
+  outline: none;
+  border: none;
+  height: 30px;
+  line-height: 30px;
+  background: #fff;
+  padding: 0 5px;
+  border-radius: 5px;
+}
+main .insert-product .insert-product-wrapper .panel-wrapper .left-panel .tab-wrapper {
+  margin-top: 10px;
+  height: auto;
+  width: 100%;
+  background: #070506;
+  border-radius: 5px;
+}
+main .insert-product .insert-product-wrapper .panel-wrapper .left-panel .tab-wrapper .tabs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+main .insert-product .insert-product-wrapper .panel-wrapper .left-panel .tab-wrapper .tabs .btn-tabs {
+  border-bottom: 2px solid #ffaf08;
+  display: flex;
+  gap: 10px;
+}
+main .insert-product .insert-product-wrapper .panel-wrapper .left-panel .tab-wrapper .tabs .btn-tabs button {
+  font-weight: 400;
+  font-size: 14px;
+  background: #070506;
+  color: #ffaf08;
+  border: none;
+  outline: none;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  border-bottom: none;
+  cursor: pointer;
+}
+main .insert-product .insert-product-wrapper .panel-wrapper .left-panel .tab-wrapper .tabs .btn-tabs #btn1 {
+  color: #fff;
+}
+main .insert-product .insert-product-wrapper .panel-wrapper .left-panel .tab-wrapper .tabs .tab-cont {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+main .insert-product .insert-product-wrapper .panel-wrapper .left-panel .tab-wrapper .tabs .tab-cont .tab-container {
+  position: relative;
+  min-height: 300px;
+  height: auto;
+  width: 100%;
+}
+main .insert-product .insert-product-wrapper .panel-wrapper .left-panel .tab-wrapper .tabs .tab-cont .tab-container .tab-content {
+  position: absolute;
+  background: #070506;
+  border: 2px solid #ffaf08;
+  height: 300px;
+  width: 100%;
+  border-radius: 5px;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.6s ease;
+  overflow: hidden;
+  overflow-y: auto;
+}
+main .insert-product .insert-product-wrapper .panel-wrapper .left-panel .tab-wrapper .tabs .tab-cont .tab-container .tab-content .variant-dropdown {
+  height: 30px;
+  line-height: 30px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  width: 60%;
+  margin-bottom: 10px;
+}
+@media (min-width: 992px) {
+  main .insert-product .insert-product-wrapper .panel-wrapper .left-panel .tab-wrapper .tabs .tab-cont .tab-container .tab-content .variant-dropdown {
+    width: 50%;
+  }
+}
+main .insert-product .insert-product-wrapper .panel-wrapper .left-panel .tab-wrapper .tabs .tab-cont .tab-container .tab-content .variantBtn {
+  margin-left: 5px;
+  padding: 0 10px;
+  border: none;
+  outline: none;
+}
+main .insert-product .insert-product-wrapper .panel-wrapper .left-panel .tab-wrapper .tabs .tab-cont .tab-container .tab-content .attributes {
+  width: 100%;
+}
+main .insert-product .insert-product-wrapper .panel-wrapper .left-panel .tab-wrapper .tabs .tab-cont .tab-container .tab-content .variant-tab-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 5px;
+}
+@media (min-width: 992px) {
+  main .insert-product .insert-product-wrapper .panel-wrapper .left-panel .tab-wrapper .tabs .tab-cont .tab-container .tab-content .variant-tab-group {
+    width: 50%;
+  }
+}
+main .insert-product .insert-product-wrapper .panel-wrapper .left-panel .tab-wrapper .tabs .tab-cont .tab-container .tab-content .variant-tab-group input {
+  outline: none;
+  border: none;
+  height: 30px;
+  line-height: 30px;
+  padding: 0 5px;
+  border-radius: 5px;
+}
+main .insert-product .insert-product-wrapper .panel-wrapper .left-panel .tab-wrapper .tabs .tab-cont .tab-container .tab-content .add-variation {
+  padding: 0 10px;
+  margin-bottom: 10px;
+}
+main .insert-product .insert-product-wrapper .panel-wrapper .left-panel .tab-wrapper .tabs .tab-cont .tab-container .tab-content .attribute-parent-group {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+@media (min-width: 992px) {
+  main .insert-product .insert-product-wrapper .panel-wrapper .left-panel .tab-wrapper .tabs .tab-cont .tab-container .tab-content .attribute-parent-group {
+    flex-direction: row;
+  }
+}
+main .insert-product .insert-product-wrapper .panel-wrapper .left-panel .tab-wrapper .tabs .tab-cont .tab-container .tab-content .attribute-parent-group .attribute-tab-group {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 5px 0;
+}
+@media (min-width: 992px) {
+  main .insert-product .insert-product-wrapper .panel-wrapper .left-panel .tab-wrapper .tabs .tab-cont .tab-container .tab-content .attribute-parent-group .attribute-tab-group {
+    width: 50%;
+  }
+}
+main .insert-product .insert-product-wrapper .panel-wrapper .left-panel .tab-wrapper .tabs .tab-cont .tab-container .tab-content .attribute-parent-group .attribute-tab-group input {
+  background: #fff;
+  height: 30px;
+  line-height: 30px;
+  padding: 0 5px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+}
+main .insert-product .insert-product-wrapper .panel-wrapper .left-panel .tab-wrapper .tabs .tab-cont .tab-container .tab-content .attribute-parent-group .attribute-tab-group input[type=file] {
+  width: 100%;
+  color: #070506;
+}
+main .insert-product .insert-product-wrapper .panel-wrapper .left-panel .tab-wrapper .tabs .tab-cont .tab-container .tab-content .attribute-parent-group .attribute-tab-group select {
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  color: #070506;
+  border-radius: 5px;
+}
+main .insert-product .insert-product-wrapper .panel-wrapper .left-panel .tab-wrapper .tabs .tab-cont .tab-container .tab-content::-webkit-scrollbar {
+  width: 5px;
+}
+main .insert-product .insert-product-wrapper .panel-wrapper .left-panel .tab-wrapper .tabs .tab-cont .tab-container .tab-content::-webkit-scrollbar-thumb {
+  background: #ffaf08;
+}
+main .insert-product .insert-product-wrapper .panel-wrapper .left-panel .tab-wrapper .tabs .tab-cont .tab-container #product-variant {
+  opacity: 1;
+  pointer-events: visible;
+}
+main .insert-product .insert-product-wrapper .panel-wrapper .right-panel {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+@media (min-width: 992px) {
+  main .insert-product .insert-product-wrapper .panel-wrapper .right-panel {
+    width: 30%;
+  }
+}
+main .insert-product .insert-product-wrapper .panel-wrapper .right-panel .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+main .insert-product .insert-product-wrapper .panel-wrapper .right-panel .form-group input {
+  outline: none;
+  border: none;
+  height: 30px;
+  line-height: 30px;
+  background: #fff;
+  padding: 0 5px;
+  border-radius: 5px;
+}
+main .insert-product .insert-product-wrapper .panel-wrapper .right-panel .form-group input[type=file] {
+  color: #070506;
+}
+main .insert-product .insert-product-wrapper .panel-wrapper .right-panel .form-group select {
+  outline: none;
+  border: none;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 5px;
+}
+main .insert-product .insert-product-wrapper button {
+  outline: none;
+  border: none;
+  height: 30px;
+  line-height: 30px;
+  background: #ffaf08;
+  color: #070506;
+  border-radius: 5px;
+  font-weight: 700;
 }
 
 /*# sourceMappingURL=admin.css.map */

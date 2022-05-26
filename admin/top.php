@@ -22,20 +22,10 @@
         <li><a href="category"><i class='bx bxs-category icon'></i>Category</a></li>
         <li><a href="subcategory"><i class='bx bxs-category-alt icon'></i>Sub Category</a></li>
         </li>
-        <li class="divider" data-text="social">Product</li>
+        <li class="divider" data-text="product">Product</li>
         <li>
-            <a href="#"><i class='bx bx-list-ul icon'></i>Product Attributes <i class="bx bx-chevron-right icon-right"></i></a>
-            <ul class="side-dropdown">
-                <li><a href="#">Insert Product Attributes</a></li>
-                <li><a href="#">View Product Attributes</a></li>
-            </ul>
-        </li>
-        <li>
-            <a href="#"><i class='bx bxs-bowl-hot icon'></i>Products <i class="bx bx-chevron-right icon-right"></i></a>
-            <ul class="side-dropdown">
-                <li><a href="#">Insert Product</a></li>
-                <li><a href="#">View Product</a></li>
-            </ul>
+        <li><a href="product-variant"><i class='bx bx-list-plus icon'></i>Product Variants</a></li>
+        <li><a href="product"><i class='bx bxs-bowl-hot icon'></i>Products</a></li>
         </li>
         <li class="divider" data-text="orders">orders</li>
         <li>

@@ -233,165 +233,153 @@ li {
   }
 }
 
-.popup-outer {
+.popup-box {
   position: fixed;
-  width: 100%;
-  height: 100vh;
-  top: 0;
-  background-color: rgba(0, 0, 0, 0.788);
-  z-index: 300;
-  display: block;
-  opacity: 0;
-  pointer-events: none;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 500px;
+  max-width: 94%;
+  height: auto;
+  background-color: var(--black);
+  border-radius: 5px;
+  color: #fff;
+  z-index: 400;
+  border: 1px solid #fff;
   transition: all .6s ease;
-  padding: 0 10%;
 
-  .popup-box {
-    position: fixed;
-    left: 50%;
-    top: 70px;
-    transform: translateX(-50%);
-    width: 500px;
-    max-width: 94%;
-    height: auto;
-    background-color: var(--black);
-    border-radius: 5px;
-    color: #fff;
+  .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 13px 20px;
 
-    .top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 13px 20px;
+    .bx {
+      font-size: 24px;
 
-      .bx {
-        font-size: 24px;
-
-        &:hover {
-          color: var(--primary);
-        }
-      }
-
-      h3 {
-        font-weight: 500;
+      &:hover {
         color: var(--primary);
       }
     }
 
-    form {
-      padding: 20px;
+    h3 {
+      font-weight: 500;
+      color: var(--primary);
+    }
+  }
+
+  form {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    .form-group {
       display: flex;
       flex-direction: column;
-      gap: 15px;
+      gap: 10px;
 
-      .form-group {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-
-        span {
-          font-size: 14px;
-        }
-
-        input {
-          border: none;
-          outline: none;
-          border-radius: 3px;
-          height: 30px;
-          line-height: 30px;
-          padding: 0 10px;
-          background-color: #fff;
-          color: #070506;
-        }
-
-        select {
-          height: 30px;
-          line-height: 30px;
-          border-radius: 5px;
-
-          option {
-            padding: 10px 0;
-            border-radius: 5px;
-            background: #070506;
-            color: #ffaf08;
-            outline: none;
-            border-color: #070506;
-
-            &:focus {
-              border-color: #ffaf08;
-            }
-
-            &:hover {
-              background-color: #ffaf08;
-              color: #070506;
-            }
-          }
-        }
+      span {
+        font-size: 14px;
       }
-    }
 
-    .bottom {
-      display: flex;
-      align-items: center;
-      justify-content: end;
+      input {
+        border: none;
+        outline: none;
+        border-radius: 3px;
+        height: 30px;
+        line-height: 30px;
+        padding: 0 10px;
+        background-color: #fff;
+        color: #070506;
+      }
 
-      .buttons {
-        padding: 13px 20px;
-        display: flex;
-        align-items: center;
-        gap: 5px;
+      select {
+        height: 30px;
+        line-height: 30px;
+        border-radius: 5px;
 
-        button,
-        input {
-          color: var(--black);
-          background-color: var(--primary);
-          padding: 7px 18px;
-          border-radius: 3px;
-          font-weight: 700;
-          border: none;
+        option {
+          padding: 10px 0;
+          border-radius: 5px;
+          background: #070506;
+          color: #ffaf08;
           outline: none;
-          white-space: nowrap;
-          border: 1px solid var(--primary);
-        }
+          border-color: #070506;
 
-        .cancel {
-          border: 1px solid #fff;
-          background-color: #fff;
-          cursor: pointer;
-          transition: all .6s ease;
-
-          &:hover {
-            background-color: #070506;
-            color: #fff;
+          &:focus {
+            border-color: #ffaf08;
           }
-        }
-
-        .save {
-          border: 1px solid #ffaf08;
-          background-color: #ffaf08;
 
           &:hover {
-            background-color: #070506;
-            color: var(--primary);
-          }
-        }
-
-        .close {
-          border: 1px solid #ffaf08;
-          background-color: #ffaf08;
-
-          &:hover {
-            background-color: #070506;
-            color: var(--primary);
+            background-color: #ffaf08;
+            color: #070506;
           }
         }
       }
     }
   }
 
+  .bottom {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+
+    .buttons {
+      padding: 13px 20px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+
+      button,
+      input {
+        color: var(--black);
+        background-color: var(--primary);
+        padding: 7px 18px;
+        border-radius: 3px;
+        font-weight: 700;
+        border: none;
+        outline: none;
+        white-space: nowrap;
+        border: 1px solid var(--primary);
+      }
+
+      .cancel {
+        border: 1px solid #fff;
+        background-color: #fff;
+        cursor: pointer;
+        transition: all .6s ease;
+
+        &:hover {
+          background-color: #070506;
+          color: #fff;
+        }
+      }
+
+      .save {
+        border: 1px solid #ffaf08;
+        background-color: #ffaf08;
+
+        &:hover {
+          background-color: #070506;
+          color: var(--primary);
+        }
+      }
+
+      .close {
+        border: 1px solid #ffaf08;
+        background-color: #ffaf08;
+
+        &:hover {
+          background-color: #070506;
+          color: var(--primary);
+        }
+      }
+    }
+  }
+
   &.active {
-    opacity: 1;
-    pointer-events: visible;
+    top: 70px;
   }
 }
 
@@ -1168,6 +1156,284 @@ main {
             }
           }
         }
+      }
+    }
+  }
+
+  .insert-product {
+    overflow: hidden;
+
+    span {
+      font-size: 14px;
+    }
+
+    .insert-product-wrapper {
+      padding: 20px;
+      background-color: #070506;
+      color: #ffaf08;
+      width: 100%;
+      height: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      border-radius: 5px;
+
+      .panel-wrapper {
+        @media (min-width: 992px) {
+          flex-direction: row;
+        }
+
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        .left-panel {
+          @media (min-width: 992px) {
+            width: 70%;
+          }
+
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+
+          .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+
+            input {
+              outline: none;
+              border: none;
+              height: 30px;
+              line-height: 30px;
+              background: #fff;
+              padding: 0 5px;
+              border-radius: 5px;
+            }
+          }
+
+          .tab-wrapper {
+            margin-top: 10px;
+            height: auto;
+            width: 100%;
+            background: #070506;
+            border-radius: 5px;
+
+            .tabs {
+              display: flex;
+              flex-direction: column;
+              gap: 10px;
+
+              .btn-tabs {
+                border-bottom: 2px solid #ffaf08;
+                display: flex;
+                gap: 10px;
+
+                button {
+                  font-weight: 400;
+                  font-size: 14px;
+                  background: #070506;
+                  color: #ffaf08;
+                  border: none;
+                  outline: none;
+                  border-bottom-right-radius: 0;
+                  border-bottom-left-radius: 0;
+                  border-bottom: none;
+                  cursor: pointer;
+                }
+
+                #btn1 {
+                  color: #fff;
+                }
+              }
+
+              .tab-cont {
+                display: flex;
+                width: 100%;
+                height: 100%;
+
+                .tab-container {
+                  position: relative;
+                  min-height: 300px;
+                  height: auto;
+                  width: 100%;
+
+                  .tab-content {
+                    position: absolute;
+                    background: #070506;
+                    border: 2px solid #ffaf08;
+                    height: 300px;
+                    width: 100%;
+                    border-radius: 5px;
+                    padding: 20px;
+                    opacity: 0;
+                    pointer-events: none;
+                    transition: all .6s ease;
+                    overflow: hidden;
+                    overflow-y: auto;
+
+                    .variant-dropdown {
+                      @media (min-width: 992px) {
+                        width: 50%;
+                      }
+                      height: 30px;
+                      line-height: 30px;
+                      border-radius: 5px;
+                      border: none;
+                      outline: none;
+                      width: 60%;
+                      margin-bottom: 10px;
+                    }
+
+                    .variantBtn {
+                      margin-left: 5px;
+                      padding: 0 10px;
+                      border: none;
+                      outline: none;
+                    }
+
+                    .attributes {
+                      width: 100%;
+                    }
+
+                    .variant-tab-group {
+                      @media (min-width: 992px) {
+                        width: 50%;
+                      }
+                      display: flex;
+                      flex-direction: column;
+                      width: 100%;
+                      gap: 5px;
+
+                      input {
+                        outline: none;
+                        border: none;
+                        height: 30px;
+                        line-height: 30px;
+                        padding: 0 5px;
+                        border-radius: 5px;
+                      }
+                    }
+
+                    .add-variation {
+                      padding: 0 10px;
+                      margin-bottom: 10px;
+                    }
+
+                    .attribute-parent-group {
+                      @media (min-width: 992px) {
+                        flex-direction: row;
+                      }
+                      width: 100%;
+                      display: flex;
+                      flex-direction: column;
+                      gap: 10px;
+
+
+                      .attribute-tab-group {
+                        @media (min-width: 992px) {
+                          width: 50%;
+                        }
+                        width: 100%;
+                        display: flex;
+                        flex-direction: column;
+                        gap: 10px;
+                        padding: 5px 0;
+
+                        input {
+                          background: #fff;
+                          height: 30px;
+                          line-height: 30px;
+                          padding: 0 5px;
+                          border: none;
+                          outline: none;
+                          border-radius: 5px;
+                        }
+
+                        input[type="file"] {
+                          width: 100%;
+                          color: #070506;
+                        }
+
+                        select {
+                          width: 100%;
+                          height: 30px;
+                          line-height: 30px;
+                          color: #070506;
+                          border-radius: 5px;
+                        }
+                      }
+                    }
+
+                    &::-webkit-scrollbar {
+                      width: 5px;
+                    }
+
+                    &::-webkit-scrollbar-thumb {
+                      background: #ffaf08;
+                    }
+                  }
+
+                  #product-variant {
+                    opacity: 1;
+                    pointer-events: visible;
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        .right-panel {
+          @media (min-width: 992px) {
+            width: 30%;
+          }
+
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+
+          .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+
+            input {
+              outline: none;
+              border: none;
+              height: 30px;
+              line-height: 30px;
+              background: #fff;
+              padding: 0 5px;
+              border-radius: 5px;
+            }
+
+            input[type="file"] {
+              color: #070506;
+            }
+
+            select {
+              outline: none;
+              border: none;
+              height: 30px;
+              line-height: 30px;
+              border-radius: 5px;
+            }
+          }
+        }
+      }
+
+      button {
+        outline: none;
+        border: none;
+        height: 30px;
+        line-height: 30px;
+        background: #ffaf08;
+        color: #070506;
+        border-radius: 5px;
+        font-weight: 700;
       }
     }
   }

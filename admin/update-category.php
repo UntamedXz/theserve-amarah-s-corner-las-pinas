@@ -59,7 +59,7 @@ if (!empty($_POST['update_category_title']) && $_FILES['update_category_thumbnai
         $categoryTitle = mysqli_real_escape_string($conn, $_POST['update_category_title']);
         $checkTitle = mysqli_query($conn, "SELECT * FROM category WHERE category_title = '$categoryTitle'");
 
-        if (mysqli_num_rows($checkTitle) == 1) {
+        if (mysqli_num_rows($checkTitle) > 0) {
             $checkTitle2 = mysqli_query($conn, "SELECT * FROM category WHERE category_title = '$categoryTitle' AND category_id = $categoryId");
 
             if (mysqli_num_rows($checkTitle2) == 0) {

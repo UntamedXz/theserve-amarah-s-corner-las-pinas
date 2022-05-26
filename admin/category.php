@@ -78,6 +78,10 @@ require_once '../includes/database_conn.php';
             background: #070506 !important;
         }
 
+        .dataTables_wrapper .dataTables_length label {
+            color: #936500 !important;
+        }
+
         table thead tr th:first-child {
             border-top-left-radius: 5px !important;
         }
@@ -104,91 +108,107 @@ require_once '../includes/database_conn.php';
         <div class="progress"></div>
     </div>
 
+    <!-- DELETE -->
+    <div id="popup-box" class="popup-box delete-modal">
+        <div class="top">
+            <h3>Edit Category</h3>
+            <div id="modalClose" class="fa-solid fa-xmark"></div>
+        </div>
+        <hr>
+        <form id="delete_category">
+            <div style="display: none;" class="form-group">
+                <span>Category ID</span>
+                <input type="text" id="delete_category_id" name="delete_category_id" value="">
+            </div>
+            <p>Are you sure, you want to delete this category?</p>
+        </form>
+        <hr>
+        <div class="bottom">
+            <div class="buttons">
+                <button id="modalClose" type="button" class="cancel">CLOSE</button>
+                <button form="delete_category" id="deleteSubCategory" type="submit" class="save">DELETE</button>
+            </div>
+
+        </div>
+    </div>
+
     <!-- VIEW -->
-    <div id="popup-outer" class="popup-outer view-modal">
-        <div id="popup-box" class="popup-box">
-            <div id="popup-box" class="popup-box">
-                <div class="top">
-                    <h3>Edit Category</h3>
-                    <div id="modalClose" class="fa-solid fa-xmark"></div>
-                </div>
-                <hr>
-                <form enctype="multipart/form-data">
-                    <h5>Category: <span style="color: #ffaf08; padding-left: 5px;" id="category_title_view"></span></h5>
-                    <h5>Category Thumbnail: <br> <img id="category_thumbnail_view" style="width: 150px; margin-top: 5px;" src=""></h5>
-                </form>
-                <hr>
-                <div class="bottom">
-                    <div class="buttons">
-                        <button id="modalClose" type="button" class="cancel">CLOSE</button>
-                    </div>
-                </div>
+    <div id="popup-box" class="popup-box view-modal">
+        <div class="top">
+            <h3>Edit Category</h3>
+            <div id="modalClose" class="fa-solid fa-xmark"></div>
+        </div>
+        <hr>
+        <form enctype="multipart/form-data">
+            <h5>Category: <span style="color: #ffaf08; padding-left: 5px;" id="category_title_view"></span></h5>
+            <h5>Category Thumbnail: <br> <img id="category_thumbnail_view" style="width: 150px; margin-top: 5px;" src=""></h5>
+        </form>
+        <hr>
+        <div class="bottom">
+            <div class="buttons">
+                <button id="modalClose" type="button" class="cancel">CLOSE</button>
             </div>
         </div>
     </div>
 
     <!-- UPDATE -->
-    <div id="popup-outer" class="popup-outer edit-modal">
-        <div id="popup-box" class="popup-box">
-            <div class="top">
-                <h3>Edit Category</h3>
-                <div id="modalClose" class="fa-solid fa-xmark"></div>
-            </div>
-            <hr>
-            <form enctype="multipart/form-data" id="edit-category">
-                <div style="display: none;" class="form-group">
-                    <span>Category ID</span>
-                    <input type="text" id="update_category_id" name="update_category_id" value="">
-                </div>
-                <div class="form-group">
-                    <span>Category Title</span>
-                    <input type="text" id="update_category_title" name="update_category_title" value="">
-                </div>
-                <div class="form-group">
-                    <span>Category Image Name:</span>
-                    <input style="background-color: #3b3b3b; color: #949494;" type="text" class="file" name="category_thumbnailDB" id="category_thumbnailDB" readonly>
-                </div>
-                <div class="form-group">
-                    <span>Select Category Image</span>
-                    <input type="file" accept=".jpg, .jpeg, .png" class="file" name="update_category_thumbnail" id="update_category_thumbnail">
-                </div>
-                <hr>
-                <div class="bottom">
-                    <div class="buttons">
-                        <button id="modalClose" type="button" class="cancel">CANCEL</button>
-                        <button type="submit" id="update_category" name="update_category" class="save">SAVE CHANGES</button>
-                    </div>
-            </form>
+    <div id="popup-box" class="popup-box edit-modal">
+        <div class="top">
+            <h3>Edit Category</h3>
+            <div id="modalClose" class="fa-solid fa-xmark"></div>
         </div>
-    </div>
+        <hr>
+        <form enctype="multipart/form-data" id="edit-category">
+            <div style="display: none;" class="form-group">
+                <span>Category ID</span>
+                <input type="text" id="update_category_id" name="update_category_id" value="">
+            </div>
+            <div class="form-group">
+                <span>Category Title</span>
+                <input type="text" id="update_category_title" name="update_category_title" value="">
+            </div>
+            <div class="form-group">
+                <span>Category Image Name:</span>
+                <input style="background-color: #3b3b3b; color: #949494;" type="text" class="file" name="category_thumbnailDB" id="category_thumbnailDB" readonly>
+            </div>
+            <div class="form-group">
+                <span>Select Category Image</span>
+                <input type="file" accept=".jpg, .jpeg, .png" class="file" name="update_category_thumbnail" id="update_category_thumbnail">
+            </div>
+        </form>
+        <hr>
+        <div class="bottom">
+            <div class="buttons">
+                <button id="modalClose" type="button" class="cancel">CANCEL</button>
+                <button form="edit-category" type="submit" id="update_category" name="update_category" class="save">SAVE CHANGES</button>
+            </div>
+        </div>
     </div>
 
     <!-- INSERT -->
-    <div id="popup-outer" class="popup-outer insert-modal">
-        <div id="popup-box" class="popup-box">
-            <div class="top">
-                <h3>INSERT Category</h3>
-                <div id="modalClose" class="fa-solid fa-xmark"></div>
-            </div>
-            <hr>
-            <form enctype="multipart/form-data" id="insert-category">
-                <div class="form-group">
-                    <span>Category Title</span>
-                    <input type="text" id="insert_category_title" name="insert_category_title" value="">
-                </div>
-                <div class="form-group">
-                    <span>Select Category Image</span>
-                    <input type="file" accept=".jpg, .jpeg, .png" class="file" name="insert_category_thumbnail" id="insert_category_thumbnail">
-                </div>
-                <hr>
-                <div class="bottom">
-                    <div class="buttons">
-                        <button id="modalClose" type="button" class="cancel">CANCEL</button>
-                        <button type="submit" id="insert_category_btn" name="insert_category_btn" class="save">INSERT</button>
-                    </div>
-            </form>
+    <div id="popup-box" class="popup-box insert-modal">
+        <div class="top">
+            <h3>INSERT Category</h3>
+            <div id="modalClose" class="fa-solid fa-xmark"></div>
         </div>
-    </div>
+        <hr>
+        <form enctype="multipart/form-data" id="insert-category">
+            <div class="form-group">
+                <span>Category Title</span>
+                <input type="text" id="insert_category_title" name="insert_category_title" value="">
+            </div>
+            <div class="form-group">
+                <span>Select Category Image</span>
+                <input type="file" accept=".jpg, .jpeg, .png" class="file" name="insert_category_thumbnail" id="insert_category_thumbnail">
+            </div>
+        </form>
+        <hr>
+        <div class="bottom">
+            <div class="buttons">
+                <button id="modalClose" type="button" class="cancel">CANCEL</button>
+                <button form="insert-category" type="submit" id="insert_category_btn" name="insert_category_btn" class="save">INSERT</button>
+            </div>
+        </div>
     </div>
 
     <?php include 'top.php'; ?>
@@ -281,11 +301,20 @@ require_once '../includes/database_conn.php';
                 $('.insert-modal').addClass('active');
             });
 
+            // GET DELETE
+            $(document).on('click', '#getDelete', function(e) {
+                e.preventDefault();
+                $('.delete-modal').addClass('active');
+                var category_id_edit = $(this).data('id');
+                $("#delete_category_id").val(category_id_edit);
+            });
+
             // CLOSE MODAL
             $(document).on('click', '#modalClose', function() {
                 $('.edit-modal').removeClass("active");
                 $('.view-modal').removeClass("active");
                 $('.insert-modal').removeClass("active");
+                $(".delete-modal").removeClass("active");
                 $("#edit-category")[0].reset();
                 $("#insert-category")[0].reset();
             })
@@ -382,6 +411,7 @@ require_once '../includes/database_conn.php';
                     })
                 })
 
+                // SUBMIT INSERT
                 $('#insert-category').on('submit', function(e) {
                     e.preventDefault();
                     $.ajax({
@@ -472,6 +502,35 @@ require_once '../includes/database_conn.php';
                                 $('#toast-icon').removeClass('fa-solid fa-triangle-exclamation').addClass('fa-solid fa-check warning');
                                 $('.text-1').text('Success!');
                                 $('.text-2').text('Category successfully added!!');
+                                setTimeout(() => {
+                                    $('#toast').removeClass("active");
+                                    $('.progress').removeClass("active");
+                                }, 5000);
+                                $('#example').DataTable().ajax.reload();
+                            }
+                        }
+                    })
+                })
+
+                // SUBMIT DELETE
+                $("#delete_category").on('submit', function(e) {
+                    e.preventDefault();
+                    $.ajax({
+                        type: "POST",
+                        url: "delete-category",
+                        data: new FormData(this),
+                        dataType: 'text',
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        success: function(response) {
+                            if (response === 'deleted') {
+                                $('.delete-modal').removeClass("active");
+                                $('#toast').addClass('active');
+                                $('.progress').addClass('active');
+                                $('#toast-icon').removeClass('fa-solid fa-triangle-exclamation').addClass('fa-solid fa-check warning');
+                                $('.text-1').text('Success!');
+                                $('.text-2').text('Category deleted successfully!');
                                 setTimeout(() => {
                                     $('#toast').removeClass("active");
                                     $('.progress').removeClass("active");

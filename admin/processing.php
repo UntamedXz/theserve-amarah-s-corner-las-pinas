@@ -54,7 +54,7 @@ if (isset($_REQUEST['category_id_edit'])) {
     $get_category = mysqli_query($conn, "SELECT * FROM category WHERE category_id = '$category_id'");
 
     $result_array = array();
-    while($result=mysqli_fetch_assoc($get_category)) {
+    while ($result = mysqli_fetch_assoc($get_category)) {
         $result_array['category_id'] = $result['category_id'];
         $result_array['category_title'] = $result['category_title'];
         $result_array['category_thumbnail'] = $result['categoty_thumbnail'];
@@ -69,7 +69,7 @@ if (isset($_REQUEST['category_id_view'])) {
     $get_category = mysqli_query($conn, "SELECT category_title, categoty_thumbnail FROM category WHERE category_id = '$category_id'");
 
     $result_array = array();
-    while($result=mysqli_fetch_assoc($get_category)) {
+    while ($result = mysqli_fetch_assoc($get_category)) {
         $result_array['category_title'] = $result['category_title'];
         $result_array['category_thumbnail'] = $result['categoty_thumbnail'];
     }
@@ -80,17 +80,32 @@ if (isset($_REQUEST['category_id_view'])) {
 // EDIT SUB CATEGORY MODAL
 if (isset($_REQUEST['subcategory_id_edit'])) {
     $subcategory_id = $_REQUEST['subcategory_id_edit'];
-    $get_subcategory = mysqli_query($conn, "SELECT category.category_title, subcategory.subcategory_id, subcategory.subcategory_title
+    $get_subcategory = mysqli_query($conn, "SELECT category.category_id, subcategory.subcategory_id, subcategory.subcategory_title
     FROM subcategory
     INNER JOIN category
     ON subcategory.category_id=category.category_id
     WHERE subcategory.subcategory_id = $subcategory_id");
 
     $result_array = array();
-    while($result=mysqli_fetch_assoc($get_subcategory)) {
-        $result_array['category_title'] = $result['category_title'];
+    while ($result = mysqli_fetch_assoc($get_subcategory)) {
+        $result_array['category_id'] = $result['category_id'];
         $result_array['subcategory_id'] = $result['subcategory_id'];
         $result_array['subcategory_title'] = $result['subcategory_title'];
+    }
+
+    echo json_encode($result_array);
+}
+
+// EDIT VARIANT MODAL
+if (isset($_POST['variant_id_edit'])) {
+    $variantId = $_POST['variant_id_edit'];
+
+    $getVariant = mysqli_query($conn, "SELECT * FROM product_variant WHERE variant_id = $variantId");
+
+    $result_array = array();
+    while ($result = mysqli_fetch_assoc($getVariant)) {
+        $result_array['variant_id'] = $result['variant_id'];
+        $result_array['variant_title'] = $result['variant_title'];
     }
 
     echo json_encode($result_array);
