@@ -217,7 +217,7 @@ require_once '../includes/database_conn.php';
         <ul class="breadcrumbs">
             <li><a href="index">Home</a></li>
             <li class="divider">/</li>
-            <li><a href="view-category" class="active">View Category</a></li>
+            <li><a href="subcategory" class="active">View Subcategory</a></li>
         </ul>
         <section class="view-category">
             <button id="getInsert" class="insert_cat" type="button"><i class="fa-solid fa-plus"></i> <span>INSERT SUB CATEGORY</span> </button>

@@ -180,7 +180,8 @@ require_once '../includes/database_conn.php';
         <div class="bottom">
             <div class="buttons">
                 <button id="modalClose" type="button" class="cancel">CANCEL</button>
-                <button form="edit-category" type="submit" id="update_category" name="update_category" class="save">SAVE CHANGES</button>
+                <button form="edit-category" type="submit" id="update_category" name="update_category" class="save">SAVE
+                    CHANGES</button>
             </div>
         </div>
     </div>
@@ -215,31 +216,350 @@ require_once '../includes/database_conn.php';
 
     <!-- MAIN -->
     <main>
-        <h1 class="title">View Product</h1>
+        <h1 class="title">Insert Simple Product</h1>
         <ul class="breadcrumbs">
             <li><a href="index">Home</a></li>
             <li class="divider">/</li>
-            <li><a href="product" class="active">View Product</a></li>
+            <li><a href="product">View Product</a></li>
+            <li class="divider">/</li>
+            <li><a href="insert-simple-product" class="active">Insert Simple Product</a></li>
         </ul>
-        <section class="view-category">
-            <button onclick="location.href = 'insert-simple-product';" id="getInsert" class="insert_cat" type="button"><i class="fa-solid fa-plus"></i> <span>INSERT SIMPLE PRODUCT</span> </button>
-            <button onclick="location.href = 'insert-variable-product';" id="getInsert" class="insert_cat" type="button"><i class="fa-solid fa-plus"></i> <span>INSERT VARIABLE PRODUCT</span> </button>
-            <div class="wrapper">
-                <table id="example" class="table table-bordered table-striped">
-                    <thead>
-                        <tr>
-                            <th>Category</th>
-                            <th>Subcategory</th>
-                            <th>Product</th>
-                            <th>URL</th>
-                            <th>Price</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                </table>
+
+        <section class="insert-product">
+            <div class="insert-product-wrapper">
+                <!-- <div class="panel-wrapper">
+                    <div class="left-panel">
+                        <div class="form-group">
+                            <span>Product Title</span>
+                            <input type="text" name="" id="">
+                        </div>
+                        <div class="form-group">
+                            <span>Product Url</span>
+                            <input type="text" name="" id="">
+                        </div>
+                        <div class="tab-wrapper">
+                            <span>Product Tabs</span>
+                            <div class="tabs">
+                                <div class="btn-tabs">
+                                    <button id="btn1" onclick="openVariant()">Product Variant</button>
+                                    <button onclick="openAttribute()" id="btn2">Product Attributes</button>
+                                </div>
+                                <div class="tab-cont">
+                                    <div class="tab-container">
+                                        <div id="product-variant" class="tab-content">
+                                            <table id="attrTbl">
+                                                <thead>
+                                                    <tr style="background: none;">
+                                                        <th>
+                                                            <span style="color: #ffaf08; font-size: 16px;">Variant Options:</span>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                            </table>
+                                        </div>
+                                        <div id="product-attribute" class="tab-content">
+                                            <select name="" id="test1">
+                                                <option value="testoption1">testoption1</option>
+                                                <option value="testoption2">testoption2</option>
+                                            </select>
+                                            <select name="" id="test2">
+                                                <option value="test2option1">test2option1</option>
+                                                <option value="test2option2">test2option2</option>
+                                            </select>
+                                            <button class="add-variation" id="add" type="submit">ADD VARIATION</button>
+                                            <table id="dynamic_field">
+                                                
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="right-panel">
+                        <div class="form-group">
+                            <span>Select a Product Category</span>
+                            <select name="" id="">
+                                <option value="">TEST</option>
+                                <option value="">TEST</option>
+                                <option value="">TEST</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <span>Select a Product Subcategory</span>
+                            <select name="" id="">
+                                <option value="">TEST</option>
+                                <option value="">TEST</option>
+                                <option value="">TEST</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <span>Product Image 1</span>
+                            <input type="file" name="" id="">
+                        </div>
+                        <div class="form-group">
+                            <span>Product Image 2</span>
+                            <input type="file" name="" id="">
+                        </div>
+                        <div class="form-group">
+                            <span>Product Image 3</span>
+                            <input type="file" name="" id="">
+                        </div>
+                        <div class="form-group">
+                            <span>Product Keyword</span>
+                            <input type="text" name="" id="">
+                        </div>
+                    </div>
+                </div>
+                <button type="submit">INSERT</button> -->
+
+                <div class="product-container">
+                    <h1>Product Details</h1>
+                    <hr>
+                    <form action="" enctype="multipart/form-data" id="insert-simpleProductForm">
+                        <div class="form-group">
+                            <span>Product Category</span>
+                            <select name="category-list" id="category-list">
+                                <option selected="selected" value="SELECT CATEGORY">SELECT CATEGORY</option>
+                                <?php
+                                $fetchCategory = mysqli_query($conn, "SELECT * FROM category");
+
+                                foreach ($fetchCategory as $categoryRow) {
+                                ?>
+                                    <option value="<?php echo $categoryRow['category_id']; ?>"><?php echo $categoryRow['category_title']; ?></option>
+                                <?php
+                                }
+                                ?>
+                            </select>
+                            <span class="error error-category"></span>
+                        </div>
+                        <div class="form-group subcategory-group">
+                            <span>Product Subcategory</span>
+                            <select name="subcategory-list" id="subcategory-list">
+                                <option selected="selected" value="SELECT SUBCATEGORY">SELECT SUBCATEGORY</option>
+                            </select>
+                            <span class="error error-subcategory"></span>
+                        </div>
+                        <div class="form-group">
+                            <span>Product Title</span>
+                            <input type="text" name="product_title" id="simpleProduct-title">
+                            <span class="error error-title"></span>
+                        </div>
+                        <div class="form-group">
+                            <span>Product Url</span>
+                            <input type="text" name="product_url" id="simpleProduct-url" readonly>
+                            <span class="error error-url"></span>
+                        </div>
+                        <div class="form-group">
+                            <span>Product Price</span>
+                            <input type="text" name="product_price" id="simpleProduct-price">
+                            <span class="error error-price"></span>
+                        </div>
+                        <div class="form-group">
+                            <span>Product Sale Price</span>
+                            <input type="text" name="product_salePrice" id="simpleProduct-salePrice">
+                            <span class="error error-salePrice"></span>
+                        </div>
+                        <div class="form-group">
+                            <span>Product Image 1</span>
+                            <input type="file" accept=".jpg, .jpeg, .png" name="product_image1" id="simpleProduct-image1">
+                            <span class="error error-image"></span>
+                        </div>
+                        <div class="form-group">
+                            <span>Product Keyword</span>
+                            <input type="text" name="product_keyword" id="simpleProduct-keyword">
+                            <span class="error error-keyword"></span>
+                        </div>
+                        <button type="submit" id="insert-simple-product">INSERT</button>
+                    </form>
+                </div>
             </div>
         </section>
 
+        <!-- CATEGORY | SUBCATEGORY AJAX -->
+        <script>
+            $(document).ready(function() {
+                $("#category-list").change(function() {
+                    var category_id = $(this).val();
+                    $.ajax({
+                        url: "get-subcategory",
+                        type: "POST",
+                        data: {
+                            category_id: category_id
+                        },
+                        success: function(data) {
+                            if (data === 'empty') {
+                                $('.subcategory-group').hide();
+                            } else {
+                                $('.subcategory-group').show();
+                                $('#subcategory-list').html(data);
+                            }
+                        }
+                    })
+                });
+            });
+        </script>
+
+        <!-- SUBMIT SIMPLE PRODUCT -->
+        <script>
+            $('#simpleProduct-title').keyup(function() {
+                var str = $(this).val();
+                var trims = $.trim(str)
+                var slug = trims.replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-').replace(/^|-$/g, '')
+                $('#simpleProduct-url').val(slug.toLowerCase());
+            })
+
+            $(document).ready(function() {
+                $('#insert-simpleProductForm').on('submit', function(e) {
+                    e.preventDefault();
+
+                    if ($('#category-list').val() == 'SELECT CATEGORY') {
+                        $('.error-category').text('Category required');
+                    } else {
+                        $('.error-category').text('');
+                    }
+                    if ($('#subcategory-list').val() == 'SELECT SUBCATEGORY') {
+                        $('.error-subcategory').text('Subcategory required');
+                    } else {
+                        $('.error-subcategory').text('');
+                    }
+                    if ($.trim($('#simpleProduct-title').val()).length == 0) {
+                        $('.error-title').text('Product Title required');
+                    } else {
+                        $('.error-title').text('');
+                    }
+                    if ($.trim($('#simpleProduct-url').val()).length == 0) {
+                        $('.error-url').text('Product URL required');
+                    } else {
+                        $('.error-url').text('');
+                    }
+                    if ($.trim($('#simpleProduct-price').val()).length == 0) {
+                        $('.error-price').text('Product Price required');
+                    } else {
+                        $('.error-price').text('');
+                    }
+                    if ($.trim($('#simpleProduct-image1').val()).length == 0) {
+                        $('.error-image').text('Add atleast 1 Product Image');
+                    } else {
+                        var imgExt = $('#simpleProduct-image1').val().split('.').pop().toLowerCase();
+
+                        if ($.inArray(imgExt, ['gif', 'png', 'jpg', 'jpeg']) == -1) {
+                            $('.error-image').text('File not supported');
+                        } else {
+                            var imgSize = $('#simpleProduct-image1')[0].files[0].size;
+
+                            if (imgSize > 10485760) {
+                                $('.error-image').text('File too large');
+                            } else {
+                                $('.error-image').text('');
+                            }
+                        }
+                    }
+                    if ($.trim($('#simpleProduct-keyword').val()).length == 0) {
+                        $('.error-keyword').text('Product Keyword required');
+                    } else {
+                        $('.error-keyword').text('');
+                    }
+                    if ($('.error-category').text() != '' && $('.error-subcategory').text() != '' && $('.error-title').text() != '' && $('.error-url').text() != '' && $('.error-price').text() != '' && $('.error-price').text() != '' && $('.error-salePrice').text() != '' && $('.error-image').text() != '' && $('.error-keyword').text() != '') {
+                        $('#toast').addClass('active');
+                        $('.progress').addClass('active');
+                        $('.text-1').text('Error!');
+                        $('.text-2').text('Fill all required fields!');
+                        setTimeout(() => {
+                            $('#toast').removeClass("active");
+                            $('.progress').removeClass("active");
+                        }, 5000);
+                    } else {
+                        $.ajax({
+                            url: "insert-simple-product-process",
+                            type: "POST",
+                            data: new FormData(this),
+                            dataType: 'text',
+                            contentType: false,
+                            cache: false,
+                            processData: false,
+                            success: function(data) {
+                                if (data === 'success') {
+                                    $('.edit-modal').removeClass("active");
+                                    $('#toast').addClass('active');
+                                    $('.progress').addClass('active');
+                                    $('#toast-icon').removeClass(
+                                        'fa-solid fa-triangle-exclamation').addClass(
+                                        'fa-solid fa-check warning');
+                                    $('.text-1').text('Success!');
+                                    $('.text-2').text('Product added successfully!');
+                                    setTimeout(() => {
+                                        $('#toast').removeClass("active");
+                                        $('.progress').removeClass("active");
+                                    }, 5000);
+                                    $('#example').DataTable().ajax.reload();
+                                }
+
+                                if (data === 'failed') {
+                                    $('.edit-modal').removeClass("active");
+                                    $('#toast').addClass('active');
+                                    $('.progress').addClass('active');
+                                    // $('#toast-icon').removeClass(
+                                    //     'fa-solid fa-triangle-exclamation').addClass(
+                                    //     'fa-solid fa-check warning');
+                                    $('.text-1').text('Error!');
+                                    $('.text-2').text('Something went wrong!');
+                                    setTimeout(() => {
+                                        $('#toast').removeClass("active");
+                                        $('.progress').removeClass("active");
+                                    }, 5000);
+                                    $('#example').DataTable().ajax.reload();
+                                }
+
+                                if (data === 'product already exist') {
+                                    $('.edit-modal').removeClass("active");
+                                    $('#toast').addClass('active');
+                                    $('.progress').addClass('active');
+                                    // $('#toast-icon').removeClass(
+                                    //     'fa-solid fa-triangle-exclamation').addClass(
+                                    //     'fa-solid fa-check warning');
+                                    $('.text-1').text('Error!');
+                                    $('.text-2').text('Product already exist!');
+                                    setTimeout(() => {
+                                        $('#toast').removeClass("active");
+                                        $('.progress').removeClass("active");
+                                    }, 5000);
+                                    $('#example').DataTable().ajax.reload();
+                                }
+                            }
+                        })
+                    }
+                });
+            });
+        </script>
+
+        <script>
+            // TABS
+            var variant = document.getElementById("product-variant");
+            var attribute = document.getElementById("product-attribute");
+            var general = document.getElementById("product-general");
+            var btn1 = document.getElementById("btn1");
+            var btn2 = document.getElementById("btn2");
+            var btn3 = document.getElementById("btn3");
+
+            function openVariant() {
+                variant.style.opacity = '1';
+                variant.style.pointerEvents = 'visible';
+                attribute.style.opacity = '0';
+                attribute.style.pointerEvents = 'none';
+                btn1.style.color = '#fff';
+                btn2.style.color = '#ffaf08';
+            }
+
+            function openAttribute() {
+                variant.style.opacity = '0';
+                variant.style.pointerEvents = 'none';
+                attribute.style.opacity = '1';
+                attribute.style.pointerEvents = 'visible';
+                btn1.style.color = '#ffaf08';
+                btn2.style.color = '#fff';
+            }
+        </script>
 
         <script>
             // DATA TABLES
@@ -256,7 +576,7 @@ require_once '../includes/database_conn.php';
                 ],
                 "iDisplayLength": 5,
                 "ajax": {
-                    url: "product-table",
+                    url: "category-table",
                     type: "post"
                 }
             });
@@ -275,7 +595,8 @@ require_once '../includes/database_conn.php';
                         var obj = JSON.parse(res);
                         $(".view-modal").addClass("active");
                         $("#category_title_view").text(obj.category_title);
-                        $("#category_thumbnail_view").attr("src", "../assets/images/" + obj.category_thumbnail);
+                        $("#category_thumbnail_view").attr("src", "../assets/images/" + obj
+                            .category_thumbnail);
                     }
                 })
             });
@@ -294,7 +615,8 @@ require_once '../includes/database_conn.php';
                         $("#update_category_id").val(obj.category_id);
                         $("#update_category_title").val(obj.category_title);
                         $("#category_thumbnailDB").val(obj.category_thumbnail);
-                        $("#update_category_thumbnail").attr("src", "../assets/images/" + obj.category_thumbnail);
+                        $("#update_category_thumbnail").attr("src", "../assets/images/" + obj
+                            .category_thumbnail);
                     }
                 })
             });
@@ -365,7 +687,9 @@ require_once '../includes/database_conn.php';
                                 $('.edit-modal').removeClass("active");
                                 $('#toast').addClass('active');
                                 $('.progress').addClass('active');
-                                $('#toast-icon').removeClass('fa-solid fa-triangle-exclamation').addClass('fa-solid fa-check warning');
+                                $('#toast-icon').removeClass(
+                                    'fa-solid fa-triangle-exclamation').addClass(
+                                    'fa-solid fa-check warning');
                                 $('.text-1').text('Success!');
                                 $('.text-2').text('Category title updated successfully!');
                                 setTimeout(() => {
@@ -402,9 +726,13 @@ require_once '../includes/database_conn.php';
                                 $('.edit-modal').removeClass("active");
                                 $('#toast').addClass('active');
                                 $('.progress').addClass('active');
-                                $('#toast-icon').removeClass('fa-solid fa-triangle-exclamation').addClass('fa-solid fa-check warning');
+                                $('#toast-icon').removeClass(
+                                    'fa-solid fa-triangle-exclamation').addClass(
+                                    'fa-solid fa-check warning');
                                 $('.text-1').text('Success!');
-                                $('.text-2').text('Category title and thumbnail updated successfully!');
+                                $('.text-2').text(
+                                    'Category title and thumbnail updated successfully!'
+                                );
                                 setTimeout(() => {
                                     $('#toast').removeClass("active");
                                     $('.progress').removeClass("active");
@@ -503,7 +831,9 @@ require_once '../includes/database_conn.php';
                                 $('.insert-modal').removeClass("active");
                                 $('#toast').addClass('active');
                                 $('.progress').addClass('active');
-                                $('#toast-icon').removeClass('fa-solid fa-triangle-exclamation').addClass('fa-solid fa-check warning');
+                                $('#toast-icon').removeClass(
+                                    'fa-solid fa-triangle-exclamation').addClass(
+                                    'fa-solid fa-check warning');
                                 $('.text-1').text('Success!');
                                 $('.text-2').text('Category successfully added!!');
                                 setTimeout(() => {
@@ -532,7 +862,9 @@ require_once '../includes/database_conn.php';
                                 $('.delete-modal').removeClass("active");
                                 $('#toast').addClass('active');
                                 $('.progress').addClass('active');
-                                $('#toast-icon').removeClass('fa-solid fa-triangle-exclamation').addClass('fa-solid fa-check warning');
+                                $('#toast-icon').removeClass(
+                                    'fa-solid fa-triangle-exclamation').addClass(
+                                    'fa-solid fa-check warning');
                                 $('.text-1').text('Success!');
                                 $('.text-2').text('Category deleted successfully!');
                                 setTimeout(() => {

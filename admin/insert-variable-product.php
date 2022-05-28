@@ -216,15 +216,17 @@ require_once '../includes/database_conn.php';
 
     <!-- MAIN -->
     <main>
-        <h1 class="title">Insert Product</h1>
+        <h1 class="title">Insert Variable Product</h1>
         <ul class="breadcrumbs">
             <li><a href="index">Home</a></li>
             <li class="divider">/</li>
-            <li><a href="insert-product" class="active">Insert Product</a></li>
+            <li><a href="product">View Product</a></li>
+            <li class="divider">/</li>
+            <li><a href="insert-variable-product" class="active">Insert Variable Product</a></li>
         </ul>
         <section class="insert-product">
             <div class="insert-product-wrapper">
-                <div class="panel-wrapper">
+                <!-- <div class="panel-wrapper">
                     <div class="left-panel">
                         <div class="form-group">
                             <span>Product Title</span>
@@ -244,44 +246,29 @@ require_once '../includes/database_conn.php';
                                 <div class="tab-cont">
                                     <div class="tab-container">
                                         <div id="product-variant" class="tab-content">
-                                            <select class="variant-dropdown" name="" id="">
-                                                <option value="">Select Variant</option>
-                                                <option value="">SIZE</option>
-                                                <option value="">FLAVOR</option>
-                                            </select>
-                                            <button class="variantBtn" type="submit">ADD</button>
-                                            <div class="variant-tab-group">
-                                                <span>Add attributes</span>
-                                                <input class="attributes" type="text" name="" placeholder="Add attributes separated by |. e.g. red|green|yellow" id="">
-                                            </div>
+                                            <table id="attrTbl">
+                                                <thead>
+                                                    <tr style="background: none;">
+                                                        <th>
+                                                            <span style="color: #ffaf08; font-size: 16px;">Variant Options:</span>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                            </table>
                                         </div>
                                         <div id="product-attribute" class="tab-content">
-                                            <button class="add-variation" type="submit">ADD VARIATION</button>
-                                            <div class="attribute-parent-group">
-                                                <div class="attribute-tab-group">
-                                                    <span>Variation Image</span>
-                                                    <input type="file" name="" id="">
-                                                </div>
-                                            </div>
-                                            <div class="attribute-parent-group">
-                                                <div class="attribute-tab-group">
-                                                    <span>Regular price</span>
-                                                    <input type="text" name="" id="">
-                                                </div>
-                                                <div class="attribute-tab-group">
-                                                    <span>Sale price</span>
-                                                    <input type="text" name="" id="">
-                                                </div>
-                                            </div>
-                                            <div class="attribute-parent-group">
-                                                <div class="attribute-tab-group">
-                                                    <span>Stock Control</span>
-                                                    <select name="" id="">
-                                                        <option value="">In Stock</option>
-                                                        <option value="">Out of Stock</option>
-                                                    </select>
-                                                </div>
-                                            </div>
+                                            <select name="" id="test1">
+                                                <option value="testoption1">testoption1</option>
+                                                <option value="testoption2">testoption2</option>
+                                            </select>
+                                            <select name="" id="test2">
+                                                <option value="test2option1">test2option1</option>
+                                                <option value="test2option2">test2option2</option>
+                                            </select>
+                                            <button class="add-variation" id="add" type="submit">ADD VARIATION</button>
+                                            <table id="dynamic_field">
+                                                
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
@@ -323,9 +310,69 @@ require_once '../includes/database_conn.php';
                         </div>
                     </div>
                 </div>
-                <button type="submit">INSERT</button>
+                <button type="submit">INSERT</button> -->
+
+                <div class="product-container">
+                    <h1>Product Details</h1>
+                    <hr>
+                    <div class="form-group">
+                        <span>Product Category</span>
+                        <select name="" id="">
+                            <option value="">Pizza</option>
+                            <option value="">Pasta</option>
+                            <option value="">Milktea</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <span>Product Subcategory</span>
+                        <select name="" id="">
+                            <option value="">Classic Flavor</option>
+                            <option value="">Special Flavor</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <span>Product Title</span>
+                        <input type="text" name="" id="">
+                    </div>
+                    <div class="form-group">
+                        <span>Product Url</span>
+                        <input type="text" name="" id="">
+                    </div>
+                    <div class="form-group">
+                        <span>Product Price</span>
+                        <input type="text" name="" id="">
+                    </div>
+                    <div class="form-group">
+                        <span>Product Sale Price</span>
+                        <input type="text" name="" id="">
+                    </div>
+                    <div class="form-group">
+                        <span>Product Image 1</span>
+                        <input type="file" name="" id="">
+                    </div>
+                    <div class="form-group">
+                        <span>Product Image 2</span>
+                        <input type="file" name="" id="">
+                    </div>
+                    <div class="form-group">
+                        <span>Product Image 3</span>
+                        <input type="file" name="" id="">
+                    </div>
+                    <button type="submit">NEXT</button>
+                </div>
             </div>
         </section>
+
+        <!-- <script>
+            function tabsHeight() {
+                var childHeight = $('.insert-product-wrapper').height();
+                $('.insert-product').css({
+                    'height': childHeight
+                });
+            }
+
+            tabsHeight();
+        </script> -->
 
         <script>
             // TABS
@@ -371,6 +418,22 @@ require_once '../includes/database_conn.php';
                 "iDisplayLength": 5,
                 "ajax": {
                     url: "category-table",
+                    type: "post"
+                }
+            });
+
+            var dataTables = $('#attrTbl').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "pagingType": "simple",
+                "scrollX": true,
+                "sScrollXInner": "100%",
+                "paging": false,
+                "ordering": false,
+                "info": false,
+                scrollY: "165px",
+                "ajax": {
+                    url: "product-attributes-table",
                     type: "post"
                 }
             });
