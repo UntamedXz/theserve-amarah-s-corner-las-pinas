@@ -38,7 +38,6 @@ while ($row = mysqli_fetch_array($query)) {
     $subdata[] = $row[1];
     $subdata[] = $row[2];
     $subdata[] = '
-    <button type="button" id="getView" data-id="' . $row[0] . '"><i class="fa-solid fa-eye"></i><span>View</span></button>
     <button type="button" id="getEdit" data-id="' . $row[0] . '"><i class="fa-solid fa-pen"></i><span>Edit</span></button>
     <button type="button" id="getDelete" data-id="' . $row[0] . '"><i class="fa-solid fa-trash-can"></i><span>Delete</span></button>
     ';

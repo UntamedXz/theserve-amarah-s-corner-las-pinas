@@ -111,7 +111,7 @@ require_once '../includes/database_conn.php';
     <!-- DELETE -->
     <div id="popup-box" class="popup-box delete-modal">
         <div class="top">
-            <h3>Edit Category</h3>
+            <h3>Delete Category</h3>
             <div id="modalClose" class="fa-solid fa-xmark"></div>
         </div>
         <hr>
@@ -168,12 +168,12 @@ require_once '../includes/database_conn.php';
                 <input type="text" id="update_category_title" name="update_category_title" value="">
             </div>
             <div class="form-group">
-                <span>Category Image Name:</span>
-                <input style="background-color: #3b3b3b; color: #949494;" type="text" class="file" name="category_thumbnailDB" id="category_thumbnailDB" readonly>
-            </div>
-            <div class="form-group">
                 <span>Select Category Image</span>
                 <input type="file" accept=".jpg, .jpeg, .png" class="file" name="update_category_thumbnail" id="update_category_thumbnail">
+            </div>
+            <div class="form-group">
+                <span>Image Preview</span>
+                <img id="file" style="width: 200px;" src="">
             </div>
         </form>
         <hr>
@@ -200,6 +200,10 @@ require_once '../includes/database_conn.php';
             <div class="form-group">
                 <span>Select Category Image</span>
                 <input type="file" accept=".jpg, .jpeg, .png" class="file" name="insert_category_thumbnail" id="insert_category_thumbnail">
+            </div>
+            <div class="form-group">
+                <span>Image Preview</span>
+                <img id="insertFile" style="width: 100px;" src="">
             </div>
         </form>
         <hr>
@@ -258,23 +262,38 @@ require_once '../includes/database_conn.php';
             });
         </script>
 
+        <!-- IMAGE PREVIEW -->
         <script>
-            //  GET VIEW
-            $(document).on('click', '#getView', function(e) {
-                e.preventDefault();
-                var category_id_view = $(this).data('id');
-                $.ajax({
-                    url: 'processing',
-                    type: 'POST',
-                    data: 'category_id_view=' + category_id_view,
-                    success: function(res) {
-                        var obj = JSON.parse(res);
-                        $(".view-modal").addClass("active");
-                        $("#category_title_view").text(obj.category_title);
-                        $("#category_thumbnail_view").attr("src", "../assets/images/" + obj.category_thumbnail);
-                    }
-                })
-            });
+            $('#update_category_thumbnail').on('change', function() {
+                var file = this.files[0];
+
+                if(file) {
+                    var reader = new FileReader();
+
+                    reader.addEventListener('load', function() {
+                        $('#file').attr("src", this.result);
+                    })
+
+                    reader.readAsDataURL(file);
+                }
+            })
+
+            $('#insert_category_thumbnail').on('change', function() {
+                var file = this.files[0];
+
+                if(file) {
+                    var reader = new FileReader();
+
+                    reader.addEventListener('load', function() {
+                        $('#insertFile').attr("src", this.result);
+                    })
+
+                    reader.readAsDataURL(file);
+                }
+            })
+        </script>
+
+        <script>
 
             // GET EDIT
             $(document).on('click', '#getEdit', function(e) {
@@ -289,8 +308,7 @@ require_once '../includes/database_conn.php';
                         $(".edit-modal").addClass("active");
                         $("#update_category_id").val(obj.category_id);
                         $("#update_category_title").val(obj.category_title);
-                        $("#category_thumbnailDB").val(obj.category_thumbnail);
-                        $("#update_category_thumbnail").attr("src", "../assets/images/" + obj.category_thumbnail);
+                        $("#file").attr("src", "../assets/images/" + obj.category_thumbnail);
                     }
                 })
             });

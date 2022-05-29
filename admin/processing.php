@@ -110,3 +110,39 @@ if (isset($_POST['variant_id_edit'])) {
 
     echo json_encode($result_array);
 }
+
+// EDIT PRODUCT PAGE
+if (isset($_POST['product_id'])) {
+    $productId = $_POST['product_id'];
+
+    $checkProduct = mysqli_query($conn, "SELECT * FROM product_variation WHERE product_id = $productId");
+
+    $encryptedId = urlencode(base64_encode($productId));
+
+    if(mysqli_num_rows($checkProduct) > 0) {
+        echo "insert-variable-product?id=" . $productId;
+    } else {
+        echo "update-simple-product?id=" . $encryptedId;
+    }
+}
+
+// EDIT SIMPLE PRODUCT
+if (isset($_POST['simple_product_id'])) {
+    $productId = $_POST['simple_product_id'];
+
+    $getSimpleProduct = mysqli_query($conn, "SELECT * FROM product WHERE product_id = $productId");
+
+    $result_array = array();
+    while ($result = mysqli_fetch_assoc($getSimpleProduct)) {
+        $result_array['category_id'] = $result['category_id'];
+        $result_array['subcategory_id'] = $result['subcategory_id'];
+        $result_array['product_title'] = $result['product_title'];
+        $result_array['product_slug'] = $result['product_slug'];
+        $result_array['product_price'] = $result['product_price'];
+        $result_array['product_sale'] = $result['product_sale'];
+        $result_array['product_img1'] = $result['product_img1'];
+        $result_array['product_keyword'] = $result['product_keyword'];
+    }
+
+    echo json_encode($result_array);
+}

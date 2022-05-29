@@ -524,11 +524,11 @@ li {
   position: fixed;
   max-width: 260px;
   width: 100%;
-  background: url(../images/navbar.png);
-  background-repeat: repeat;
+  background: url(../images/admin-bg-5.png);
+  background-repeat: no-repeat;
   background-position: center;
   background-attachment: fixed;
-  background-size: contain;
+  background-size: cover;
   top: 0;
   left: 0;
   height: 100%;
@@ -710,11 +710,10 @@ li {
   transition: all 0.3s ease;
 
   nav {
-    background: url(../images/navbar.png);
-    background-repeat: repeat;
+    background: url(../images/admin-bg-5.png);
+    background-repeat: no-repeat;
     background-position: center;
-    background-attachment: fixed;
-    background-size: contain;
+    background-size: cover;
     height: 64px;
     padding: 0 20px;
     display: flex;
@@ -949,11 +948,10 @@ main {
   // DASHBOARD
   .dashboard {
     .dashboard-wrapper {
-      background: url(../images/navbar.png);
-      background-repeat: repeat;
+      background: url(../images/admin-bg-5.png);
+      background-repeat: no-repeat;
       background-position: center;
-      background-attachment: fixed;
-      background-size: contain;
+      background-size: cover;
       width: 100%;
       height: 300px;
       padding: 10px;
@@ -967,11 +965,10 @@ main {
     height: auto;
 
     .wrapper {
-      background: url(../images/navbar.png);
-      background-repeat: repeat;
+      background: url(../images/admin-bg-5.png);
+      background-repeat: no-repeat;
       background-position: center;
-      background-attachment: fixed;
-      background-size: contain;
+      background-size: cover;
       color: #fff;
       width: 100%;
       height: 100%;
@@ -1099,11 +1096,10 @@ main {
     }
 
     .wrapper {
-      background: url(../images/navbar.png), linear-gradient(#070506, #ffaf08);
-      background-repeat: repeat;
+      background: url(../images/admin-bg-5.png);
+      background-repeat: no-repeat;
       background-position: center;
-      background-attachment: fixed;
-      background-size: contain;
+      background-size: cover;
       border-radius: 5px;
       width: 100%;
       height: 100%;
@@ -1489,11 +1485,10 @@ main {
     // }
 
     .insert-product-wrapper {
-      background: url(../images/navbar.png);
-      background-repeat: repeat;
+      background: url(../images/admin-bg-5.png);
+      background-repeat: no-repeat;
       background-position: center;
-      background-attachment: fixed;
-      background-size: contain;
+      background-size: cover;
       border-radius: 5px;
       width: 100%;
       height: auto;

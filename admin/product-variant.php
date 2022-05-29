@@ -111,7 +111,7 @@ require_once '../includes/database_conn.php';
     <!-- DELETE -->
     <div id="popup-box" class="popup-box delete-modal">
         <div class="top">
-            <h3>Edit Category</h3>
+            <h3>Delete Subcategory</h3>
             <div id="modalClose" class="fa-solid fa-xmark"></div>
         </div>
         <hr>
@@ -120,7 +120,7 @@ require_once '../includes/database_conn.php';
                 <span>Category ID</span>
                 <input type="text" id="delete_variant_id" name="delete_variant_id" value="">
             </div>
-            <p>Are you sure, you want to delete this category?</p>
+            <p>Are you sure, you want to delete this subcategory?</p>
         </form>
         <hr>
         <div class="bottom">

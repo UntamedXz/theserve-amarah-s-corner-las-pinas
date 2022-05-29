@@ -366,6 +366,10 @@ require_once '../includes/database_conn.php';
                             <span class="error error-image"></span>
                         </div>
                         <div class="form-group">
+                            <span>Image Preview</span>
+                            <img id="file" style="width: 100px;" src="">
+                        </div>
+                        <div class="form-group">
                             <span>Product Keyword</span>
                             <input type="text" name="product_keyword" id="simpleProduct-keyword">
                             <span class="error error-keyword"></span>
@@ -375,6 +379,23 @@ require_once '../includes/database_conn.php';
                 </div>
             </div>
         </section>
+
+        <!-- IMAGE PREVIEW -->
+        <script>
+            $('#simpleProduct-image1').on('change', function() {
+                var file = this.files[0];
+
+                if (file) {
+                    var reader = new FileReader();
+
+                    reader.addEventListener('load', function() {
+                        $('#file').attr("src", this.result);
+                    })
+
+                    reader.readAsDataURL(file);
+                }
+            })
+        </script>
 
         <!-- CATEGORY | SUBCATEGORY AJAX -->
         <script>
@@ -407,6 +428,7 @@ require_once '../includes/database_conn.php';
                 var trims = $.trim(str)
                 var slug = trims.replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-').replace(/^|-$/g, '')
                 $('#simpleProduct-url').val(slug.toLowerCase());
+                $('#simpleProduct-keyword').val(str);
             })
 
             $(document).ready(function() {
@@ -418,10 +440,15 @@ require_once '../includes/database_conn.php';
                     } else {
                         $('.error-category').text('');
                     }
-                    if ($('#subcategory-list').val() == 'SELECT SUBCATEGORY') {
-                        $('.error-subcategory').text('Subcategory required');
-                    } else {
+
+                    if ($('.subcategory-group').css('display') == 'none') {
                         $('.error-subcategory').text('');
+                    } else {
+                        if ($('#subcategory-list').val() == 'SELECT SUBCATEGORY') {
+                            $('.error-subcategory').text('Subcategory required');
+                        } else {
+                            $('.error-subcategory').text('');
+                        }
                     }
                     if ($.trim($('#simpleProduct-title').val()).length == 0) {
                         $('.error-title').text('Product Title required');
@@ -460,7 +487,7 @@ require_once '../includes/database_conn.php';
                     } else {
                         $('.error-keyword').text('');
                     }
-                    if ($('.error-category').text() != '' && $('.error-subcategory').text() != '' && $('.error-title').text() != '' && $('.error-url').text() != '' && $('.error-price').text() != '' && $('.error-price').text() != '' && $('.error-salePrice').text() != '' && $('.error-image').text() != '' && $('.error-keyword').text() != '') {
+                    if ($('.error-category').text() != '' || $('.error-subcategory').text() != '' || $('.error-title').text() != '' || $('.error-url').text() != '' || $('.error-price').text() != '' || $('.error-price').text() != '' || $('.error-salePrice').text() != '' || $('.error-image').text() != '' || $('.error-keyword').text() != '') {
                         $('#toast').addClass('active');
                         $('.progress').addClass('active');
                         $('.text-1').text('Error!');
@@ -580,70 +607,6 @@ require_once '../includes/database_conn.php';
                     type: "post"
                 }
             });
-        </script>
-
-        <script>
-            //  GET VIEW
-            $(document).on('click', '#getView', function(e) {
-                e.preventDefault();
-                var category_id_view = $(this).data('id');
-                $.ajax({
-                    url: 'processing',
-                    type: 'POST',
-                    data: 'category_id_view=' + category_id_view,
-                    success: function(res) {
-                        var obj = JSON.parse(res);
-                        $(".view-modal").addClass("active");
-                        $("#category_title_view").text(obj.category_title);
-                        $("#category_thumbnail_view").attr("src", "../assets/images/" + obj
-                            .category_thumbnail);
-                    }
-                })
-            });
-
-            // GET EDIT
-            $(document).on('click', '#getEdit', function(e) {
-                e.preventDefault();
-                var category_id_edit = $(this).data('id');
-                $.ajax({
-                    url: 'processing',
-                    type: 'POST',
-                    data: 'category_id_edit=' + category_id_edit,
-                    success: function(res) {
-                        var obj = JSON.parse(res);
-                        $(".edit-modal").addClass("active");
-                        $("#update_category_id").val(obj.category_id);
-                        $("#update_category_title").val(obj.category_title);
-                        $("#category_thumbnailDB").val(obj.category_thumbnail);
-                        $("#update_category_thumbnail").attr("src", "../assets/images/" + obj
-                            .category_thumbnail);
-                    }
-                })
-            });
-
-            // GET INSERT
-            $(document).on('click', '#getInsert', function(e) {
-                e.preventDefault();
-                $('.insert-modal').addClass('active');
-            });
-
-            // GET DELETE
-            $(document).on('click', '#getDelete', function(e) {
-                e.preventDefault();
-                $('.delete-modal').addClass('active');
-                var category_id_edit = $(this).data('id');
-                $("#delete_category_id").val(category_id_edit);
-            });
-
-            // CLOSE MODAL
-            $(document).on('click', '#modalClose', function() {
-                $('.edit-modal').removeClass("active");
-                $('.view-modal').removeClass("active");
-                $('.insert-modal').removeClass("active");
-                $(".delete-modal").removeClass("active");
-                $("#edit-category")[0].reset();
-                $("#insert-category")[0].reset();
-            })
         </script>
 
         <script>
