@@ -53,6 +53,8 @@ require_once '../includes/database_conn.php';
             background-color: #ffaf08;
             color: #070506;
             white-space: nowrap;
+            font-weight: 900;
+            text-transform: uppercase;
         }
 
         .dataTables_wrapper .dataTables_paginate .paginate_button {

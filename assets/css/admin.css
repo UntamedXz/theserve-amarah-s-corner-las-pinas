@@ -531,6 +531,7 @@ li {
   border-radius: 10px;
   margin: 4px 0;
   white-space: nowrap;
+  font-weight: 600;
 }
 #sidebar .side-menu > li > a:hover {
   background-color: var(--primary);
@@ -990,6 +991,7 @@ main .view-category .wrapper #example thead tr:first-child th:last-child {
 }
 main .view-category .wrapper #example tbody tr td {
   vertical-align: middle;
+  font-weight: 600;
 }
 main .view-category .wrapper #example tbody tr td:last-child {
   display: flex;
