@@ -233,6 +233,35 @@ require_once '../includes/database_conn.php';
                 var product_id = $(this).data('id');
                 $("#delete_product_id").val(product_id);
             });
+
+            // SUBMIT DELETE
+            $("#delete_product").on('submit', function(e) {
+                    e.preventDefault();
+                    $.ajax({
+                        type: "POST",
+                        url: "delete-product",
+                        data: new FormData(this),
+                        dataType: 'text',
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        success: function(response) {
+                            if (response === 'deleted') {
+                                $('.delete-modal').removeClass("active");
+                                $('#toast').addClass('active');
+                                $('.progress').addClass('active');
+                                $('#toast-icon').removeClass('fa-solid fa-triangle-exclamation').addClass('fa-solid fa-check warning');
+                                $('.text-1').text('Success!');
+                                $('.text-2').text('Category deleted successfully!');
+                                setTimeout(() => {
+                                    $('#toast').removeClass("active");
+                                    $('.progress').removeClass("active");
+                                }, 5000);
+                                $('#example').DataTable().ajax.reload();
+                            }
+                        }
+                    })
+                })
         </script>
 
 

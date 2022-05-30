@@ -519,6 +519,8 @@ require_once '../includes/database_conn.php';
                                         $('.progress').removeClass("active");
                                     }, 5000);
                                     $('#example').DataTable().ajax.reload();
+                                    $('#insert-simpleProductForm')[0].reset();
+                                    $('#file').attr("src", "");
                                 }
 
                                 if (data == 'failed') {

@@ -291,6 +291,27 @@ body {
     display: none;
   }
 }
+.header .header-1 .left .nav-link {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.header .header-1 .left .nav-link .badge {
+  position: absolute;
+  top: -5px;
+  right: -10px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #070506;
+  background: #ffaf08;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--black);
+  font-size: 10px;
+  font-weight: 700;
+}
 .header .header-1 .left div,
 .header .header-1 .left a {
   display: flex;

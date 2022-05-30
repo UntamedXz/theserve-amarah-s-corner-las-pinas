@@ -10,7 +10,10 @@
         </form>
         <div class="left">
             <div id="search-btn" class="bx bx-search-alt-2"></div>
-            <a href="cart" class="bx bxs-cart"></a>
+            <a href="cart" class="nav-link">
+                <i class="bx bxs-cart"></i>
+                <span class="badge">8</span>
+            </a>
             <a href="login" id="login-btn" class="bx bxs-user"></a>
             <div id="navbar" class="bx bx-menu-alt-right"></div>
         </div>

@@ -54,7 +54,7 @@ while ($result = mysqli_fetch_assoc($getCategoryTitle)) {
                     ?>
                         <a href="catalog?id=<?php echo $encryptedCategoryId; ?>" class="menu__card swiper-slide">
                             <div class="menu__image">
-                                <img src="./assets/images/<?php echo $category_row['categoty_thumbnail']; ?>" alt="">
+                                <img src="./assets/images/<?php echo $category_row['categoty_thumbnail']; ?>">
                             </div>
                             <div class="menu__name">
                                 <h3><?php echo ucwords($category_row['category_title']); ?></h3>

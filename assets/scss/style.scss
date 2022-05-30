@@ -301,6 +301,7 @@ body {
 
     .left {
       @media (min-width: 768px) {
+
         #search-btn,
         #navbar {
           display: none;
@@ -310,6 +311,29 @@ body {
       display: flex;
       justify-content: space-between;
       align-items: center;
+
+      .nav-link {
+        display: flex;
+        align-items: center;
+        position: relative;
+
+        .badge {
+          position: absolute;
+          top: -5px;
+          right: -10px;
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          border: 2px solid #070506;
+          background: #ffaf08;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: var(--black);
+          font-size: 10px;
+          font-weight: 700;
+        }
+      }
 
       div,
       a {

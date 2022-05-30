@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 30, 2022 at 11:56 AM
+-- Generation Time: May 30, 2022 at 03:40 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.1
 
@@ -147,7 +147,22 @@ INSERT INTO `product` (`category_id`, `subcategory_id`, `product_id`, `product_t
 (5, 7, 20, 'Double Dutch Milktea', 'double-dutch-milktea', '629462beee633.jpg', NULL, NULL, 'Double Dutch Milktea', '95.00', '', NULL),
 (5, 8, 21, 'Red Velvet Cheesecake Milktea', 'red-velvet-cheesecake-milktea', '629462f7e59aa.jpg', NULL, NULL, 'Red Velvet Cheesecake Milktea', '125.00', '', NULL),
 (5, 8, 22, 'Overload Oreo Cheesecake Milktea', 'overload-oreo-cheesecake-milktea', '62946330a7e62.jpg', NULL, NULL, 'Overload Oreo Cheesecake Milktea', '125.00', '', NULL),
-(1, 2, 23, 'Dgdsg', 'dgdsg', '629464c0649ed.jpg', NULL, NULL, 'dgdsg', '123.00', '', NULL);
+(5, 8, 24, 'Choco Lava Milktea', 'choco-lava-milktea', '6294c183989dc.jpg', NULL, NULL, 'Choco Lava Milktea', '125.00', '', NULL),
+(1, 2, 25, 'Hawaiian Pizza', 'hawaiian-pizza', '6294c1d06cf4e.jpg', NULL, NULL, 'Hawaiian Pizza', '199.00', '', NULL),
+(1, 2, 26, 'Beef & Mushroom Pizza', 'beef-mushroom-pizza', '6294c2081e8bb.jpg', NULL, NULL, 'Beef & Mushroom Pizza', '199.00', '', NULL),
+(1, 2, 27, 'Pepperoni Pizza', 'pepperoni-pizza', '6294c22d5cd69.jpg', NULL, NULL, 'Pepperoni Pizza', '199.00', '', NULL),
+(1, 3, 28, 'Pepperoni Overload Pizza', 'pepperoni-overload-pizza', '6294c25a50468.jpg', NULL, NULL, 'Pepperoni Overload Pizza', '249.00', '', NULL),
+(1, 3, 29, 'Beef & Mushroom Overload Pizza', 'beef-mushroom-overload-pizza', '6294c278a7656.jpg', NULL, NULL, 'Beef & Mushroom Overload Pizza', '249.00', '', NULL),
+(1, 3, 30, 'Bacon & Ham Pizza', 'bacon-ham-pizza', '6294c29ce9644.jpg', NULL, NULL, 'Bacon & Ham Pizza', '249.00', '', NULL),
+(1, 3, 31, 'Triple Cheese Pizza', 'triple-cheese-pizza', '6294c2b6586d8.jpg', NULL, NULL, 'Triple Cheese Pizza', '249.00', '', NULL),
+(1, 3, 32, 'All Meat Pizza', 'all-meat-pizza', '6294c2d1c1ece.jpg', NULL, NULL, 'All Meat Pizza', '249.00', '', NULL),
+(1, 3, 33, 'Creamcheese Supreme Pizza', 'creamcheese-supreme-pizza', '6294c2ec1c0bd.jpg', NULL, NULL, 'Creamcheese Supreme Pizza', '249.00', '', NULL),
+(1, 3, 34, 'Spinach Overload Pizza', 'spinach-overload-pizza', '6294c30304d5d.jpg', NULL, NULL, 'Spinach Overload Pizza', '249.00', '', NULL),
+(2, 0, 36, 'Honey Garlic', 'honey-garlic', '6294c39181159.jpg', NULL, NULL, 'Honey Garlic', '129.00', '', NULL),
+(2, 0, 37, 'Buffalo', 'buffalo', '6294c48d360a2.jpg', NULL, NULL, 'Buffalo', '129.00', '', NULL),
+(2, 0, 38, 'Garlic Parmesan', 'garlic-parmesan', '6294c4fb394d6.jpg', NULL, NULL, 'Garlic Parmesan', '129.00', '', NULL),
+(2, 0, 39, 'Buttered Garlic', 'buttered-garlic', '6294c524d2114.jpg', NULL, NULL, 'Buttered Garlic', '129.00', '', NULL),
+(2, 0, 40, 'Salted Egg', 'salted-egg', '6294c5450b238.jpg', NULL, NULL, 'Salted Egg', '129.00', '', NULL);
 
 -- --------------------------------------------------------
 
@@ -315,7 +330,7 @@ ALTER TABLE `default_product_variation`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `product_attribute`
