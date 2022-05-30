@@ -469,7 +469,7 @@ li {
   position: fixed;
   max-width: 260px;
   width: 100%;
-  background: url(../images/admin-bg-5.png);
+  background: url(../images/adminpage_bg.png);
   background-repeat: no-repeat;
   background-position: center;
   background-attachment: fixed;
@@ -616,7 +616,7 @@ li {
   }
 }
 #content nav {
-  background: url(../images/admin-bg-5.png);
+  background: url(../images/adminpage_bg.png);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -828,7 +828,7 @@ main .breadcrumbs li.divider {
   pointer-events: none;
 }
 main .dashboard .dashboard-wrapper {
-  background: url(../images/admin-bg-5.png);
+  background: url(../images/adminpage_bg.png);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -842,7 +842,7 @@ main .insert-category {
   height: auto;
 }
 main .insert-category .wrapper {
-  background: url(../images/admin-bg-5.png);
+  background: url(../images/adminpage_bg.png);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -963,7 +963,7 @@ main .view-category .insert_cat:hover {
   color: #070506;
 }
 main .view-category .wrapper {
-  background: url(../images/admin-bg-5.png);
+  background: url(../images/adminpage_bg.png);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -993,11 +993,6 @@ main .view-category .wrapper #example tbody tr td {
   vertical-align: middle;
   font-weight: 600;
 }
-main .view-category .wrapper #example tbody tr td:last-child {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-}
 main .view-category .wrapper #example tbody tr td:last-child button {
   width: 80px;
   height: 25px;
@@ -1007,9 +1002,10 @@ main .view-category .wrapper #example tbody tr td:last-child button {
   outline: none;
   border-radius: 5px;
   white-space: nowrap;
-  display: flex;
+  display: inline;
   justify-content: center;
   align-items: center;
+  margin: 2px 0;
 }
 main .view-category .wrapper #example tbody tr td:last-child button i {
   padding-right: 5px;
@@ -1034,7 +1030,7 @@ main .insert-product span {
   font-size: 14px;
 }
 main .insert-product .insert-product-wrapper {
-  background: url(../images/admin-bg-5.png);
+  background: url(../images/adminpage_bg.png);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;

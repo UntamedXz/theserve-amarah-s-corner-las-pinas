@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./assets/css/style.css">
     <title>Amarah's Corner - BF Resort Las Piñas</title>
 
@@ -257,8 +258,9 @@
                     $get_category = mysqli_query($conn, "SELECT * FROM category");
 
                     foreach ($get_category as $category_row) {
+                        $encryptedCategoryId = urlencode(base64_encode($category_row['category_id']));
                     ?>
-                        <a href="catalog" class="menu__card swiper-slide">
+                        <a href="catalog?id=<?php echo $encryptedCategoryId; ?>" class="menu__card swiper-slide">
                             <div class="menu__image">
                                 <img src="./assets/images/<?php echo $category_row['categoty_thumbnail']; ?>" alt="">
                             </div>

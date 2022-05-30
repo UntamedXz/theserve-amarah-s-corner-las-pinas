@@ -936,9 +936,6 @@ section {
   border: 1px solid var(--primary);
 }
 
-.catalog {
-  padding-top: 20px;
-}
 .catalog .container {
   width: 100%;
   display: flex;

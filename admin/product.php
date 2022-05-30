@@ -58,6 +58,10 @@ require_once '../includes/database_conn.php';
             text-transform: uppercase;
         }
 
+        .dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody {
+            overflow-x: scroll !important;
+        }
+
         .dataTables_wrapper .dataTables_paginate .paginate_button {
             padding: 5px 10px;
             background-color: #ffaf08 !important;
@@ -222,158 +226,12 @@ require_once '../includes/database_conn.php';
                 })
             });
 
-            // GET INSERT
-            $(document).on('click', '#getInsert', function (e) {
-                e.preventDefault();
-                $('.insert-modal').addClass('active');
-            });
-
             // GET DELETE
             $(document).on('click', '#getDelete', function (e) {
                 e.preventDefault();
                 $('.delete-modal').addClass('active');
                 var product_id = $(this).data('id');
                 $("#delete_product_id").val(product_id);
-            });
-
-            // CLOSE MODAL
-            $(document).on('click', '#modalClose', function () {
-                $('.edit-modal').removeClass("active");
-                $('.view-modal').removeClass("active");
-                $('.insert-modal').removeClass("active");
-                $(".delete-modal").removeClass("active");
-                $("#edit-category")[0].reset();
-                $("#insert-category")[0].reset();
-            })
-        </script>
-
-        <script>
-            // SUBMIT EDIT
-            $(document).ready(function () {
-                $("#edit-category").on('submit', function (e) {
-                    e.preventDefault();
-                    $.ajax({
-                        type: "POST",
-                        url: "update-category",
-                        data: new FormData(this),
-                        dataType: 'text',
-                        contentType: false,
-                        cache: false,
-                        processData: false,
-                        success: function (response) {
-                            if (response === 'category is empty') {
-                                $('#toast').addClass('active');
-                                $('.progress').addClass('active');
-                                // $('#toast-icon').removeClass('fa-solid fa-triangle-exclamation').addClass('fa-solid fa-circle-exclamation');
-                                $('.text-1').text('Error!');
-                                $('.text-2').text('Category title field is empty!');
-                                setTimeout(() => {
-                                    $('#toast').removeClass("active");
-                                    $('.progress').removeClass("active");
-                                }, 5000);
-                            }
-
-                            if (response === 'category title already exist') {
-                                $('#toast').addClass('active');
-                                $('.progress').addClass('active');
-                                $('.text-1').text('Error!');
-                                $('.text-2').text('Category title already exist!');
-                                setTimeout(() => {
-                                    $('#toast').removeClass("active");
-                                    $('.progress').removeClass("active");
-                                }, 5000);
-                            }
-
-                            if (response === 'title updated') {
-                                $('.edit-modal').removeClass("active");
-                                $('#toast').addClass('active');
-                                $('.progress').addClass('active');
-                                $('#toast-icon').removeClass(
-                                    'fa-solid fa-triangle-exclamation').addClass(
-                                    'fa-solid fa-check warning');
-                                $('.text-1').text('Success!');
-                                $('.text-2').text('Category title updated successfully!');
-                                setTimeout(() => {
-                                    $('#toast').removeClass("active");
-                                    $('.progress').removeClass("active");
-                                }, 5000);
-                                $('#example').DataTable().ajax.reload();
-                            }
-
-                            if (response === 'invalid file') {
-                                $('#toast').addClass('active');
-                                $('.progress').addClass('active');
-                                $('.text-1').text('Error!');
-                                $('.text-2').text('File not supported!');
-                                setTimeout(() => {
-                                    $('#toast').removeClass("active");
-                                    $('.progress').removeClass("active");
-                                }, 5000);
-                                $('#example').DataTable().ajax.reload();
-                            }
-                            if (response === 'invalid file') {
-                                $('#toast').addClass('active');
-                                $('.progress').addClass('active');
-                                $('.text-1').text('Error!');
-                                $('.text-2').text('File is too large!');
-                                setTimeout(() => {
-                                    $('#toast').removeClass("active");
-                                    $('.progress').removeClass("active");
-                                }, 5000);
-                                $('#example').DataTable().ajax.reload();
-                            }
-
-                            if (response === 'updated successfully') {
-                                $('.edit-modal').removeClass("active");
-                                $('#toast').addClass('active');
-                                $('.progress').addClass('active');
-                                $('#toast-icon').removeClass(
-                                    'fa-solid fa-triangle-exclamation').addClass(
-                                    'fa-solid fa-check warning');
-                                $('.text-1').text('Success!');
-                                $('.text-2').text(
-                                    'Category title and thumbnail updated successfully!'
-                                    );
-                                setTimeout(() => {
-                                    $('#toast').removeClass("active");
-                                    $('.progress').removeClass("active");
-                                }, 5000);
-                                $('#example').DataTable().ajax.reload();
-                            }
-                        }
-                    })
-                });
-
-                // SUBMIT DELETE
-                $("#delete_product").on('submit', function (e) {
-                    e.preventDefault();
-                    $.ajax({
-                        type: "POST",
-                        url: "delete-product",
-                        data: new FormData(this),
-                        dataType: 'text',
-                        contentType: false,
-                        cache: false,
-                        processData: false,
-                        success: function (response) {
-                            if (response === 'deleted') {
-                                $('.delete-modal').removeClass("active");
-                                $('#toast').addClass('active');
-                                $('.progress').addClass('active');
-                                $('#toast-icon').removeClass(
-                                    'fa-solid fa-triangle-exclamation').addClass(
-                                    'fa-solid fa-check warning');
-                                $('.text-1').text('Success!');
-                                $('.text-2').text('Product deleted successfully!');
-                                setTimeout(() => {
-                                    $('#toast').removeClass("active");
-                                    $('.progress').removeClass("active");
-                                }, 5000);
-                                $('#example').DataTable().ajax.reload();
-                            }
-                        }
-                    })
-                })
             });
         </script>
 

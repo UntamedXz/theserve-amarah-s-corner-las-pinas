@@ -28,7 +28,7 @@ require_once '../includes/database_conn.php';
             </ul>
             <section class="dashboard">
                 <div class="dashboard-wrapper">
-                    Dashboard
+                    Dashboard angas gagu
                 </div>
 
                 

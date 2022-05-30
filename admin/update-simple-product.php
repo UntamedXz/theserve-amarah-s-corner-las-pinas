@@ -412,8 +412,7 @@ while ($result = mysqli_fetch_assoc($getSimpleProduct)) {
                                         $('.progress').removeClass("active");
                                     }, 5000);
                                     $('#example').DataTable().ajax.reload();
-                                }
-                            }
+                                }                            }
                         })
                     }
                 });

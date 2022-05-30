@@ -524,7 +524,7 @@ li {
   position: fixed;
   max-width: 260px;
   width: 100%;
-  background: url(../images/admin-bg-5.png);
+  background: url(../images/adminpage_bg.png);
   background-repeat: no-repeat;
   background-position: center;
   background-attachment: fixed;
@@ -711,7 +711,7 @@ li {
   transition: all 0.3s ease;
 
   nav {
-    background: url(../images/admin-bg-5.png);
+    background: url(../images/adminpage_bg.png);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -949,7 +949,7 @@ main {
   // DASHBOARD
   .dashboard {
     .dashboard-wrapper {
-      background: url(../images/admin-bg-5.png);
+      background: url(../images/adminpage_bg.png);
       background-repeat: no-repeat;
       background-position: center;
       background-size: cover;
@@ -966,7 +966,7 @@ main {
     height: auto;
 
     .wrapper {
-      background: url(../images/admin-bg-5.png);
+      background: url(../images/adminpage_bg.png);
       background-repeat: no-repeat;
       background-position: center;
       background-size: cover;
@@ -1097,7 +1097,7 @@ main {
     }
 
     .wrapper {
-      background: url(../images/admin-bg-5.png);
+      background: url(../images/adminpage_bg.png);
       background-repeat: no-repeat;
       background-position: center;
       background-size: cover;
@@ -1141,9 +1141,7 @@ main {
               font-weight: 600;
 
               &:last-child {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 5px;
+                // white-space: nowrap;
 
                 button {
                   width: 80px;
@@ -1154,9 +1152,10 @@ main {
                   outline: none;
                   border-radius: 5px;
                   white-space: nowrap;
-                  display: flex;
+                  display: inline;
                   justify-content: center;
                   align-items: center;
+                  margin: 2px 0;
 
                   i {
                     padding-right: 5px;
@@ -1487,7 +1486,7 @@ main {
     // }
 
     .insert-product-wrapper {
-      background: url(../images/admin-bg-5.png);
+      background: url(../images/adminpage_bg.png);
       background-repeat: no-repeat;
       background-position: center;
       background-size: cover;

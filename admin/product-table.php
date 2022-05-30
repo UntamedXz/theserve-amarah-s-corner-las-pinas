@@ -21,14 +21,17 @@ $totalData = mysqli_num_rows($query);
 $totalFilter = $totalData;
 
 //Search
-$sql = "SELECT product.product_id, product.product_img1, category.category_title, subcategory.subcategory_title, product.product_title, product.product_slug, product.product_price FROM product LEFT JOIN category ON product.category_id=category.category_id LEFT JOIN subcategory ON category.category_id=subcategory.category_id WHERE 1=1 GROUP BY product.product_title";
+$sql = "SELECT product.product_id, product.product_img1, category.category_title, subcategory.subcategory_title, product.product_title, product.product_slug, product.product_price FROM product LEFT JOIN category ON product.category_id=category.category_id LEFT JOIN subcategory ON category.category_id=subcategory.category_id WHERE 1=1";
 if (!empty($request['search']['value'])) {
-    $sql .= " AND (category_title Like '" . $request['search']['value'] . "%' ";
+    $sql .= " AND (category_title Like '" . $request['search']['value'] . "%'";
     $sql .= " OR subcategory_title Like '" . $request['search']['value'] . "%' ";
     $sql .= " OR product_title Like '" . $request['search']['value'] . "%' ";
     $sql .= " OR product_slug Like '" . $request['search']['value'] . "%' ";
     $sql .= " OR product_price Like '" . $request['search']['value'] . "%' )";
 }
+
+$sql .= " GROUP BY product.product_title";
+
 $query = mysqli_query($conn, $sql);
 $totalData = mysqli_num_rows($query);
 
@@ -37,12 +40,11 @@ $sql .= " ORDER BY " . $col[$request['order'][0]['column']] . "   " . $request['
     $request['start'] . "  ," . $request['length'] . "  ";
 
 $query = mysqli_query($conn, $sql);
-
 $data = array();
 
 while ($row = mysqli_fetch_array($query)) {
     $subdata = array();
-    $subdata[] = '<img style="width: 80px;" src="../assets/images/'.$row[1].'">';
+    $subdata[] = '<img style="width: 80px; border-radius: 50%;" src="../assets/images/' . $row[1] . '">';
     $subdata[] = $row[2];
     $subdata[] = $row[3];
     $subdata[] = $row[4];

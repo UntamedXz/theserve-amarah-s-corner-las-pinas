@@ -506,8 +506,7 @@ require_once '../includes/database_conn.php';
                             cache: false,
                             processData: false,
                             success: function(data) {
-                                if (data === 'success') {
-                                    $('.edit-modal').removeClass("active");
+                                if (data == 'success') {
                                     $('#toast').addClass('active');
                                     $('.progress').addClass('active');
                                     $('#toast-icon').removeClass(
@@ -522,7 +521,7 @@ require_once '../includes/database_conn.php';
                                     $('#example').DataTable().ajax.reload();
                                 }
 
-                                if (data === 'failed') {
+                                if (data == 'failed') {
                                     $('.edit-modal').removeClass("active");
                                     $('#toast').addClass('active');
                                     $('.progress').addClass('active');
@@ -538,7 +537,7 @@ require_once '../includes/database_conn.php';
                                     $('#example').DataTable().ajax.reload();
                                 }
 
-                                if (data === 'product already exist') {
+                                if (data == 'product already exist') {
                                     $('.edit-modal').removeClass("active");
                                     $('#toast').addClass('active');
                                     $('.progress').addClass('active');
