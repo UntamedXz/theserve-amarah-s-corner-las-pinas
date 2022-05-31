@@ -1,15 +1,8 @@
 <?php
 require_once "./includes/database_conn.php";
 
-$id = $_GET['id'];
-$decode_id = base64_decode(urldecode($id));
+$id = $_GET['link'];
 
-$getCategoryTitle = mysqli_query($conn, "SELECT category_title FROM category WHERE category_id = $decode_id");
-
-$categoryTitle = '';
-while ($result = mysqli_fetch_assoc($getCategoryTitle)) {
-    $categoryTitle = $result['category_title'];
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -70,41 +63,92 @@ while ($result = mysqli_fetch_assoc($getCategoryTitle)) {
         </div>
     </section>
 
-    <section class="catalog">
-        <h3 class="title-header"><?php echo $categoryTitle ?></h3>
-        <div class="container">
-            <!-- <div class="container-left">
-                <div class="container-left-cont">
+    <?php
+    $getProduct = mysqli_query($conn, "SELECT * FROM product WHERE product_slug = '$id'");
 
+    foreach($getProduct as $row) {
+    ?>
+    <section class="product-details">
+        <div class="product-details__wrapper">
+            <div class="left">
+                <div class="img-container">
+                    <img src="./assets/images/<?php echo $row['product_img1']; ?>" alt="">
                 </div>
-            </div> -->
-            <div class="container-right">
-                <div class="container-right-cont">
-                    <?php
-                    $getProduct = mysqli_query($conn, "SELECT subcategory.subcategory_title, product.product_img1, product.product_title, product.product_price, product.product_slug FROM product LEFT JOIN subcategory ON product.subcategory_id=subcategory.subcategory_id WHERE product.category_id = $decode_id");
-
-                    foreach ($getProduct as $rowProduct) {
-                    ?>
-                        <a href="product?link=<?php echo $rowProduct['product_slug']; ?>" class="catalog-box">
-                            <div class="img-cont">
-                                <img src="./assets/images/<?php echo $rowProduct['product_img1']; ?>" alt="">
-                            </div>
-                            <div class="details">
-                                <h4><?php echo $rowProduct['product_title'] ?></h4>
-                                <h5 style="color: #ffaf08; font-weight: 400;"><?php echo $rowProduct['subcategory_title']; ?></h5>
-                                <h5 class="price">P<?php echo $rowProduct['product_price'] ?></h5>
-                                <button class="order-btn"><i class='bx bxs-cart'></i>ORDER NOW</button>
-                            </div>
-                        </a>
-                    <?php
-                    }
-                    ?>
-                </div>
-                <div id="load-more-products">
-                    <input type="submit" class="load-more-products" value="LOAD MORE">
+                <div class="product-details">
+                    <h1 class="product-title">
+                        <?php echo $row['product_title']; ?>
+                    </h1>
+                    <span class="price"><small>Starts at </small> <b>P<?php echo $row['product_price']; ?></b></span>
+                    <!-- <span class="desc">
+                        Ham with Mozarella and Special Cheese
+                    </span> -->
                 </div>
             </div>
+            <div class="right">
+                <div class="form-group">
+                    <span>Special Instructions (Optional)</span>
+                    <input type="text" name="" id="">
+                </div>
+            </div>
+        </div>
     </section>
+    <?php
+    }
+    ?>
+
+    <div class="product-footer">
+        <div class="product-footer__wrapper">
+            <div class="qty-container">
+                <div class="prev">-</div>
+                <div class="next">+</div>
+                <input class="number-spinner" type="number" name="" id="" value="1">
+            </div>
+            <div class="total-box">
+                <div class="total">
+                    <span class="totalText">Total</span>
+                    <span class="totalPrice">P125.00</span>
+                </div>
+                <div class="btn-container">
+                    <button type="submit">ADD TO CART</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.prev').on('click', function() {
+                var prev = $(this).closest('.qty-container').find('input').val();
+
+                if (prev == 1) {
+                    $(this).closest('.qty-container').find('input').val('1');
+                } else {
+                    var prevVal = prev - 1;
+                    $(this).closest('.qty-container').find('input').val(prevVal);
+                }
+            });
+
+            $('.next').on('click', function() {
+                var next = $(this).closest('.qty-container').find('input').val();
+
+                if (next == 100) {
+                    $(this).closest('.qty-container').find('input').val('100');
+                } else {
+                    var nextVal = ++next;
+                    $(this).closest('.qty-container').find('input').val(nextVal);
+                }
+            });
+        })
+    </script>
+
+    <!-- TOTAL -->
+    <script>
+        $(document).ready(function() {
+            $('.next').on('click', function() {
+                
+            });
+        });
+    </script>
 
     <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
     <script>
@@ -126,34 +170,6 @@ while ($result = mysqli_fetch_assoc($getCategoryTitle)) {
                 prevEl: ".swiper-button-prev",
             },
         });
-    </script>
-    <!-- SCRIPT -->
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js">
-    </script>
-
-    <script>
-        var products_col = document.querySelectorAll(".catalog-box");
-        var load_more_products = document.querySelector(".load-more-products");
-
-        if (products_col.length < 8) {
-            load_more_products.style.display = 'none';
-        } else {
-            load_more_products.style.display = 'block';
-
-            var current_products_col = 8;
-            load_more_products.addEventListener("click", function() {
-                for (var i = current_products_col; i < current_products_col + 8; i++) {
-                    if (products_col[i]) {
-                        products_col[i].style.display = "flex";
-                    }
-                }
-                current_products_col += 4;
-                if (current_products_col >=
-                    products_col.length) {
-                    event.target.style.display = "none";
-                }
-            });
-        }
     </script>
 
     <script>

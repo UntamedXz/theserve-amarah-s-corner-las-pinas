@@ -14,8 +14,17 @@
                 <i class="bx bxs-cart"></i>
                 <span class="badge">8</span>
             </a>
-            <a href="login" id="login-btn" class="bx bxs-user"></a>
+            <a href="login" id="login-btn" class="bx bxs-user loginBtn"></a>
             <div id="navbar" class="bx bx-menu-alt-right"></div>
+            <div class="profile">
+                <img src="./assets/images/B612_20220322_202642_720-min.jpg" alt="">
+                <ul class="profile-link">
+                    <li><a href="#"><i class="bx bxs-user-circle icon"></i>Profile</a></li>
+                    <li><a href="#"><i class="bx bxs-cog"></i>Settings</a></li>
+                    
+                    <li><a href="./includes/logout"><i class="bx bxs-log-out-circle"></i>Logout</a></li>
+                </ul>
+            </div>
         </div>
     </div>
 </header>
@@ -36,3 +45,24 @@
     <a href="#feedbacks">feedback</a>
     <a href="#">contact</a>
 </nav>
+
+<script>
+    // PROFILE DROPDOWN
+    const profile = document.querySelector('.profile');
+    const imgProfile = profile.querySelector('img');
+    const dropdownProfile = profile.querySelector('.profile-link');
+
+    imgProfile.addEventListener('click', function() {
+        dropdownProfile.classList.toggle('show');
+    })
+
+    window.addEventListener('click', function(e) {
+        if (e.target !== imgProfile) {
+            if (e.target !== dropdownProfile) {
+                if (dropdownProfile.classList.contains('show')) {
+                    dropdownProfile.classList.remove('show');
+                }
+            }
+        }
+    })
+</script>

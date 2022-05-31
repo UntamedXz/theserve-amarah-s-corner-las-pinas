@@ -36,7 +36,7 @@ if (isset($_POST['login'])) {
                 }
                 $_SESSION['loggedin'] = true;
                 $_SESSION['userEmail'] = $email;
-                header("Location: cart");
+                header("Location: login");
             } else {
                 $_SESSION['status'] = "wrong password";
                 $_SESSION['email'] = $_POST['email'];

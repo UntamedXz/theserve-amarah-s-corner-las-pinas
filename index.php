@@ -1,4 +1,7 @@
-<?php require_once './includes/database_conn.php'; ?>
+<?php
+require_once './includes/database_conn.php';
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -236,7 +239,19 @@
 <body>
     <div id="preloader"></div>
 
-    <?php include './includes/navbar.php'; ?>
+    <?php include './includes/navbar.php';
+    if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
+        echo "
+        <script type='text/javascript'>
+            window.onload = (event) => {
+                document.querySelector('.header .header-1 .left .profile').style.display = 'flex';
+
+                document.querySelector('.header .header-1 .left .loginBtn').style.display = 'none';
+            }
+        </script>
+        ";
+    }
+    ?>
 
     <!-- BANNER SECTION -->
     <section class="banner" id="home">
@@ -255,11 +270,11 @@
             <div class="menu__wrapper swiper mySwiper">
                 <div class="menu__content swiper-wrapper">
                     <?php
-                    $get_category = mysqli_query($conn, "SELECT * FROM category");
+$get_category = mysqli_query($conn, "SELECT * FROM category");
 
-                    foreach ($get_category as $category_row) {
-                        $encryptedCategoryId = urlencode(base64_encode($category_row['category_id']));
-                    ?>
+foreach ($get_category as $category_row) {
+    $encryptedCategoryId = urlencode(base64_encode($category_row['category_id']));
+    ?>
                         <a href="catalog?id=<?php echo $encryptedCategoryId; ?>" class="menu__card swiper-slide">
                             <div class="menu__image">
                                 <img src="./assets/images/<?php echo $category_row['categoty_thumbnail']; ?>" alt="">
@@ -269,8 +284,8 @@
                             </div>
                         </a>
                     <?php
-                    }
-                    ?>
+}
+?>
                 </div>
                 <div class="swiper-button-next"></div>
                 <div class="swiper-button-prev"></div>
@@ -430,7 +445,7 @@
             <input type="submit" class="load-more-feedbacks" value="LOAD MORE">
         </div>
     </section>
-    <?php include './includes/footer.php'; ?>
+    <?php include './includes/footer.php';?>
     <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js">
     </script>
