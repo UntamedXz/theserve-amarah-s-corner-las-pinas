@@ -30,16 +30,16 @@
 </header>
 <!-- NAVIGATION BAR 2 -->
 <nav class="custom-nav">
-    <a href="index">home</a>
-    <a href="index#menu">menu</a>
-    <a href="index#updates">updates</a>
-    <a href="index#feedbacks">feedback</a>
+    <a href="http://localhost/theserve-amarah-s-corner-las-pinas">home</a>
+    <a href="http://localhost/theserve-amarah-s-corner-las-pinas/#menu">menu</a>
+    <a href="http://localhost/theserve-amarah-s-corner-las-pinas/#updates">updates</a>
+    <a href="http://localhost/theserve-amarah-s-corner-las-pinas/#feedbacks">feedback</a>
     <a href="#">contact</a>
 </nav>
 <!-- MOBILE NAVIGATION MENU -->
 <nav class="dropdown-nav">
     <div class="bx bxs-x-square" id="close-menu"></div>
-    <a href="index">home</a>
+    <a href="http://localhost/theserve-amarah-s-corner-las-pinas">home</a>
     <a href="index#menu">menu</a>
     <a href="#updates">updates</a>
     <a href="#feedbacks">feedback</a>
@@ -66,3 +66,17 @@
         }
     })
 </script>
+
+<?php
+if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
+    echo "
+    <script type='text/javascript'>
+        window.onload = (event) => {
+            document.querySelector('.header .header-1 .left .profile').style.display = 'flex';
+
+            document.querySelector('.header .header-1 .left .loginBtn').style.display = 'none';
+        }
+    </script>
+    ";
+}
+?>

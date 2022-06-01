@@ -73,7 +73,7 @@ body {
 @media (min-width: 768px) {
   .toast {
     width: auto;
-    top: 130px;
+    top: 134px;
     left: unset;
     transform: unset;
     bottom: unset;
@@ -1253,7 +1253,6 @@ section {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-bottom: 10px;
   gap: 10px;
 }
 @media (min-width: 768px) {
@@ -1262,10 +1261,6 @@ section {
     justify-content: space-between;
     align-items: center;
   }
-}
-.cart .wrapper .project .shop .box .content .qty-remove .subTotal {
-  align-self: center;
-  margin: 0;
 }
 .cart .wrapper .project .shop .box .content .qty-remove .unit {
   margin-right: 5px;
@@ -1283,7 +1278,7 @@ section {
   color: #fff;
   font-weight: 500;
 }
-.cart .wrapper .project .shop .box .content .btn-area {
+.cart .wrapper .project .shop .box .content .qty-remove .btn-area {
   padding: 5px 10px;
   background-color: var(--primary);
   border: 1px solid var(--primary);
@@ -1295,15 +1290,10 @@ section {
   text-transform: uppercase;
   transition: all 0.6s ease;
 }
-@media (min-width: 768px) {
-  .cart .wrapper .project .shop .box .content .btn-area {
-    float: right;
-  }
-}
-.cart .wrapper .project .shop .box .content .btn-area i {
+.cart .wrapper .project .shop .box .content .qty-remove .btn-area i {
   margin-right: 5px;
 }
-.cart .wrapper .project .shop .box .content .btn-area:hover {
+.cart .wrapper .project .shop .box .content .qty-remove .btn-area:hover {
   background-color: var(--black);
   border: 1px solid var(--primary);
   color: var(--primary);

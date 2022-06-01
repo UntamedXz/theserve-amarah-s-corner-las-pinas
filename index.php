@@ -11,7 +11,8 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./assets/css/style.css">
     <title>Amarah's Corner - BF Resort Las Piñas</title>
 
@@ -25,7 +26,7 @@ session_start();
         }
     </style>
     <script>
-        (function(w, d) {
+        (function (w, d) {
             w.CollectId = "628c48cbfaa7943a0bbb67f1";
             var h = d.head || d.getElementsByTagName("head")[0];
             var s = d.createElement("script");
@@ -275,14 +276,14 @@ $get_category = mysqli_query($conn, "SELECT * FROM category");
 foreach ($get_category as $category_row) {
     $encryptedCategoryId = urlencode(base64_encode($category_row['category_id']));
     ?>
-                        <a href="catalog?id=<?php echo $encryptedCategoryId; ?>" class="menu__card swiper-slide">
-                            <div class="menu__image">
-                                <img src="./assets/images/<?php echo $category_row['categoty_thumbnail']; ?>" alt="">
-                            </div>
-                            <div class="menu__name">
-                                <h3><?php echo ucwords($category_row['category_title']); ?></h3>
-                            </div>
-                        </a>
+                    <a href="catalog?id=<?php echo $encryptedCategoryId; ?>" class="menu__card swiper-slide">
+                        <div class="menu__image">
+                            <img src="./assets/images/<?php echo $category_row['categoty_thumbnail']; ?>" alt="">
+                        </div>
+                        <div class="menu__name">
+                            <h3><?php echo ucwords($category_row['category_title']); ?></h3>
+                        </div>
+                    </a>
                     <?php
 }
 ?>
@@ -312,21 +313,18 @@ foreach ($get_category as $category_row) {
                     <img src="./assets/images/2021-12-28.jpg" alt="">
                 </div>
                 <h4>Posted on Dec 28, 2021</h4>
-                <h5>Merry Christmas, Katambay!<3 </h5>
-            </div> <!-- UPDATE 3 -->
-            <div class="col">
-                <div class="image-cont">
-                    <img src="./assets/images/2021-12-21.jpg" alt="">
-                </div>
-                <h4>Posted on Dec 21, 2021</h4>
-                <h5>Jumpstart your day with Amarah's ALL-DAY BREAKFAST MEALS! Calling all SILOG lovers out
-                    there! Namnamin ang sarap ng almusal anytime of the day! 🤗 Tara na sa Amarahs,
-                    Katambay! 💛 <br> #amarahscorner <br> #amarahscornerph <br> #katambay<3 </h5>
-            </div>
-        </div>
-        <div id="load-more">
-            <input type="submit" class="load-more" value="LOAD MORE">
-        </div>
+                <h5>Merry Christmas, Katambay!<3 </h5> </div> <!-- UPDATE 3 -->
+                        <div class="col">
+                            <div class="image-cont">
+                                <img src="./assets/images/2021-12-21.jpg" alt="">
+                            </div>
+                            <h4>Posted on Dec 21, 2021</h4>
+                            <h5>Jumpstart your day with Amarah's ALL-DAY BREAKFAST MEALS! Calling all SILOG lovers out
+                                there! Namnamin ang sarap ng almusal anytime of the day! 🤗 Tara na sa Amarahs,
+                                Katambay! 💛 <br> #amarahscorner <br> #amarahscornerph <br> #katambay<3 </h5> </div>
+                                    </div> <div id="load-more">
+                                    <input type="submit" class="load-more" value="LOAD MORE">
+                        </div>
     </section>
     <!-- FEEDBACK SECTION -->
     <section class="feedbacks" id="feedbacks">
@@ -455,7 +453,7 @@ foreach ($get_category as $category_row) {
     <script>
         var loader = document.getElementById("preloader");
 
-        window.addEventListener("load", function() {
+        window.addEventListener("load", function () {
             loader.style.display = "none";
         })
     </script>

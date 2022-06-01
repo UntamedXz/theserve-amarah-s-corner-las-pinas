@@ -1,6 +1,6 @@
-<?php 
-session_start(); 
-if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
+<?php
+session_start();
+if (isset($_SESSION['userEmail']) && !empty($_SESSION['userEmail'])) {
     header("Location: ./index");
 }
 ?>
@@ -14,6 +14,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
     <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./assets/css/style.css">
     <title>Amarah's Corner - BF Resort Las Piñas</title>
 
@@ -31,106 +32,34 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
 <body>
     <div id="preloader"></div>
 
-    <?php include './includes/navbar.php'; ?>
+    <?php include './includes/navbar.php';?>
 
-    <div class="toast-wrapper">
-        <div class="toast">
-            <div class="toast-content">
-                <i class="fa-solid fa-triangle-exclamation warning"></i>
+    <!-- TOAST -->
+    <div class="toast" id="toast">
+        <div class="toast-content" id="toast-content">
+            <i id="toast-icon" class="fa-solid fa-triangle-exclamation warning"></i>
 
-                <div class="message">
-                    <span class="text text-1"></span>
-                    <span class="text text-2"></span>
-                </div>
+            <div class="message">
+                <span class="text text-1" id="text-1"></span>
+                <span class="text text-2" id="text-2"></span>
             </div>
-            <i class="fa-solid fa-xmark close"></i>
-            <div class="progress"></div>
         </div>
+        <i class="fa-solid fa-xmark close"></i>
+        <div class="progress"></div>
     </div>
-
-    <?php
-    if(isset($_SESSION['status']) && $_SESSION['status'] == 'no input') {
-    echo '<script>
-    window.addEventListener("load", function () {
-        document.querySelector(".toast").classList.toggle("active");
-        document.querySelector(".text-1").textContent = "Error";
-        document.querySelector(".text-2").textContent = "All fields are required!";
-        document.querySelector(".progress").classList.toggle("active");
-        document.querySelector(".close").addEventListener("click", () => {
-            document.querySelector(".toast").classList.remove("active");
-        });
-    })
-    </script>';
-    unset($_SESSION['status']);
-    }
-    if(isset($_SESSION['status']) && $_SESSION['status'] == 'no email') {
-    echo '<script>
-    window.addEventListener("load", function () {
-        document.querySelector(".toast").classList.toggle("active");
-        document.querySelector(".text-1").textContent = "Error";
-        document.querySelector(".text-2").textContent = "Input email!";
-        document.querySelector(".progress").classList.toggle("active");
-        document.querySelector(".close").addEventListener("click", () => {
-            document.querySelector(".toast").classList.remove("active");
-        });
-    })
-    </script>';
-    unset($_SESSION['status']);
-    }
-    if(isset($_SESSION['status']) && $_SESSION['status'] == 'no password') {
-    echo '<script>
-    window.addEventListener("load", function () {
-        document.querySelector(".toast").classList.toggle("active");
-        document.querySelector(".text-1").textContent = "Error";
-        document.querySelector(".text-2").textContent = "Input password!";
-        document.querySelector(".progress").classList.toggle("active");
-        document.querySelector(".close").addEventListener("click", () => {
-            document.querySelector(".toast").classList.remove("active");
-        });
-    })
-    </script>';
-    unset($_SESSION['status']);
-    }
-    if(isset($_SESSION['status']) && $_SESSION['status'] == 'email not registered') {
-    echo '<script>
-    window.addEventListener("load", function () {
-        document.querySelector(".toast").classList.toggle("active");
-        document.querySelector(".text-1").textContent = "Error";
-        document.querySelector(".text-2").textContent = "Email not registered!";
-        document.querySelector(".progress").classList.toggle("active");
-        document.querySelector(".close").addEventListener("click", () => {
-            document.querySelector(".toast").classList.remove("active");
-        });
-    })
-    </script>';
-    unset($_SESSION['status']);
-    }
-    if(isset($_SESSION['status']) && $_SESSION['status'] == 'wrong password') {
-    echo '<script>
-    window.addEventListener("load", function () {
-        document.querySelector(".toast").classList.toggle("active");
-        document.querySelector(".text-1").textContent = "Error";
-        document.querySelector(".text-2").textContent = "Wrong password!";
-        document.querySelector(".progress").classList.toggle("active");
-        document.querySelector(".close").addEventListener("click", () => {
-            document.querySelector(".toast").classList.remove("active");
-        });
-    })
-    </script>';
-    unset($_SESSION['status']);
-    }
-    ?>
 
     <!-- LOGIN FORM -->
     <div class="login-form-container">
-        <form action="./processing.php" method="POST">
+        <form id="login">
             <a href="#" class="logo"><img src="./assets/images/official_logo.png" alt=""></a>
             <h3>sign in</h3>
             <span>email</span>
-            <input type="email" name="email" class="box" placeholder="enter your email"
-                value="<?php if(isset($_SESSION['email'])) { echo $_SESSION['email']; } ?>">
+            <input type="email" name="loginEmail" id="loginEmail" class="box" placeholder="enter your email"
+                value="<?php if (isset($_SESSION['email'])) {echo $_SESSION['email'];}?>">
+            <input type="hidden" name="" id="error-email">
             <span>password</span>
-            <input type="password" name="password" class="box" placeholder="enter your password">
+            <input type="password" name="loginPassword" id="loginPassword" class="box" placeholder="enter your password">
+            <input type="hidden" name="" id="error-password">
             <div class="checkbox">
                 <input type="checkbox" name="rem" id="remember-me">
                 <label for="remember-me">remember me</label>
@@ -140,6 +69,96 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
             <p>don't have an account? <a href="register">create one</a></p>
         </form>
     </div>
+
+    <script>
+        $('#login').on('submit', function(e) {
+            e.preventDefault();
+
+            if ($('#loginEmail').val() == '') {
+                $('#error-email').val('Input email!');
+            } else {
+                $('#error-email').val('');
+            }
+
+            if ($('#loginPassword').val() == '') {
+                $('#error-password').val('Input password!');
+            } else {
+                $('#error-password').val('');
+            }
+
+            if ($('#error-email').val() != '') {
+                $('#toast').addClass('active');
+                $('.progress').addClass('active');
+                // $('#toast-icon').removeClass(
+                //     'fa-solid fa-triangle-exclamation').addClass(
+                //     'fa-solid fa-check warning');
+                $('.text-1').text('Error!');
+                $('.text-2').text('Input email!');
+
+                setTimeout(() => {
+                    $('#toast').removeClass("active");
+                    $('.progress').removeClass("active");
+                }, 5000);
+            } else if ($('#error-password').val() != '') {
+                $('#toast').addClass('active');
+                $('.progress').addClass('active');
+                // $('#toast-icon').removeClass(
+                //     'fa-solid fa-triangle-exclamation').addClass(
+                //     'fa-solid fa-check warning');
+                $('.text-1').text('Error!');
+                $('.text-2').text('Input password!');
+
+                setTimeout(() => {
+                    $('#toast').removeClass("active");
+                    $('.progress').removeClass("active");
+                }, 5000);
+            } else {
+                $.ajax({
+                    type: "POST",
+                    url: "login-validation",
+                    data: new FormData(this),
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    success: function(response) {
+                        if (response == 'email not registered') {
+                            $('#toast').addClass('active');
+                            $('.progress').addClass('active');
+                            // $('#toast-icon').removeClass(
+                            //     'fa-solid fa-triangle-exclamation').addClass(
+                            //     'fa-solid fa-check warning');
+                            $('.text-1').text('Error!');
+                            $('.text-2').text('Email not registered!');
+
+                            setTimeout(() => {
+                                $('#toast').removeClass("active");
+                                $('.progress').removeClass("active");
+                            }, 5000);
+                        }
+
+                        if (response == 'wrong password') {
+                            $('#toast').addClass('active');
+                            $('.progress').addClass('active');
+                            // $('#toast-icon').removeClass(
+                            //     'fa-solid fa-triangle-exclamation').addClass(
+                            //     'fa-solid fa-check warning');
+                            $('.text-1').text('Error!');
+                            $('.text-2').text('Wrong password');
+
+                            setTimeout(() => {
+                                $('#toast').removeClass("active");
+                                $('.progress').removeClass("active");
+                            }, 5000);
+                        }
+
+                        if (response == 'success') {
+                            location.href = 'http://localhost/theserve-amarah-s-corner-las-pinas';
+                        }
+                    }
+                })
+            }
+        })
+    </script>
 
     <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js">

@@ -1,7 +1,16 @@
 <?php 
 session_start();
+require_once './includes/database_conn.php';
 if (!isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == false) {
     header("Location: ./login");
+}
+
+$userEmail = $_SESSION['userEmail'];
+
+$getUserId = mysqli_query($conn, "SELECT * FROM customers WHERE email = '$userEmail'");
+
+while($row = mysqli_fetch_array($getUserId)) {
+    $userId = $row['user_id'];
 }
 
 ?>
@@ -58,72 +67,40 @@ if (!isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == false) {
             <hr>
             <div class="project">
                 <div class="shop">
+                    <?php
+                    $getUserCart = mysqli_query($conn, "SELECT product.product_title, product.product_img1, subcategory.subcategory_title, product.product_price, cart.product_qty, cart.product_total
+                    FROM cart
+                    LEFT JOIN product
+                    ON cart.product_id = product.product_id
+                    LEFT JOIN subcategory
+                    ON cart.subcategory_id = subcategory.subcategory_id WHERE cart.user_id = $userId");
+
+                    foreach($getUserCart as $row) {
+                    ?>
                     <div class="box">
                         <div class="img" style="background:
-                            url(https://d1sag4ddilekf6.azureedge.net/compressed/items/PHITE20220114095410029702/photo/menueditor_item_4b7424ad46314b1d93304f29b30ed091_1647089506293598067.jpg)
-                            no-repeat;
-                            background-size: cover;
+                            url(./assets/images/<?php echo $row['product_img1']; ?>) no-repeat; background-size: cover;
                             background-position: center;">
                         </div>
                         <div class="content">
-                            <h3>Ham & Cheese</h3>
-                            <h5>Classic Flavor</h5>
-                            <h4>Price <strong>P199</strong></h4>
+                            <h3><?php echo $row['product_title']; ?></h3>
+                            <h5><?php echo $row['subcategory_title']; ?></h5>
+                            <h4>Price <strong>P<?php echo $row['product_price']; ?></strong></h4>
                             <div class="qty-remove">
-                                <p class="unit">Quantity: <input value="2"></p>
-                                <p class="btn-area">
+                                <p class="unit">Quantity: <input value="<?php echo $row['product_qty']; ?>"></p>
+                                <h4 class="subTotal">Subtotal <strong>P<?php echo $row['product_total']; ?></strong></h4>
+                            </div>
+                            <p class="btn-area">
                                     <i class='bx bxs-trash'></i>
                                     <span class="btn-2">Remove</span>
                                 </p>
-                            </div>
                         </div>
                     </div>
-                    <div class="box">
-                        <div class="img" style="background:
-                            url(https://d1sag4ddilekf6.azureedge.net/compressed/items/PHITE20220114095410015522/photo/menueditor_item_5955afb8c1964c85a38328cd9eaa9ccb_1647089542791428327.jpg)
-                            no-repeat;
-                            background-size: cover;
-                            background-position: center;">
-                        </div>
-                        <div class="content">
-                            <h3>Hawaiian Pizza</h3>
-                            <h5>Classic Flavor</h5>
-                            <h4>Price <strong>P199</strong></h4>
-                            <div class="qty-remove">
-                                <p class="unit">Quantity: <input value="2"></p>
-                                <p class="btn-area">
-                                    <i class='bx bxs-trash'></i>
-                                    <span class="btn-2">Remove</span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="box">
-                        <div class="img" style="background:
-                            url(https://d1sag4ddilekf6.azureedge.net/compressed/items/PHITE20220114095409055210/photo/menueditor_item_113a2ca62d704b7f95fe3b786299eaf6_1647415409774154060.jpg)
-                            no-repeat;
-                            background-size: cover;
-                            background-position: center;">
-                        </div>
-                        <div class="content">
-                            <h3>Beef & Mushroom Overload</h3>
-                            <h5>Special Flavor</h5>
-                            <h4>Price <strong>P249</strong></h4>
-                            <div class="qty-remove">
-                                <p class="unit">Quantity: <input value="2"></p>
-                                <p class="btn-area">
-                                    <i class='bx bxs-trash'></i>
-                                    <span class="btn-2">Remove</span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+                    <?php
+                    }
+                    ?>
                 </div>
                 <div class="right-bar">
-                    <p><span>Subtotal</span> <span><strong>P1,294.00</strong></span></p>
-                    <hr>
-                    <p><span>Shipping</span> <span><strong>P100</strong></span></p>
-                    <hr>
                     <p><span>Total</span> <span><strong>P1,394.00</strong></span></p>
 
                     <a href="#"><i class='bx bxs-cart'></i>Proceed to Checkout</a>

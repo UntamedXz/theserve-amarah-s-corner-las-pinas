@@ -54,7 +54,7 @@ while ($result = mysqli_fetch_assoc($getCategoryTitle)) {
                     ?>
                         <a href="catalog?id=<?php echo $encryptedCategoryId; ?>" class="menu__card swiper-slide">
                             <div class="menu__image">
-                                <img src="./assets/images/<?php echo $category_row['categoty_thumbnail']; ?>">
+                                <img src="./assets/images/<?php echo $category_row['categoty_thumbnail']; ?>" alt="">
                             </div>
                             <div class="menu__name">
                                 <h3><?php echo ucwords($category_row['category_title']); ?></h3>
@@ -87,7 +87,13 @@ while ($result = mysqli_fetch_assoc($getCategoryTitle)) {
                     ?>
                         <a href="product?link=<?php echo $rowProduct['product_slug']; ?>" class="catalog-box">
                             <div class="img-cont">
+                                <?php
+                                if(!empty($rowProduct['product_img1'])) {
+                                ?>
                                 <img src="./assets/images/<?php echo $rowProduct['product_img1']; ?>" alt="">
+                                <?php
+                                }
+                                ?>
                             </div>
                             <div class="details">
                                 <h4><?php echo $rowProduct['product_title'] ?></h4>
@@ -130,6 +136,8 @@ while ($result = mysqli_fetch_assoc($getCategoryTitle)) {
     <!-- SCRIPT -->
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js">
     </script>
+
+    <script src="./assets/js/script.js"></script>
 
     <script>
         var products_col = document.querySelectorAll(".catalog-box");

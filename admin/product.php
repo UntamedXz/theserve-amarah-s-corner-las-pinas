@@ -234,6 +234,15 @@ require_once '../includes/database_conn.php';
                 $("#delete_product_id").val(product_id);
             });
 
+            $(document).on('click', '#modalClose', function() {
+                $('.edit-modal').removeClass("active");
+                $('.view-modal').removeClass("active");
+                $('.insert-modal').removeClass("active");
+                $(".delete-modal").removeClass("active");
+                $("#edit-category")[0].reset();
+                $("#insert-category")[0].reset();
+            })
+
             // SUBMIT DELETE
             $("#delete_product").on('submit', function(e) {
                     e.preventDefault();

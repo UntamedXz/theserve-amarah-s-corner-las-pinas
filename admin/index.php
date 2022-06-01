@@ -27,8 +27,8 @@ require_once '../includes/database_conn.php';
                 <li><a href="#" class="active">Home</a></li>
             </ul>
             <section class="dashboard">
-                <div class="dashboard-wrapper">
-                    Dashboard angas gagu
+                <div style="display: flex; justify-content: center; align-items: center;" class="dashboard-wrapper">
+                    <h1 style="font-size: 38px;">UNDER DEVELOPMENT</h1>
                 </div>
 
                 

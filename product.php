@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once "./includes/database_conn.php";
 
 $id = $_GET['link'];
@@ -13,7 +14,9 @@ $id = $_GET['link'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./assets/css/style.css">
     <title>Amarah's Corner - BF Resort Las Piñas</title>
 
@@ -31,7 +34,21 @@ $id = $_GET['link'];
 <body>
     <div id="preloader"></div>
 
-    <?php include './includes/navbar.php'; ?>
+    <?php include './includes/navbar.php';?>
+
+    <!-- TOAST -->
+    <div class="toast" id="toast">
+        <div class="toast-content" id="toast-content">
+            <i id="toast-icon" class="fa-solid fa-triangle-exclamation warning"></i>
+
+            <div class="message">
+                <span class="text text-1" id="text-1"></span>
+                <span class="text text-2" id="text-2"></span>
+            </div>
+        </div>
+        <i class="fa-solid fa-xmark close"></i>
+        <div class="progress"></div>
+    </div>
 
     <!-- MENU SECTION -->
     <section class="menu" id="menu">
@@ -40,22 +57,22 @@ $id = $_GET['link'];
             <div class="menu__wrapper swiper mySwiper">
                 <div class="menu__content swiper-wrapper">
                     <?php
-                    $get_category = mysqli_query($conn, "SELECT * FROM category");
+$get_category = mysqli_query($conn, "SELECT * FROM category");
 
-                    foreach ($get_category as $category_row) {
-                        $encryptedCategoryId = urlencode(base64_encode($category_row['category_id']));
-                    ?>
-                        <a href="catalog?id=<?php echo $encryptedCategoryId; ?>" class="menu__card swiper-slide">
-                            <div class="menu__image">
-                                <img src="./assets/images/<?php echo $category_row['categoty_thumbnail']; ?>">
-                            </div>
-                            <div class="menu__name">
-                                <h3><?php echo ucwords($category_row['category_title']); ?></h3>
-                            </div>
-                        </a>
+foreach ($get_category as $category_row) {
+    $encryptedCategoryId = urlencode(base64_encode($category_row['category_id']));
+    ?>
+                    <a href="catalog?id=<?php echo $encryptedCategoryId; ?>" class="menu__card swiper-slide">
+                        <div class="menu__image">
+                            <img src="./assets/images/<?php echo $category_row['categoty_thumbnail']; ?>">
+                        </div>
+                        <div class="menu__name">
+                            <h3><?php echo ucwords($category_row['category_title']); ?></h3>
+                        </div>
+                    </a>
                     <?php
-                    }
-                    ?>
+}
+?>
                 </div>
                 <div class="swiper-button-next"></div>
                 <div class="swiper-button-prev"></div>
@@ -64,21 +81,30 @@ $id = $_GET['link'];
     </section>
 
     <?php
-    $getProduct = mysqli_query($conn, "SELECT * FROM product WHERE product_slug = '$id'");
+$getProduct = mysqli_query($conn, "SELECT * FROM product WHERE product_slug = '$id'");
 
-    foreach($getProduct as $row) {
+foreach ($getProduct as $row) {
     ?>
     <section class="product-details">
         <div class="product-details__wrapper">
             <div class="left">
+                <input type="hidden" name="" id="product_id" value="<?php echo $row['product_id']; ?>">
+                <input type="hidden" name="" id="userEmail" value="<?php echo $_SESSION['userEmail']; ?>">
                 <div class="img-container">
+                    <?php
+if (!empty($row['product_img1'])) {
+        ?>
                     <img src="./assets/images/<?php echo $row['product_img1']; ?>" alt="">
+                    <?php
+}
+    ?>
                 </div>
                 <div class="product-details">
                     <h1 class="product-title">
                         <?php echo $row['product_title']; ?>
                     </h1>
-                    <span class="price"><small>Starts at </small> <b>P<?php echo $row['product_price']; ?></b></span>
+                    <span class="price"><small>Starts at </small> <b>P<span
+                                class="priceValue"><?php echo $row['product_price']; ?></span> </b></span>
                     <!-- <span class="desc">
                         Ham with Mozarella and Special Cheese
                     </span> -->
@@ -93,42 +119,46 @@ $id = $_GET['link'];
         </div>
     </section>
     <?php
-    }
-    ?>
+}
+?>
 
     <div class="product-footer">
         <div class="product-footer__wrapper">
             <div class="qty-container">
-                <div class="prev">-</div>
-                <div class="next">+</div>
-                <input class="number-spinner" type="number" name="" id="" value="1">
+                <div class="prev qtyBtn">-</div>
+                <div class="next qtyBtn">+</div>
+                <input class="number-spinner" type="number" name="" id="" value="1" min="1">
             </div>
             <div class="total-box">
                 <div class="total">
                     <span class="totalText">Total</span>
-                    <span class="totalPrice">P125.00</span>
+                    <span class="totalPrice">P<span
+                            class="totalPriceSpan"><?php echo $row['product_price']; ?></span></span>
                 </div>
                 <div class="btn-container">
-                    <button type="submit">ADD TO CART</button>
+                    <button type="submit" id="addToCart">ADD TO CART</button>
                 </div>
             </div>
         </div>
     </div>
 
+    <script src="./assets/js/script.js"></script>
+
     <script type="text/javascript">
-        $(document).ready(function() {
-            $('.prev').on('click', function() {
+        $(document).ready(function () {
+            $('.prev').on('click', function () {
                 var prev = $(this).closest('.qty-container').find('input').val();
 
                 if (prev == 1) {
-                    $(this).closest('.qty-container').find('input').val('1');
+                    var a = 1;
+                    $(this).closest('.qty-container').find('input').val(a);
                 } else {
                     var prevVal = prev - 1;
                     $(this).closest('.qty-container').find('input').val(prevVal);
                 }
             });
 
-            $('.next').on('click', function() {
+            $('.next').on('click', function () {
                 var next = $(this).closest('.qty-container').find('input').val();
 
                 if (next == 100) {
@@ -138,16 +168,53 @@ $id = $_GET['link'];
                     $(this).closest('.qty-container').find('input').val(nextVal);
                 }
             });
+
+            $(".qtyBtn").on('click', function () {
+                var total = parseFloat($('.number-spinner').val()).toFixed(2);
+                var price = parseFloat($('.priceValue').text()).toFixed(2);
+
+                var sum = parseFloat(total * price).toFixed(2);
+                $('.totalPriceSpan').text(sum);
+            });
         })
     </script>
 
-    <!-- TOTAL -->
     <script>
-        $(document).ready(function() {
-            $('.next').on('click', function() {
-                
-            });
-        });
+        $('#addToCart').on('click', function(e) {
+            e.preventDefault();
+            var userEmail = $('#userEmail').val();
+            var product_id = $('#product_id').val();
+            var qty = $('.number-spinner').val();
+            var total = $('.totalPriceSpan').text();
+
+            $.ajax({
+                type: "POST",
+                url: "add-to-cart",
+                data: {
+                    'add-to-cart': true,
+                    'userEmail': userEmail,
+                    'product_id': product_id,
+                    'qty': qty,
+                    'total': total,
+                },
+                success: function(response) {
+                    if (response == 'success') {
+                            $('#toast').addClass('active');
+                            $('.progress').addClass('active');
+                            $('#toast-icon').removeClass(
+                                'fa-solid fa-triangle-exclamation').addClass(
+                                'fa-solid fa-check warning');
+                            $('.text-1').text('Success!');
+                            $('.text-2').text('Added to cart successfully!');
+
+                            setTimeout(() => {
+                                $('#toast').removeClass("active");
+                                $('.progress').removeClass("active");
+                            }, 5000);
+                        }
+                }
+            })
+        })
     </script>
 
     <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
@@ -175,7 +242,7 @@ $id = $_GET['link'];
     <script>
         var loader = document.getElementById("preloader");
 
-        window.addEventListener("load", function() {
+        window.addEventListener("load", function () {
             loader.style.display = "none";
         })
     </script>

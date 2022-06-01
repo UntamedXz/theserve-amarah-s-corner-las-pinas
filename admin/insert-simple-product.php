@@ -466,7 +466,7 @@ require_once '../includes/database_conn.php';
                         $('.error-price').text('');
                     }
                     if ($.trim($('#simpleProduct-image1').val()).length == 0) {
-                        $('.error-image').text('Add atleast 1 Product Image');
+                        $('.error-image').text('');
                     } else {
                         var imgExt = $('#simpleProduct-image1').val().split('.').pop().toLowerCase();
 
