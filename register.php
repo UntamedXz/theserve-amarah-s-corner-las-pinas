@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./assets/css/style.css">
     <title>Amarah's Corner - BF Resort Las Piñas</title>
 
@@ -49,7 +50,8 @@
             <a href="#" class="logo"><img src="./assets/images/official_logo.png" alt=""></a>
             <h3>sign up</h3>
             <span>Username</span>
-            <input type="text" name="reg-username" class="box" placeholder="enter your username" id="username" value="<?php if (isset($_POST['username'])) {
+            <input type="text" name="reg-username" class="box" placeholder="enter your username" id="username"
+                value="<?php if (isset($_POST['username'])) {
                                                                                                                             echo $_POST['username'];
                                                                                                                         } ?>">
             <input type="hidden" name="" id="error-username">
@@ -59,7 +61,8 @@
                                                                                                                 } ?>">
             <input type="hidden" name="" id="error-email">
             <span>password</span>
-            <input type="password" name="reg-password" class="box" placeholder="enter your password" id="password" value="<?php if (isset($_POST['password'])) {
+            <input type="password" name="reg-password" class="box" placeholder="enter your password" id="password"
+                value="<?php if (isset($_POST['password'])) {
                                                                                                                                 echo $_POST['password'];
                                                                                                                             } ?>">
             <input type="hidden" name="" id="error-password">
@@ -68,8 +71,9 @@
         </form>
     </div>
 
+    <?php include './includes/cart-count.php' ?>
     <script>
-        $('#register').on('submit', function(e) {
+        $('#register').on('submit', function (e) {
             e.preventDefault();
             if ($('#username').val() == '') {
                 $('#error-username').val('Input Username!');
@@ -136,7 +140,7 @@
                     contentType: false,
                     cache: false,
                     processData: false,
-                    success: function(response) {
+                    success: function (response) {
                         if (response == 'Email already exist!') {
                             $('#toast').addClass('active');
                             $('.progress').addClass('active');
@@ -197,7 +201,7 @@
         // PRELOADER JS
         var loader = document.getElementById("preloader");
 
-        window.addEventListener("load", function() {
+        window.addEventListener("load", function () {
             loader.style.display = "none";
             setTimeout(() => {
                 document.querySelector(".toast").classList.remove("active");

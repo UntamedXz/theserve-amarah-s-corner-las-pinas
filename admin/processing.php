@@ -36,12 +36,12 @@ if (isset($_POST['login'])) {
                     setcookie('password', '');
                 }
                 $_SESSION['adminloggedin'] = true;
-                $_SESSION['userEmail'] = $email;
+                $_SESSION['adminEmail'] = $email;
                 header("Location: ./index");
             } else {
                 $_SESSION['status'] = "wrong password";
                 $_SESSION['admin_email'] = $_POST['email'];
-                $_SESSION['userEmail'] = '';
+                $_SESSION['adminEmail'] = '';
                 header("Location: login");
             }
         }

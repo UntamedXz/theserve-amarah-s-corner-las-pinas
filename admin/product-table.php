@@ -13,7 +13,7 @@ $col = array(
 );
 //create column like table in database
 
-$sql = "SELECT product.product_id, category.category_title, subcategory.subcategory_title, product.product_title, product.product_slug, product.product_price FROM product LEFT JOIN category ON product.category_id=category.category_id LEFT JOIN subcategory ON category.category_id=subcategory.category_id GROUP BY product.product_title";
+$sql = "SELECT product.product_id, product.product_img1, category.category_title, subcategory.subcategory_title, product.product_title, product.product_slug, product.product_price FROM product LEFT JOIN category ON product.category_id=category.category_id LEFT JOIN subcategory ON product.subcategory_id=subcategory.subcategory_id";
 $query = mysqli_query($conn, $sql);
 
 $totalData = mysqli_num_rows($query);
@@ -21,7 +21,7 @@ $totalData = mysqli_num_rows($query);
 $totalFilter = $totalData;
 
 //Search
-$sql = "SELECT product.product_id, product.product_img1, category.category_title, subcategory.subcategory_title, product.product_title, product.product_slug, product.product_price FROM product LEFT JOIN category ON product.category_id=category.category_id LEFT JOIN subcategory ON category.category_id=subcategory.category_id WHERE 1=1";
+$sql = "SELECT product.product_id, product.product_img1, category.category_title, subcategory.subcategory_title, product.product_title, product.product_slug, product.product_price FROM product LEFT JOIN category ON product.category_id=category.category_id LEFT JOIN subcategory ON product.subcategory_id=subcategory.subcategory_id WHERE 1=1";
 if (!empty($request['search']['value'])) {
     $sql .= " AND (category_title Like '" . $request['search']['value'] . "%'";
     $sql .= " OR subcategory_title Like '" . $request['search']['value'] . "%' ";
@@ -29,8 +29,6 @@ if (!empty($request['search']['value'])) {
     $sql .= " OR product_slug Like '" . $request['search']['value'] . "%' ";
     $sql .= " OR product_price Like '" . $request['search']['value'] . "%' )";
 }
-
-$sql .= " GROUP BY product.product_title";
 
 $query = mysqli_query($conn, $sql);
 $totalData = mysqli_num_rows($query);

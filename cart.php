@@ -13,11 +13,11 @@ while($row = mysqli_fetch_array($getUserId)) {
     $userId = $row['user_id'];
 }
 
-$getCartNumber = mysqli_query($conn, "SELECT COUNT(user_id) FROM cart WHERE user_id = $userId");
+// $getCartNumber = mysqli_query($conn, "SELECT COUNT(user_id) FROM cart WHERE user_id = $userId");
 
-while($rowCartNum = mysqli_fetch_array($getCartNumber)) {
-    $cartNumber = $row['COUNT(user_id)'];
-}
+// while($rowCartNum = mysqli_fetch_array($getCartNumber)) {
+//     $cartNumber = $row['COUNT(user_id)'];
+// }
 
 ?>
 <!DOCTYPE html>
@@ -115,6 +115,7 @@ while($rowCartNum = mysqli_fetch_array($getCartNumber)) {
         </div>
     </section>
 
+    <?php include './includes/cart-count.php' ?>
     <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js">
     </script>

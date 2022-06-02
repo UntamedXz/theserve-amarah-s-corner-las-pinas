@@ -333,77 +333,52 @@ require_once '../includes/database_conn.php';
                         processData: false,
                         success: function(response) {
                             if (response === 'empty field') {
-                                // $('.insert-modal').removeClass("active");
                                 $('#toast').addClass('active');
                                 $('.progress').addClass('active');
-                                // $('#toast-icon').removeClass('fa-solid fa-triangle-exclamation').addClass('fa-solid fa-check warning');
                                 $('.text-1').text('Error!');
                                 $('.text-2').text('All fields are required');
                                 setTimeout(() => {
                                     $('#toast').removeClass("active");
                                     $('.progress').removeClass("active");
                                 }, 5000);
-                                // $('#example').DataTable().ajax.reload();
-                            }
-
-                            if (response === 'empty category') {
-                                // $('.insert-modal').removeClass("active");
+                            } else if (response === 'empty category') {
                                 $('#toast').addClass('active');
                                 $('.progress').addClass('active');
-                                // $('#toast-icon').removeClass('fa-solid fa-triangle-exclamation').addClass('fa-solid fa-check warning');
                                 $('.text-1').text('Error!');
                                 $('.text-2').text('Select category!');
                                 setTimeout(() => {
                                     $('#toast').removeClass("active");
                                     $('.progress').removeClass("active");
                                 }, 5000);
-                                // $('#example').DataTable().ajax.reload();
-                            }
-
-                            if (response === 'empty subcategory') {
-                                // $('.insert-modal').removeClass("active");
+                            } else if (response === 'empty subcategory') {
                                 $('#toast').addClass('active');
                                 $('.progress').addClass('active');
-                                // $('#toast-icon').removeClass('fa-solid fa-triangle-exclamation').addClass('fa-solid fa-check warning');
                                 $('.text-1').text('Error!');
                                 $('.text-2').text('Input subcategory title!');
                                 setTimeout(() => {
                                     $('#toast').removeClass("active");
                                     $('.progress').removeClass("active");
                                 }, 5000);
-                                // $('#example').DataTable().ajax.reload();
-                            }
-
-                            if (response === 'subcategory title already exist') {
-                                // $('.insert-modal').removeClass("active");
+                            } else if (response === 'subcategory title already exist') {
                                 $('#toast').addClass('active');
                                 $('.progress').addClass('active');
-                                // $('#toast-icon').removeClass('fa-solid fa-triangle-exclamation').addClass('fa-solid fa-check warning');
                                 $('.text-1').text('Error!');
                                 $('.text-2').text('Subcategory title already exist!');
                                 setTimeout(() => {
                                     $('#toast').removeClass("active");
                                     $('.progress').removeClass("active");
                                 }, 5000);
-                                // $('#example').DataTable().ajax.reload();
-                            }
-
-                            if (response === 'failed') {
-                                // $('.insert-modal').removeClass("active");
+                            } else if (response === 'failed') {
                                 $('#toast').addClass('active');
                                 $('.progress').addClass('active');
-                                // $('#toast-icon').removeClass('fa-solid fa-triangle-exclamation').addClass('fa-solid fa-check warning');
                                 $('.text-1').text('Error!');
                                 $('.text-2').text('Something went wrong!');
                                 setTimeout(() => {
                                     $('#toast').removeClass("active");
                                     $('.progress').removeClass("active");
                                 }, 5000);
-                                // $('#example').DataTable().ajax.reload();
-                            }
-
-                            if (response === 'success') {
-                                $('.insert-modal').removeClass("active");
+                            } else if (response === 'success') {
+                                $('.edit-modal').removeClass("active");
                                 $('#toast').addClass('active');
                                 $('.progress').addClass('active');
                                 $('#toast-icon').removeClass('fa-solid fa-triangle-exclamation').addClass('fa-solid fa-check warning');
@@ -414,6 +389,16 @@ require_once '../includes/database_conn.php';
                                     $('.progress').removeClass("active");
                                 }, 5000);
                                 $('#example').DataTable().ajax.reload();
+                                $("#edit-category")[0].reset();
+                            } else {
+                                $('#toast').addClass('active');
+                                $('.progress').addClass('active');
+                                $('.text-1').text('Error!');
+                                $('.text-2').text(response);
+                                setTimeout(() => {
+                                    $('#toast').removeClass("active");
+                                    $('.progress').removeClass("active");
+                                }, 5000);
                             }
                         }
                     })
@@ -432,76 +417,51 @@ require_once '../includes/database_conn.php';
                         processData: false,
                         success: function(response) {
                             if (response === 'empty field') {
-                                // $('.insert-modal').removeClass("active");
                                 $('#toast').addClass('active');
                                 $('.progress').addClass('active');
-                                // $('#toast-icon').removeClass('fa-solid fa-triangle-exclamation').addClass('fa-solid fa-check warning');
                                 $('.text-1').text('Error!');
                                 $('.text-2').text('All fields are required');
                                 setTimeout(() => {
                                     $('#toast').removeClass("active");
                                     $('.progress').removeClass("active");
                                 }, 5000);
-                                // $('#example').DataTable().ajax.reload();
-                            }
-
-                            if (response === 'empty category') {
-                                // $('.insert-modal').removeClass("active");
+                            } else if (response === 'empty category') {
                                 $('#toast').addClass('active');
                                 $('.progress').addClass('active');
-                                // $('#toast-icon').removeClass('fa-solid fa-triangle-exclamation').addClass('fa-solid fa-check warning');
                                 $('.text-1').text('Error!');
                                 $('.text-2').text('Select category!');
                                 setTimeout(() => {
                                     $('#toast').removeClass("active");
                                     $('.progress').removeClass("active");
                                 }, 5000);
-                                // $('#example').DataTable().ajax.reload();
-                            }
-
-                            if (response === 'empty subcategory') {
-                                // $('.insert-modal').removeClass("active");
+                            } else if (response === 'empty subcategory') {
                                 $('#toast').addClass('active');
                                 $('.progress').addClass('active');
-                                // $('#toast-icon').removeClass('fa-solid fa-triangle-exclamation').addClass('fa-solid fa-check warning');
                                 $('.text-1').text('Error!');
                                 $('.text-2').text('Input subcategory title!');
                                 setTimeout(() => {
                                     $('#toast').removeClass("active");
                                     $('.progress').removeClass("active");
                                 }, 5000);
-                                // $('#example').DataTable().ajax.reload();
-                            }
-
-                            if (response === 'title already exist') {
-                                // $('.insert-modal').removeClass("active");
+                            } else if (response === 'title already exist') {
                                 $('#toast').addClass('active');
                                 $('.progress').addClass('active');
-                                // $('#toast-icon').removeClass('fa-solid fa-triangle-exclamation').addClass('fa-solid fa-check warning');
                                 $('.text-1').text('Error!');
                                 $('.text-2').text('Subcategory title already exist!');
                                 setTimeout(() => {
                                     $('#toast').removeClass("active");
                                     $('.progress').removeClass("active");
                                 }, 5000);
-                                // $('#example').DataTable().ajax.reload();
-                            }
-
-                            if (response === 'failed') {
-                                // $('.insert-modal').removeClass("active");
+                            } else if (response === 'failed') {
                                 $('#toast').addClass('active');
                                 $('.progress').addClass('active');
-                                // $('#toast-icon').removeClass('fa-solid fa-triangle-exclamation').addClass('fa-solid fa-check warning');
                                 $('.text-1').text('Error!');
                                 $('.text-2').text('Something went wrong!');
                                 setTimeout(() => {
                                     $('#toast').removeClass("active");
                                     $('.progress').removeClass("active");
                                 }, 5000);
-                                // $('#example').DataTable().ajax.reload();
-                            }
-
-                            if (response === 'success') {
+                            } else if (response === 'success') {
                                 $('.insert-modal').removeClass("active");
                                 $('#toast').addClass('active');
                                 $('.progress').addClass('active');
@@ -513,6 +473,16 @@ require_once '../includes/database_conn.php';
                                     $('.progress').removeClass("active");
                                 }, 5000);
                                 $('#example').DataTable().ajax.reload();
+                                $("#insert-category")[0].reset();
+                            } else {
+                                $('#toast').addClass('active');
+                                $('.progress').addClass('active');
+                                $('.text-1').text('Error!');
+                                $('.text-2').text(response);
+                                setTimeout(() => {
+                                    $('#toast').removeClass("active");
+                                    $('.progress').removeClass("active");
+                                }, 5000);
                             }
                         }
                     })
@@ -542,6 +512,15 @@ require_once '../includes/database_conn.php';
                                     $('.progress').removeClass("active");
                                 }, 5000);
                                 $('#example').DataTable().ajax.reload();
+                            } else {
+                                $('#toast').addClass('active');
+                                $('.progress').addClass('active');
+                                $('.text-1').text('Error!');
+                                $('.text-2').text(response);
+                                setTimeout(() => {
+                                    $('#toast').removeClass("active");
+                                    $('.progress').removeClass("active");
+                                }, 5000);
                             }
                         }
                     })

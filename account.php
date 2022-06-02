@@ -111,6 +111,7 @@ while($row = mysqli_fetch_array($getUserId)) {
         </div>
     </section>
 
+    <?php include './includes/cart-count.php' ?>
     <script>
         var loader = document.getElementById("preloader");
 

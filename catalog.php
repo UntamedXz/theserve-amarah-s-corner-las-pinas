@@ -86,11 +86,16 @@ while ($result = mysqli_fetch_assoc($getCategoryTitle)) {
                     foreach ($getProduct as $rowProduct) {
                     ?>
                         <a href="product?link=<?php echo $rowProduct['product_slug']; ?>" class="catalog-box">
+                            
                             <div class="img-cont">
                                 <?php
                                 if(!empty($rowProduct['product_img1'])) {
                                 ?>
                                 <img src="./assets/images/<?php echo $rowProduct['product_img1']; ?>" alt="">
+                                <?php
+                                } else {
+                                ?>
+                                <span style="color: #6b6b6b;">NO IMAGE AVAILABLE</span>
                                 <?php
                                 }
                                 ?>
@@ -112,6 +117,7 @@ while ($result = mysqli_fetch_assoc($getCategoryTitle)) {
             </div>
     </section>
 
+    <?php include './includes/cart-count.php' ?>
     <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
     <script>
         var swiper = new Swiper(".mySwiper", {

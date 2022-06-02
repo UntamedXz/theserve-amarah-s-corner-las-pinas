@@ -520,16 +520,9 @@ require_once '../includes/database_conn.php';
                                     }, 5000);
                                     $('#example').DataTable().ajax.reload();
                                     $('#insert-simpleProductForm')[0].reset();
-                                    $('#file').attr("src", "");
-                                }
-
-                                if (data == 'failed') {
-                                    $('.edit-modal').removeClass("active");
+                                } else if (data == 'failed') {
                                     $('#toast').addClass('active');
                                     $('.progress').addClass('active');
-                                    // $('#toast-icon').removeClass(
-                                    //     'fa-solid fa-triangle-exclamation').addClass(
-                                    //     'fa-solid fa-check warning');
                                     $('.text-1').text('Error!');
                                     $('.text-2').text('Something went wrong!');
                                     setTimeout(() => {
@@ -537,22 +530,24 @@ require_once '../includes/database_conn.php';
                                         $('.progress').removeClass("active");
                                     }, 5000);
                                     $('#example').DataTable().ajax.reload();
-                                }
-
-                                if (data == 'product already exist') {
-                                    $('.edit-modal').removeClass("active");
+                                } else if (data == 'product already exist') {
                                     $('#toast').addClass('active');
                                     $('.progress').addClass('active');
-                                    // $('#toast-icon').removeClass(
-                                    //     'fa-solid fa-triangle-exclamation').addClass(
-                                    //     'fa-solid fa-check warning');
                                     $('.text-1').text('Error!');
                                     $('.text-2').text('Product already exist!');
                                     setTimeout(() => {
                                         $('#toast').removeClass("active");
                                         $('.progress').removeClass("active");
                                     }, 5000);
-                                    $('#example').DataTable().ajax.reload();
+                                } else {
+                                    $('#toast').addClass('active');
+                                    $('.progress').addClass('active');
+                                    $('.text-1').text('Error!');
+                                    $('.text-2').text(data);
+                                    setTimeout(() => {
+                                        $('#toast').removeClass("active");
+                                        $('.progress').removeClass("active");
+                                    }, 5000);
                                 }
                             }
                         })

@@ -374,7 +374,7 @@ require_once '../includes/database_conn.php';
                         cache: false,
                         processData: false,
                         success: function(response) {
-                            if (response === 'empty fields') {
+                            if (response === 'empty field') {
                                 $('#toast').addClass('active');
                                 $('.progress').addClass('active');
                                 // $('#toast-icon').removeClass('fa-solid fa-triangle-exclamation').addClass('fa-solid fa-circle-exclamation');
@@ -384,9 +384,7 @@ require_once '../includes/database_conn.php';
                                     $('#toast').removeClass("active");
                                     $('.progress').removeClass("active");
                                 }, 5000);
-                            }
-
-                            if (response === 'title already exist') {
+                            } else if (response === 'title already exist') {
                                 $('#toast').addClass('active');
                                 $('.progress').addClass('active');
                                 // $('#toast-icon').removeClass('fa-solid fa-triangle-exclamation').addClass('fa-solid fa-circle-exclamation');
@@ -396,9 +394,7 @@ require_once '../includes/database_conn.php';
                                     $('#toast').removeClass("active");
                                     $('.progress').removeClass("active");
                                 }, 5000);
-                            }
-
-                            if (response === 'success') {
+                            } else if (response === 'success') {
                                 $('.insert-modal').removeClass("active");
                                 $('#toast').addClass('active');
                                 $('.progress').addClass('active');
@@ -410,6 +406,15 @@ require_once '../includes/database_conn.php';
                                     $('.progress').removeClass("active");
                                 }, 5000);
                                 $('#example').DataTable().ajax.reload();
+                            } else {
+                                $('#toast').addClass('active');
+                                $('.progress').addClass('active');
+                                $('.text-1').text('Error!');
+                                $('.text-2').text(response);
+                                setTimeout(() => {
+                                    $('#toast').removeClass("active");
+                                    $('.progress').removeClass("active");
+                                }, 5000);
                             }
                         }
                     })
@@ -439,6 +444,15 @@ require_once '../includes/database_conn.php';
                                     $('.progress').removeClass("active");
                                 }, 5000);
                                 $('#example').DataTable().ajax.reload();
+                            } else {
+                                $('#toast').addClass('active');
+                                $('.progress').addClass('active');
+                                $('.text-1').text('Error!');
+                                $('.text-2').text(response);
+                                setTimeout(() => {
+                                    $('#toast').removeClass("active");
+                                    $('.progress').removeClass("active");
+                                }, 5000);
                             }
                         }
                     })

@@ -70,6 +70,7 @@ if (isset($_SESSION['userEmail']) && !empty($_SESSION['userEmail'])) {
         </form>
     </div>
 
+    <?php include './includes/cart-count.php' ?>
     <script>
         $('#login').on('submit', function(e) {
             e.preventDefault();

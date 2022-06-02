@@ -11,7 +11,7 @@ if($_POST['category-list'] == "CATEGORY" && empty($_POST['insert-subcategory']))
     $category =  $_POST['category-list'];
     $subcategoryTitle = ucwords($_POST['insert-subcategory']);
 
-    $check = mysqli_query($conn, "SELECT * FROM subcategory WHERE subcategory_title = '$subcategoryTitle'");
+    $check = mysqli_query($conn, "SELECT * FROM subcategory WHERE subcategory_title = '$subcategoryTitle' AND category_id = $category");
 
     if(mysqli_num_rows($check) > 0) {
         echo 'title already exist';

@@ -2,7 +2,7 @@
     <div class="footer-wrapper">
         <span class="connect">Connect with amarah's corner</span>
         <div class="icons">
-            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://www.facebook.com/amarahscornerbf"><i class="fa-brands fa-facebook-f"></i></a>
             <a href="#"><i class="fa-brands fa-twitter"></i></a>
             <a href="#"><i class="fa-brands fa-instagram"></i></a></div>
         <div class="nav-links">

@@ -18,7 +18,8 @@ require_once '../includes/database_conn.php';
 
     <!-- datatable lib -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.0/css/jquery.dataTables.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.min.js"></script>
 
     <link rel="stylesheet" href="../assets/css/admin.css">
@@ -143,7 +144,8 @@ require_once '../includes/database_conn.php';
         <hr>
         <form enctype="multipart/form-data">
             <h5>Category: <span style="color: #ffaf08; padding-left: 5px;" id="category_title_view"></span></h5>
-            <h5>Category Thumbnail: <br> <img id="category_thumbnail_view" style="width: 150px; margin-top: 5px;" src=""></h5>
+            <h5>Category Thumbnail: <br> <img id="category_thumbnail_view" style="width: 150px; margin-top: 5px;"
+                    src=""></h5>
         </form>
         <hr>
         <div class="bottom">
@@ -171,7 +173,8 @@ require_once '../includes/database_conn.php';
             </div>
             <div class="form-group">
                 <span>Select Category Image</span>
-                <input type="file" accept=".jpg, .jpeg, .png" class="file" name="update_category_thumbnail" id="update_category_thumbnail">
+                <input type="file" accept=".jpg, .jpeg, .png" class="file" name="update_category_thumbnail"
+                    id="update_category_thumbnail">
             </div>
             <div class="form-group">
                 <span>Image Preview</span>
@@ -182,7 +185,8 @@ require_once '../includes/database_conn.php';
         <div class="bottom">
             <div class="buttons">
                 <button id="modalClose" type="button" class="cancel">CANCEL</button>
-                <button form="edit-category" type="submit" id="update_category" name="update_category" class="save">SAVE CHANGES</button>
+                <button form="edit-category" type="submit" id="update_category" name="update_category" class="save">SAVE
+                    CHANGES</button>
             </div>
         </div>
     </div>
@@ -201,7 +205,8 @@ require_once '../includes/database_conn.php';
             </div>
             <div class="form-group">
                 <span>Select Category Image</span>
-                <input type="file" accept=".jpg, .jpeg, .png" class="file" name="insert_category_thumbnail" id="insert_category_thumbnail">
+                <input type="file" accept=".jpg, .jpeg, .png" class="file" name="insert_category_thumbnail"
+                    id="insert_category_thumbnail">
             </div>
             <div class="form-group">
                 <span>Image Preview</span>
@@ -212,12 +217,13 @@ require_once '../includes/database_conn.php';
         <div class="bottom">
             <div class="buttons">
                 <button id="modalClose" type="button" class="cancel">CANCEL</button>
-                <button form="insert-category" type="submit" id="insert_category_btn" name="insert_category_btn" class="save">INSERT</button>
+                <button form="insert-category" type="submit" id="insert_category_btn" name="insert_category_btn"
+                    class="save">INSERT</button>
             </div>
         </div>
     </div>
 
-    <?php include 'top.php'; ?>
+    <?php include 'top.php';?>
 
     <!-- MAIN -->
     <main>
@@ -228,7 +234,8 @@ require_once '../includes/database_conn.php';
             <li><a href="view-category" class="active">View Category</a></li>
         </ul>
         <section class="view-category">
-            <button id="getInsert" class="insert_cat" type="button"><i class="fa-solid fa-plus"></i> <span>INSERT CATEGORY</span> </button>
+            <button id="getInsert" class="insert_cat" type="button"><i class="fa-solid fa-plus"></i> <span>INSERT
+                    CATEGORY</span> </button>
             <div class="wrapper">
                 <table id="example" class="table table-bordered table-striped">
                     <thead>
@@ -266,13 +273,13 @@ require_once '../includes/database_conn.php';
 
         <!-- IMAGE PREVIEW -->
         <script>
-            $('#update_category_thumbnail').on('change', function() {
+            $('#update_category_thumbnail').on('change', function () {
                 var file = this.files[0];
 
-                if(file) {
+                if (file) {
                     var reader = new FileReader();
 
-                    reader.addEventListener('load', function() {
+                    reader.addEventListener('load', function () {
                         $('#file').attr("src", this.result);
                     })
 
@@ -280,13 +287,13 @@ require_once '../includes/database_conn.php';
                 }
             })
 
-            $('#insert_category_thumbnail').on('change', function() {
+            $('#insert_category_thumbnail').on('change', function () {
                 var file = this.files[0];
 
-                if(file) {
+                if (file) {
                     var reader = new FileReader();
 
-                    reader.addEventListener('load', function() {
+                    reader.addEventListener('load', function () {
                         $('#insertFile').attr("src", this.result);
                     })
 
@@ -296,16 +303,15 @@ require_once '../includes/database_conn.php';
         </script>
 
         <script>
-
             // GET EDIT
-            $(document).on('click', '#getEdit', function(e) {
+            $(document).on('click', '#getEdit', function (e) {
                 e.preventDefault();
                 var category_id_edit = $(this).data('id');
                 $.ajax({
                     url: 'processing',
                     type: 'POST',
                     data: 'category_id_edit=' + category_id_edit,
-                    success: function(res) {
+                    success: function (res) {
                         var obj = JSON.parse(res);
                         $(".edit-modal").addClass("active");
                         $("#update_category_id").val(obj.category_id);
@@ -316,13 +322,13 @@ require_once '../includes/database_conn.php';
             });
 
             // GET INSERT
-            $(document).on('click', '#getInsert', function(e) {
+            $(document).on('click', '#getInsert', function (e) {
                 e.preventDefault();
                 $('.insert-modal').addClass('active');
             });
 
             // GET DELETE
-            $(document).on('click', '#getDelete', function(e) {
+            $(document).on('click', '#getDelete', function (e) {
                 e.preventDefault();
                 $('.delete-modal').addClass('active');
                 var category_id_edit = $(this).data('id');
@@ -330,20 +336,21 @@ require_once '../includes/database_conn.php';
             });
 
             // CLOSE MODAL
-            $(document).on('click', '#modalClose', function() {
+            $(document).on('click', '#modalClose', function () {
                 $('.edit-modal').removeClass("active");
                 $('.view-modal').removeClass("active");
                 $('.insert-modal').removeClass("active");
                 $(".delete-modal").removeClass("active");
                 $("#edit-category")[0].reset();
                 $("#insert-category")[0].reset();
+                $('#file').attr("src", '');
             })
         </script>
 
         <script>
             // SUBMIT EDIT
-            $(document).ready(function() {
-                $("#edit-category").on('submit', function(e) {
+            $(document).ready(function () {
+                $("#edit-category").on('submit', function (e) {
                     e.preventDefault();
                     $.ajax({
                         type: "POST",
@@ -353,7 +360,7 @@ require_once '../includes/database_conn.php';
                         contentType: false,
                         cache: false,
                         processData: false,
-                        success: function(response) {
+                        success: function (response) {
                             if (response === 'category is empty') {
                                 $('#toast').addClass('active');
                                 $('.progress').addClass('active');
@@ -364,9 +371,7 @@ require_once '../includes/database_conn.php';
                                     $('#toast').removeClass("active");
                                     $('.progress').removeClass("active");
                                 }, 5000);
-                            }
-
-                            if (response === 'category title already exist') {
+                            } else if (response === 'category title already exist') {
                                 $('#toast').addClass('active');
                                 $('.progress').addClass('active');
                                 $('.text-1').text('Error!');
@@ -375,13 +380,13 @@ require_once '../includes/database_conn.php';
                                     $('#toast').removeClass("active");
                                     $('.progress').removeClass("active");
                                 }, 5000);
-                            }
-
-                            if (response === 'title updated') {
+                            } else if (response === 'title updated') {
                                 $('.edit-modal').removeClass("active");
                                 $('#toast').addClass('active');
                                 $('.progress').addClass('active');
-                                $('#toast-icon').removeClass('fa-solid fa-triangle-exclamation').addClass('fa-solid fa-check warning');
+                                $('#toast-icon').removeClass(
+                                    'fa-solid fa-triangle-exclamation').addClass(
+                                    'fa-solid fa-check warning');
                                 $('.text-1').text('Success!');
                                 $('.text-2').text('Category title updated successfully!');
                                 setTimeout(() => {
@@ -389,9 +394,10 @@ require_once '../includes/database_conn.php';
                                     $('.progress').removeClass("active");
                                 }, 5000);
                                 $('#example').DataTable().ajax.reload();
-                            }
-
-                            if (response === 'invalid file') {
+                                $("#edit-category")[0].reset();
+                                $("#insert-category")[0].reset();
+                                $('#file').attr("src", '');
+                            } else if (response === 'invalid file') {
                                 $('#toast').addClass('active');
                                 $('.progress').addClass('active');
                                 $('.text-1').text('Error!');
@@ -401,8 +407,7 @@ require_once '../includes/database_conn.php';
                                     $('.progress').removeClass("active");
                                 }, 5000);
                                 $('#example').DataTable().ajax.reload();
-                            }
-                            if (response === 'invalid file') {
+                            } else if (response === 'invalid file') {
                                 $('#toast').addClass('active');
                                 $('.progress').addClass('active');
                                 $('.text-1').text('Error!');
@@ -412,15 +417,30 @@ require_once '../includes/database_conn.php';
                                     $('.progress').removeClass("active");
                                 }, 5000);
                                 $('#example').DataTable().ajax.reload();
-                            }
-
-                            if (response === 'updated successfully') {
+                            } else if (response === 'updated successfully') {
                                 $('.edit-modal').removeClass("active");
                                 $('#toast').addClass('active');
                                 $('.progress').addClass('active');
-                                $('#toast-icon').removeClass('fa-solid fa-triangle-exclamation').addClass('fa-solid fa-check warning');
+                                $('#toast-icon').removeClass(
+                                    'fa-solid fa-triangle-exclamation').addClass(
+                                    'fa-solid fa-check warning');
                                 $('.text-1').text('Success!');
-                                $('.text-2').text('Category title and thumbnail updated successfully!');
+                                $('.text-2').text(
+                                    'Category title and thumbnail updated successfully!'
+                                );
+                                setTimeout(() => {
+                                    $('#toast').removeClass("active");
+                                    $('.progress').removeClass("active");
+                                }, 5000);
+                                $('#example').DataTable().ajax.reload();
+                                $("#edit-category")[0].reset();
+                                $("#insert-category")[0].reset();
+                                $('#file').attr("src", '');
+                            } else {
+                                $('#toast').addClass('active');
+                                $('.progress').addClass('active');
+                                $('.text-1').text('Error!');
+                                $('.text-2').text(response);
                                 setTimeout(() => {
                                     $('#toast').removeClass("active");
                                     $('.progress').removeClass("active");
@@ -432,7 +452,7 @@ require_once '../includes/database_conn.php';
                 })
 
                 // SUBMIT INSERT
-                $('#insert-category').on('submit', function(e) {
+                $('#insert-category').on('submit', function (e) {
                     e.preventDefault();
                     $.ajax({
                         type: "POST",
@@ -442,86 +462,83 @@ require_once '../includes/database_conn.php';
                         contentType: false,
                         cache: false,
                         processData: false,
-                        success: function(response) {
+                        success: function (response) {
                             if (response === 'empty fields') {
                                 $('#toast').addClass('active');
                                 $('.progress').addClass('active');
-                                // $('#toast-icon').removeClass('fa-solid fa-triangle-exclamation').addClass('fa-solid fa-circle-exclamation');
                                 $('.text-1').text('Error!');
                                 $('.text-2').text('All fields are required!');
                                 setTimeout(() => {
                                     $('#toast').removeClass("active");
                                     $('.progress').removeClass("active");
                                 }, 5000);
-                            }
-
-                            if (response === 'empty category title') {
+                            } else if (response === 'empty category title') {
                                 $('#toast').addClass('active');
                                 $('.progress').addClass('active');
-                                // $('#toast-icon').removeClass('fa-solid fa-triangle-exclamation').addClass('fa-solid fa-circle-exclamation');
                                 $('.text-1').text('Error!');
                                 $('.text-2').text('Category title is empty!');
                                 setTimeout(() => {
                                     $('#toast').removeClass("active");
                                     $('.progress').removeClass("active");
                                 }, 5000);
-                            }
-
-                            if (response === 'empty thumbnail') {
+                            } else if (response === 'empty thumbnail') {
                                 $('#toast').addClass('active');
                                 $('.progress').addClass('active');
-                                // $('#toast-icon').removeClass('fa-solid fa-triangle-exclamation').addClass('fa-solid fa-circle-exclamation');
                                 $('.text-1').text('Error!');
                                 $('.text-2').text('Category thumbnail is empty!');
                                 setTimeout(() => {
                                     $('#toast').removeClass("active");
                                     $('.progress').removeClass("active");
                                 }, 5000);
-                            }
-
-                            if (response === 'file not supported') {
+                            } else if (response === 'file not supported') {
                                 $('#toast').addClass('active');
                                 $('.progress').addClass('active');
-                                // $('#toast-icon').removeClass('fa-solid fa-triangle-exclamation').addClass('fa-solid fa-circle-exclamation');
                                 $('.text-1').text('Error!');
                                 $('.text-2').text('File is not supported!');
                                 setTimeout(() => {
                                     $('#toast').removeClass("active");
                                     $('.progress').removeClass("active");
                                 }, 5000);
-                            }
-
-                            if (response === 'file too large') {
+                            } else if (response === 'file too large') {
                                 $('#toast').addClass('active');
                                 $('.progress').addClass('active');
-                                // $('#toast-icon').removeClass('fa-solid fa-triangle-exclamation').addClass('fa-solid fa-circle-exclamation');
                                 $('.text-1').text('Error!');
                                 $('.text-2').text('File is too large!');
                                 setTimeout(() => {
                                     $('#toast').removeClass("active");
                                     $('.progress').removeClass("active");
                                 }, 5000);
-                            }
-
-                            if (response === 'title already exist') {
+                            } else if (response === 'title already exist') {
                                 $('#toast').addClass('active');
                                 $('.progress').addClass('active');
-                                // $('#toast-icon').removeClass('fa-solid fa-triangle-exclamation').addClass('fa-solid fa-circle-exclamation');
                                 $('.text-1').text('Error!');
                                 $('.text-2').text('Category title already exists!');
                                 setTimeout(() => {
                                     $('#toast').removeClass("active");
                                     $('.progress').removeClass("active");
                                 }, 5000);
-                            }
-
-                            if (response === 'successful') {
+                            } else if (response === 'successful') {
                                 $('.insert-modal').removeClass("active");
                                 $('#toast').addClass('active');
                                 $('.progress').addClass('active');
-                                $('#toast-icon').removeClass('fa-solid fa-triangle-exclamation').addClass('fa-solid fa-check warning');
+                                $('#toast-icon').removeClass(
+                                    'fa-solid fa-triangle-exclamation').addClass(
+                                    'fa-solid fa-check warning');
                                 $('.text-1').text('Success!');
                                 $('.text-2').text('Category successfully added!!');
+                                setTimeout(() => {
+                                    $('#toast').removeClass("active");
+                                    $('.progress').removeClass("active");
+                                }, 5000);
+                                $('#example').DataTable().ajax.reload();
+                                $("#edit-category")[0].reset();
+                                $("#insert-category")[0].reset();
+                                $('#file').attr("src", '');
+                            } else {
+                                $('#toast').addClass('active');
+                                $('.progress').addClass('active');
+                                $('.text-1').text('Error!');
+                                $('.text-2').text(response);
                                 setTimeout(() => {
                                     $('#toast').removeClass("active");
                                     $('.progress').removeClass("active");
@@ -533,7 +550,7 @@ require_once '../includes/database_conn.php';
                 })
 
                 // SUBMIT DELETE
-                $("#delete_category").on('submit', function(e) {
+                $("#delete_category").on('submit', function (e) {
                     e.preventDefault();
                     $.ajax({
                         type: "POST",
@@ -543,12 +560,14 @@ require_once '../includes/database_conn.php';
                         contentType: false,
                         cache: false,
                         processData: false,
-                        success: function(response) {
+                        success: function (response) {
                             if (response === 'deleted') {
                                 $('.delete-modal').removeClass("active");
                                 $('#toast').addClass('active');
                                 $('.progress').addClass('active');
-                                $('#toast-icon').removeClass('fa-solid fa-triangle-exclamation').addClass('fa-solid fa-check warning');
+                                $('#toast-icon').removeClass(
+                                    'fa-solid fa-triangle-exclamation').addClass(
+                                    'fa-solid fa-check warning');
                                 $('.text-1').text('Success!');
                                 $('.text-2').text('Category deleted successfully!');
                                 setTimeout(() => {
@@ -556,6 +575,15 @@ require_once '../includes/database_conn.php';
                                     $('.progress').removeClass("active");
                                 }, 5000);
                                 $('#example').DataTable().ajax.reload();
+                            } else {
+                                $('#toast').addClass('active');
+                                $('.progress').addClass('active');
+                                $('.text-1').text('Error!');
+                                $('.text-2').text(response);
+                                setTimeout(() => {
+                                    $('#toast').removeClass("active");
+                                    $('.progress').removeClass("active");
+                                }, 5000);
                             }
                         }
                     })
@@ -564,7 +592,7 @@ require_once '../includes/database_conn.php';
         </script>
 
 
-        <?php include 'bottom.php' ?>
+        <?php include 'bottom.php'?>
 
 </body>
 

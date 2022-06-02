@@ -4,6 +4,12 @@ require_once "./includes/database_conn.php";
 
 $id = $_GET['link'];
 
+if(isset($_SESSION['userEmail'])) {
+    $userEmail = $_SESSION['userEmail'];
+} else {
+    $userEmail = '';
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -56,12 +62,12 @@ $id = $_GET['link'];
         <div class="menu__container">
             <div class="menu__wrapper swiper mySwiper">
                 <div class="menu__content swiper-wrapper">
-                    <?php
-$get_category = mysqli_query($conn, "SELECT * FROM category");
+                <?php
+                $get_category = mysqli_query($conn, "SELECT * FROM category");
 
-foreach ($get_category as $category_row) {
-    $encryptedCategoryId = urlencode(base64_encode($category_row['category_id']));
-    ?>
+                foreach ($get_category as $category_row) {
+                $encryptedCategoryId = urlencode(base64_encode($category_row['category_id']));
+                ?>
                     <a href="catalog?id=<?php echo $encryptedCategoryId; ?>" class="menu__card swiper-slide">
                         <div class="menu__image">
                             <img src="./assets/images/<?php echo $category_row['categoty_thumbnail']; ?>">
@@ -70,9 +76,9 @@ foreach ($get_category as $category_row) {
                             <h3><?php echo ucwords($category_row['category_title']); ?></h3>
                         </div>
                     </a>
-                    <?php
-}
-?>
+                <?php
+                }
+                ?>
                 </div>
                 <div class="swiper-button-next"></div>
                 <div class="swiper-button-prev"></div>
@@ -81,23 +87,23 @@ foreach ($get_category as $category_row) {
     </section>
 
     <?php
-$getProduct = mysqli_query($conn, "SELECT * FROM product WHERE product_slug = '$id'");
+    $getProduct = mysqli_query($conn, "SELECT * FROM product WHERE product_slug = '$id'");
 
-foreach ($getProduct as $row) {
+    foreach ($getProduct as $row) {
     ?>
     <section class="product-details">
         <div class="product-details__wrapper">
             <div class="left">
                 <input type="hidden" name="" id="product_id" value="<?php echo $row['product_id']; ?>">
-                <input type="hidden" name="" id="userEmail" value="<?php echo $_SESSION['userEmail']; ?>">
+                <input type="hidden" name="" id="userEmail" value="<?php echo $userEmail; ?>">
                 <div class="img-container">
                     <?php
-if (!empty($row['product_img1'])) {
-        ?>
+                    if (!empty($row['product_img1'])) {
+                    ?>
                     <img src="./assets/images/<?php echo $row['product_img1']; ?>" alt="">
                     <?php
-}
-    ?>
+                    }
+                    ?>
                 </div>
                 <div class="product-details">
                     <h1 class="product-title">
@@ -142,6 +148,7 @@ if (!empty($row['product_img1'])) {
         </div>
     </div>
 
+    <?php include './includes/cart-count.php' ?>
     <script src="./assets/js/script.js"></script>
 
     <script type="text/javascript">
@@ -180,25 +187,28 @@ if (!empty($row['product_img1'])) {
     </script>
 
     <script>
-        $('#addToCart').on('click', function(e) {
+        $('#addToCart').on('click', function (e) {
             e.preventDefault();
             var userEmail = $('#userEmail').val();
             var product_id = $('#product_id').val();
             var qty = $('.number-spinner').val();
             var total = $('.totalPriceSpan').text();
 
-            $.ajax({
-                type: "POST",
-                url: "add-to-cart",
-                data: {
-                    'add-to-cart': true,
-                    'userEmail': userEmail,
-                    'product_id': product_id,
-                    'qty': qty,
-                    'total': total,
-                },
-                success: function(response) {
-                    if (response == 'success') {
+            if(userEmail == '') {
+                location.href = 'http://localhost/theserve-amarah-s-corner-las-pinas/login';
+            } else {
+                $.ajax ({
+                    type: "POST",
+                    url: "add-to-cart",
+                    data: {
+                        'add-to-cart': true,
+                        'userEmail': userEmail,
+                        'product_id': product_id,
+                        'qty': qty,
+                        'total': total,
+                    },
+                    success: function (response) {
+                        if (response == 'success') {
                             $('#toast').addClass('active');
                             $('.progress').addClass('active');
                             $('#toast-icon').removeClass(
@@ -212,8 +222,9 @@ if (!empty($row['product_img1'])) {
                                 $('.progress').removeClass("active");
                             }, 5000);
                         }
-                }
-            })
+                    }
+                })
+            }
         })
     </script>
 

@@ -1,6 +1,20 @@
 <?php
 require_once './includes/database_conn.php';
 session_start();
+
+if(isset($_SESSION['userEmail'])) {
+    $userEmail = $_SESSION['userEmail'];
+
+    $getUserId = mysqli_query($conn, "SELECT * FROM customers WHERE email = '$userEmail'");
+    $row = mysqli_fetch_array($getUserId);
+    $userId = $row['user_id'];
+
+    $getCartCount = mysqli_query($conn, "SELECT COUNT(user_id) FROM cart WHERE user_id = $userId");
+    $rowCount = mysqli_fetch_array($getCartCount);
+    $cartCount = $rowCount['COUNT(user_id)'];
+} else {
+    $cartCount = '0';
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,7 +57,7 @@ session_start();
     <div id="preloader"></div>
 
     <?php include './includes/navbar.php';
-if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
+    if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
     echo "
         <script type='text/javascript'>
             window.onload = (event) => {
@@ -53,8 +67,8 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
             }
         </script>
         ";
-}
-?>
+    }
+    ?>
 
     <!-- BANNER SECTION -->
     <section class="banner" id="home">
@@ -72,12 +86,12 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
         <div class="menu__container">
             <div class="menu__wrapper swiper mySwiper">
                 <div class="menu__content swiper-wrapper">
-                    <?php
-$get_category = mysqli_query($conn, "SELECT * FROM category");
+                <?php
+                $get_category = mysqli_query($conn, "SELECT * FROM category");
 
-foreach ($get_category as $category_row) {
-    $encryptedCategoryId = urlencode(base64_encode($category_row['category_id']));
-    ?>
+                foreach ($get_category as $category_row) {
+                $encryptedCategoryId = urlencode(base64_encode($category_row['category_id']));
+                ?>
                     <a href="catalog?id=<?php echo $encryptedCategoryId; ?>" class="menu__card swiper-slide">
                         <div class="menu__image">
                             <img src="./assets/images/<?php echo $category_row['categoty_thumbnail']; ?>" alt="">
@@ -86,15 +100,16 @@ foreach ($get_category as $category_row) {
                             <h3><?php echo ucwords($category_row['category_title']); ?></h3>
                         </div>
                     </a>
-                    <?php
-}
-?>
+                <?php
+                }
+                ?>
                 </div>
                 <div class="swiper-button-next"></div>
                 <div class="swiper-button-prev"></div>
             </div>
         </div>
     </section>
+    <input type="hidden" name="" id="cartCount" value="<?php echo $cartCount; ?>">
     <!-- UPDATES SECTION -->
     <section class="updates" id="updates">
         <h3 class="title-header">Updates</h3>
@@ -246,6 +261,8 @@ foreach ($get_category as $category_row) {
         </div>
     </section>
     <?php include './includes/footer.php';?>
+
+    <?php include './includes/cart-count.php' ?>
     <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js">
     </script>
