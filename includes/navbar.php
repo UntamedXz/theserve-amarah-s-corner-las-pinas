@@ -19,8 +19,7 @@
             <div class="profile">
                 <img src="./assets/images/B612_20220322_202642_720-min.jpg" alt="">
                 <ul class="profile-link">
-                    <li><a href="#"><i class="bx bxs-user-circle icon"></i>Profile</a></li>
-                    <li><a href="#"><i class="bx bxs-cog"></i>Settings</a></li>
+                    <li><a href="http://localhost/theserve-amarah-s-corner-las-pinas/account"><i class="bx bxs-user-circle icon"></i>Profile</a></li>
                     
                     <li><a href="./includes/logout"><i class="bx bxs-log-out-circle"></i>Logout</a></li>
                 </ul>

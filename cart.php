@@ -13,6 +13,12 @@ while($row = mysqli_fetch_array($getUserId)) {
     $userId = $row['user_id'];
 }
 
+$getCartNumber = mysqli_query($conn, "SELECT COUNT(user_id) FROM cart WHERE user_id = $userId");
+
+while($rowCartNum = mysqli_fetch_array($getCartNumber)) {
+    $cartNumber = $row['COUNT(user_id)'];
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

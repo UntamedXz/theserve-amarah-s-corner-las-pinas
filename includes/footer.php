@@ -1,24 +1,21 @@
-<div id="footer">
-    <footer>
-        <div class="content">
-            <div class="top">
-                <div class="logo-details">
-                    <span class="logo_name">CONNECT WITH AMARAH'S CORNER</span>
-                </div>
-                <div class="media-icons">
-                    <a href="https://web.facebook.com/amarahscornerbf/?_rdc=1&_rdr"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                </div>
-            </div>
+<footer>
+    <div class="footer-wrapper">
+        <span class="connect">Connect with amarah's corner</span>
+        <div class="icons">
+            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#"><i class="fa-brands fa-twitter"></i></a>
+            <a href="#"><i class="fa-brands fa-instagram"></i></a></div>
+        <div class="nav-links">
+            <ul>
+                <li><a href="http://localhost/theserve-amarah-s-corner-las-pinas/">Home</a></li>
+                <li><a href="#">about us</a></li>
+                <li><a href="http://localhost/theserve-amarah-s-corner-las-pinas/#menu">menu</a></li>
+                <li><a href="#">contact us</a></li>
+                <li><a href="#">legal terms</a></li>
+            </ul>
         </div>
-        <div class="bottom-details">
-            <div class="bottom_text">
-                <span class="copyright_text">Copyright © 2021 <a href="#">Amarah's Corner PH.</a>All rights reserved</span>
-                <span class="policy_terms">
-                    <a href="chatbot.php">START A CONVERSATION WITH AMARAH</a></li>
-                </span>
-            </div>
+        <div class="copyright"><span>Copyright &copy;
+                2018 Amarah's Corner Philippines. All Rights Reserved</span>
         </div>
-    </footer>
-</div>
+    </div>
+</footer>

@@ -1042,6 +1042,142 @@ section {
   border: 1px solid var(--primary);
 }
 
+footer {
+  width: 100%;
+}
+footer .footer-wrapper {
+  width: 100%;
+  height: auto;
+  background-color: #070506;
+  color: #ffaf08;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding-top: 10px;
+}
+footer .footer-wrapper .connect {
+  font-size: 13px;
+  text-transform: uppercase;
+}
+@media (min-width: 768px) {
+  footer .footer-wrapper .connect {
+    font-size: unset;
+  }
+}
+footer .footer-wrapper .icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+footer .footer-wrapper .icons a {
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: #070506;
+}
+footer .footer-wrapper .icons a i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  width: 30px;
+  border: 2px solid #ffaf08;
+  background-color: #ffaf08;
+  border-radius: 50%;
+}
+@media (min-width: 768px) {
+  footer .footer-wrapper .icons a i {
+    height: 40px;
+    width: 40px;
+  }
+}
+footer .footer-wrapper .icons a i:hover {
+  background: #070506;
+  color: #ffaf08;
+}
+footer .footer-wrapper .nav-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+footer .footer-wrapper .nav-links ul {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  list-style-type: none;
+  gap: 15px;
+  margin: 0;
+  padding: 0;
+  margin-bottom: 5px;
+}
+@media (min-width: 768px) {
+  footer .footer-wrapper .nav-links ul {
+    flex-direction: unset;
+    gap: unset;
+  }
+}
+footer .footer-wrapper .nav-links ul li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 13px;
+}
+@media (min-width: 768px) {
+  footer .footer-wrapper .nav-links ul li {
+    border-right: 1px solid #ffaf08;
+  }
+}
+footer .footer-wrapper .nav-links ul li a {
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #ffaf08;
+  padding: 15px;
+  font-size: 13px;
+}
+@media (min-width: 768px) {
+  footer .footer-wrapper .nav-links ul li a {
+    font-size: unset;
+  }
+}
+footer .footer-wrapper .nav-links ul li a:hover {
+  color: #fff;
+}
+footer .footer-wrapper .nav-links ul li:last-child {
+  border-right: none;
+}
+footer .footer-wrapper .copyright {
+  width: 100%;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  background: #ffaf08;
+  color: #070506;
+  padding: 10px;
+  text-transform: capitalize;
+  font-weight: 600;
+}
+footer .footer-wrapper .copyright span {
+  font-size: 14px;
+  padding: 0 3%;
+}
+@media (min-width: 768px) {
+  footer .footer-wrapper .copyright span {
+    font-size: 16px;
+  }
+}
+@media (min-width: 1025px) {
+  footer .footer-wrapper .copyright span {
+    font-size: unset;
+  }
+}
+
 .catalog .container {
   width: 100%;
   display: flex;
@@ -1634,6 +1770,351 @@ section {
   background-color: transparent;
   border: 2px solid #ffaf08;
   color: #ffaf08;
+}
+
+.account {
+  border: 1px solid transparent;
+  padding: 0 3%;
+}
+@media (min-width: 768px) {
+  .account {
+    padding: 0 10%;
+  }
+}
+@media (min-width: 1025px) {
+  .account {
+    padding: 0 15%;
+  }
+}
+.account .account-wrapper {
+  width: 100%;
+  height: auto;
+  background: url(../images/adminpage_bg.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-top: 20px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.account .account-wrapper .first-row {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 20px;
+  padding-bottom: 0;
+  gap: 20px;
+}
+@media (min-width: 1025px) {
+  .account .account-wrapper .first-row {
+    flex-direction: row;
+  }
+}
+.account .account-wrapper .first-row .img-cont {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+@media (min-width: 1025px) {
+  .account .account-wrapper .first-row .img-cont {
+    width: 30%;
+  }
+}
+.account .account-wrapper .first-row .img-cont img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 2px solid #ffaf08;
+}
+@media (min-width: 1025px) {
+  .account .account-wrapper .first-row .img-cont img {
+    width: 250px;
+    height: 250px;
+  }
+}
+.account .account-wrapper .first-row .account-details {
+  width: 100%;
+  background: url(../images/background.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: 20px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+}
+@media (min-width: 1025px) {
+  .account .account-wrapper .first-row .account-details {
+    width: 70%;
+    position: relative;
+  }
+}
+.account .account-wrapper .first-row .account-details .name {
+  font-size: 28px;
+  text-align: center;
+  font-weight: 800;
+  line-height: 25px;
+}
+@media (min-width: 1025px) {
+  .account .account-wrapper .first-row .account-details .name {
+    font-size: 36px;
+    text-align: unset;
+    line-height: unset;
+  }
+}
+.account .account-wrapper .first-row .account-details .type {
+  font-size: 18px;
+  text-align: center;
+}
+@media (min-width: 1025px) {
+  .account .account-wrapper .first-row .account-details .type {
+    font-size: 22px;
+    text-align: unset;
+  }
+}
+.account .account-wrapper .first-row .account-details .tab {
+  margin-top: 10px;
+  background: #070506;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  border-radius: 5px;
+}
+@media (min-width: 1025px) {
+  .account .account-wrapper .first-row .account-details .tab {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    margin-top: unset;
+    justify-content: unset;
+  }
+}
+.account .account-wrapper .first-row .account-details .tab button {
+  font-size: 18px;
+  font-weight: 700;
+  border: none;
+  outline: none;
+  background: none;
+  color: #ffaf08;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+.account .account-wrapper .first-row .account-details .tab button:hover {
+  background-color: #ffaf08;
+  color: #070506;
+}
+.account .account-wrapper .second-row {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 20px;
+  gap: 20px;
+}
+@media (min-width: 1025px) {
+  .account .account-wrapper .second-row {
+    flex-direction: row;
+  }
+}
+.account .account-wrapper .second-row .profile-info {
+  width: 100%;
+  background: url(../images/background.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: 20px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+@media (min-width: 1025px) {
+  .account .account-wrapper .second-row .profile-info {
+    width: 30%;
+  }
+}
+.account .account-wrapper .second-row .profile-info .my-profile {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.account .account-wrapper .second-row .profile-info .my-profile .myProfile {
+  font-weight: 600;
+  color: #070506;
+  font-size: 18px;
+}
+.account .account-wrapper .second-row .profile-info .my-profile hr {
+  width: 50px;
+  align-self: flex-start;
+  color: #070506;
+  background-color: #070506;
+  outline-color: #070506;
+  height: 2px;
+  border: none;
+}
+.account .account-wrapper .second-row .profile-info .my-profile .name-email-edit {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  word-wrap: break-all;
+  gap: 10px;
+}
+.account .account-wrapper .second-row .profile-info .my-profile .name-email-edit .name-email {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  word-wrap: break-word;
+}
+.account .account-wrapper .second-row .profile-info .my-profile .name-email-edit .name-email h1 {
+  font-weight: 800;
+  font-size: 22px;
+}
+.account .account-wrapper .second-row .profile-info .my-profile .name-email-edit .name-email h3 {
+  width: 100%;
+  font-weight: 600;
+  font-size: 16px;
+  word-wrap: break-word;
+}
+.account .account-wrapper .second-row .profile-info .my-profile .name-email-edit button {
+  padding: 3px 10px;
+  background-color: #070506;
+  color: #ffaf08;
+  border: 2px solid #070506;
+  outline: none;
+  border-radius: 5px;
+  font-weight: 600;
+}
+.account .account-wrapper .second-row .profile-info .my-profile .name-email-edit button:hover {
+  background-color: transparent;
+  color: #070506;
+}
+.account .account-wrapper .second-row .profile-info .basic-information {
+  display: flex;
+  flex-direction: column;
+}
+.account .account-wrapper .second-row .profile-info .basic-information .basicInformation {
+  font-weight: 600;
+  font-size: 18px;
+  color: #070506;
+}
+.account .account-wrapper .second-row .profile-info .basic-information hr {
+  width: 50px;
+  align-self: flex-start;
+  color: #070506;
+  background-color: #070506;
+  outline-color: #070506;
+  height: 2px;
+  border: none;
+}
+.account .account-wrapper .second-row .profile-info .basic-information .basicInfoWrapper {
+  margin-top: 5px;
+  display: flex;
+  flex-direction: column;
+}
+.account .account-wrapper .second-row .profile-info .basic-information .basicInfoWrapper span {
+  font-size: 16px;
+  font-weight: 500;
+}
+.account .account-wrapper .second-row .tab-content {
+  width: 100%;
+  background: url(../images/background.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: 20px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+}
+@media (min-width: 1025px) {
+  .account .account-wrapper .second-row .tab-content {
+    width: 70%;
+  }
+}
+.account .account-wrapper .second-row .tab-content hr {
+  width: 50px;
+  align-self: flex-start;
+  color: #070506;
+  background-color: #070506;
+  outline-color: #070506;
+  height: 2px;
+  border: none;
+}
+.account .account-wrapper .second-row .tab-content form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.account .account-wrapper .second-row .tab-content form .profile-details {
+  font-weight: 700;
+  font-size: 20px;
+}
+.account .account-wrapper .second-row .tab-content form .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.account .account-wrapper .second-row .tab-content form .form-group span {
+  font-weight: 600;
+}
+.account .account-wrapper .second-row .tab-content form .form-group input[type=text],
+.account .account-wrapper .second-row .tab-content form .form-group input[type=email] {
+  height: 40px;
+  width: 100%;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  background-color: #070506;
+  color: #fff;
+  padding: 0 10px;
+  font-size: 14px;
+}
+.account .account-wrapper .second-row .tab-content form .form-group input[type=date] {
+  width: 140px;
+  height: 40px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  background-color: #070506;
+  color: #fff;
+  padding: 0 10px;
+  color-scheme: dark;
+}
+.account .account-wrapper .second-row .tab-content form .form-group .gender {
+  background-color: #070506;
+  width: 145px;
+  color: #fff;
+  height: 40px;
+  line-height: 40px;
+  padding: 0 10px;
+  border-radius: 5px;
+}
+.account .account-wrapper .second-row .tab-content form .form-group .gender input[type=radio] {
+  transform: scale(1.1);
+}
+.account .account-wrapper .second-row .tab-content form .form-group .gender label {
+  font-size: 14px;
+}
+.account .account-wrapper .second-row .tab-content form button {
+  height: 40px;
+  font-weight: 700;
+  border: 2px solid #070506;
+  background-color: #070506;
+  outline: none;
+  color: #ffaf08;
+  border-radius: 5px;
+}
+.account .account-wrapper .second-row .tab-content form button:hover {
+  background-color: transparent;
+  color: #070506;
 }
 
 /*# sourceMappingURL=style.css.map */

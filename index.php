@@ -13,6 +13,7 @@ session_start();
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="./assets/css/style.css">
     <title>Amarah's Corner - BF Resort Las Piñas</title>
 
@@ -36,213 +37,14 @@ session_start();
             h.appendChild(s);
         })(window, document);
     </script>
-
-    <style>
-        /*FOOTER*/
-        footer {
-            background: black;
-            width: 100%;
-            bottom: 0;
-            align-items: center;
-            justify-content: center;
-        }
-
-        footer::before {
-            content: '';
-            left: 0;
-            top: 100px;
-            height: 1px;
-            width: 100%;
-            background: #AFAFB6;
-            align-items: center;
-        }
-
-        footer .content {
-            max-width: 1250px;
-            margin: auto;
-            padding: 30px 40px 40px 40px;
-            align-items: center;
-
-        }
-
-        footer .content .top {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 50px;
-        }
-
-        .content .top .logo-details {
-            color: #fff;
-            font-size: 20px;
-        }
-
-        .content .top .media-icons {
-            display: flex;
-        }
-
-        .content .top .media-icons a {
-            height: 30px;
-            width: 30px;
-            margin: 0 8px;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 30px;
-            color: #fff;
-            font-size: 17px;
-            text-decoration: none;
-            transition: all 0.4s ease;
-            align-items: center;
-        }
-
-        .top .media-icons a:nth-child(1) {
-            background: #4267B2;
-        }
-
-        .top .media-icons a:nth-child(1):hover {
-            color: #4267B2;
-            background: #fff;
-        }
-
-        .top .media-icons a:nth-child(2) {
-            background: #1DA1F2;
-        }
-
-        .top .media-icons a:nth-child(2):hover {
-            color: #1DA1F2;
-            background: #fff;
-        }
-
-        .top .media-icons a:nth-child(3) {
-            background: #E1306C;
-        }
-
-        .top .media-icons a:nth-child(3):hover {
-            color: #E1306C;
-            background: #fff;
-        }
-
-        .top .media-icons a:nth-child(4) {
-            background: #0077B5;
-        }
-
-        .top .media-icons a:nth-child(4):hover {
-            color: #0077B5;
-            background: #fff;
-        }
-
-        .top .media-icons a:nth-child(5) {
-            background: #FF0000;
-        }
-
-        .top .media-icons a:nth-child(5):hover {
-            color: #FF0000;
-            background: #fff;
-        }
-
-        footer .bottom-details {
-            width: 100%;
-            background: black;
-        }
-
-        footer .bottom-details .bottom_text {
-            max-width: 1250px;
-            margin: auto;
-            padding: 15px 30px;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .bottom-details .bottom_text span,
-        .bottom-details .bottom_text a {
-            font-size: 10px;
-            font-weight: 200;
-            color: #fff;
-            opacity: 0.8;
-            text-decoration: none;
-        }
-
-        .bottom-details .bottom_text a:hover {
-            opacity: 1;
-            text-decoration: underline;
-        }
-
-        .bottom-details .bottom_text a {
-            margin-right: 10px;
-        }
-
-        @media (max-width: 900px) {
-            footer .content .link-boxes {
-                flex-wrap: wrap;
-            }
-
-            footer .content .link-boxes .input-box {
-                width: 30%;
-                margin-top: 2px;
-            }
-        }
-
-        @media (max-width: 700px) {
-            footer {
-                position: relative;
-            }
-
-            .content .top .logo-details {
-                font-size: 26px;
-            }
-
-            .content .top .media-icons a {
-                height: 25px;
-                width: 25px;
-                font-size: 14px;
-                line-height: 25px;
-            }
-
-            footer .content .link-boxes .box {
-                width: calc(100% / 5 - 10px);
-            }
-
-            footer .content .link-boxes .input-box {
-                width: 30%;
-            }
-
-            .bottom-details .bottom_text span,
-            .bottom-details .bottom_text a {
-                font-size: 12px;
-            }
-        }
-
-        @media (max-width: 520px) {
-            footer::before {
-                top: 145px;
-            }
-
-            footer .content .top {
-                flex-direction: column;
-            }
-
-            .content .top .media-icons {
-                margin-top: 8px;
-            }
-
-            footer .content .link-boxes .box {
-                width: calc(100% / 5 - 10px);
-            }
-
-            footer .content .link-boxes .input-box {
-                width: 100%;
-            }
-
-        }
-    </style>
 </head>
 
 <body>
     <div id="preloader"></div>
 
     <?php include './includes/navbar.php';
-    if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
-        echo "
+if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
+    echo "
         <script type='text/javascript'>
             window.onload = (event) => {
                 document.querySelector('.header .header-1 .left .profile').style.display = 'flex';
@@ -251,8 +53,8 @@ session_start();
             }
         </script>
         ";
-    }
-    ?>
+}
+?>
 
     <!-- BANNER SECTION -->
     <section class="banner" id="home">
