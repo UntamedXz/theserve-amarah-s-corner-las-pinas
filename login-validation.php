@@ -21,7 +21,7 @@ if (mysqli_num_rows($checkLoginEmail) == 0) {
             setcookie('password', '');
         }
         $_SESSION['loggedin'] = true;
-        $_SESSION['userEmail'] = $loginEmail;
+        $_SESSION['id'] = $row['user_id'];
         echo 'success';
     } else {
         echo 'wrong password';

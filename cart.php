@@ -1,23 +1,24 @@
-<?php 
+<?php
 session_start();
 require_once './includes/database_conn.php';
 if (!isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == false) {
     header("Location: ./login");
 }
 
-$userEmail = $_SESSION['userEmail'];
+$user_id = $_SESSION['id'];
 
-$getUserId = mysqli_query($conn, "SELECT * FROM customers WHERE email = '$userEmail'");
+$getAccountInfo = mysqli_query($conn, "SELECT * FROM customers WHERE user_id = '$user_id'");
 
-while($row = mysqli_fetch_array($getUserId)) {
+while($row = mysqli_fetch_array($getAccountInfo)) {
     $userId = $row['user_id'];
+    $userProfileIcon = $row['user_profile_image'];
 }
 
 if(isset($_SESSION['userEmail'])) {
-    $userEmail = $_SESSION['userEmail'];
+    $user_id = $_SESSION['id'];
 
-    $getUserId = mysqli_query($conn, "SELECT * FROM customers WHERE email = '$userEmail'");
-    $row = mysqli_fetch_array($getUserId);
+    $getAccountInfo = mysqli_query($conn, "SELECT * FROM customers WHERE user_id = '$user_id'");
+    $row = mysqli_fetch_array($getAccountInfo);
     $userId = $row['user_id'];
 
     $getCartCount = mysqli_query($conn, "SELECT COUNT(user_id) FROM cart WHERE user_id = $userId");
@@ -74,6 +75,18 @@ if(isset($_SESSION['userEmail'])) {
 
     <?php include './includes/navbar.php'; ?>
     <input type="hidden" name="" id="cartCount" value="<?php echo $cartCount; ?>">
+
+    <input type="hidden" id="profileIconCheck" value="<?php echo $userProfileIcon; ?>">
+
+    <script>
+        $(window).on('load', function() {
+            if($('#profileIconCheck').val() == '') {
+                $('#profileIcon').attr("src","./assets/images/no_profile_pic.png");
+            } else {
+                $('#profileIcon').attr("src","./assets/images/" + $('#profileIconCheck').val());
+            }
+        })
+    </script>
 
     <!-- DELETE -->
     <div id="popup-box" class="popup-box delete-modal">

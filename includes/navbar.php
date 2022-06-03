@@ -17,7 +17,7 @@
             <a href="login" id="login-btn" class="bx bxs-user loginBtn"></a>
             <div id="navbar" class="bx bx-menu-alt-right"></div>
             <div class="profile">
-                <img src="./assets/images/B612_20220322_202642_720-min.jpg" alt="">
+                <img id="profileIcon" src="" alt="">
                 <ul class="profile-link">
                     <li><a href="http://localhost/theserve-amarah-s-corner-las-pinas/account"><i class="bx bxs-user-circle icon"></i>Profile</a></li>
                     

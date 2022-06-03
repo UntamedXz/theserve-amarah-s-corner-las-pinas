@@ -2,12 +2,13 @@
 require_once './includes/database_conn.php';
 session_start();
 
-if(isset($_SESSION['userEmail'])) {
-    $userEmail = $_SESSION['userEmail'];
+if(isset($_SESSION['id'])) {
+    $user_id = $_SESSION['id'];
 
-    $getUserId = mysqli_query($conn, "SELECT * FROM customers WHERE email = '$userEmail'");
+    $getUserId = mysqli_query($conn, "SELECT * FROM customers WHERE user_id = $user_id");
     $row = mysqli_fetch_array($getUserId);
     $userId = $row['user_id'];
+    $userProfileIcon = $row['user_profile_image'];
 
     $getCartCount = mysqli_query($conn, "SELECT COUNT(user_id) FROM cart WHERE user_id = $userId");
     $rowCount = mysqli_fetch_array($getCartCount);
@@ -70,9 +71,21 @@ if(isset($_SESSION['userEmail'])) {
     }
     ?>
 
+    <input type="hidden" id="profileIconCheck" value="<?php echo $userProfileIcon; ?>">
+
+    <script>
+        $(window).on('load', function() {
+            if($('#profileIconCheck').val() == '') {
+                $('#profileIcon').attr("src","./assets/images/no_profile_pic.png");
+            } else {
+                $('#profileIcon').attr("src","./assets/images/" + $('#profileIconCheck').val());
+            }
+        })
+    </script>
+
     <!-- BANNER SECTION -->
     <section class="banner" id="home">
-        <img src="./assets/images/banner.jpg" alt="">
+        <img src="./assets/images/banner2.jpg" alt="">
     </section>
     <!-- BRANCH NAME SECTION -->
     <section class="branch">
@@ -117,28 +130,29 @@ if(isset($_SESSION['userEmail'])) {
             <!-- UPDATE 1 -->
             <div class="col">
                 <div class="image-cont">
-                    <img src="./assets/images/2021-12-29.jpg" alt="">
+                    <img src="./assets/images/acousticnight.png" alt="">
                 </div>
-                <h4>Posted on Dec 29, 2021</h4>
-                <h5>Let's continue the festivities with family and friends! Because food is more enjoyable when shared!
-                    🤗 Tara na sa Amarah and enjoy our menu -- pizza, pasta, wings, milktea, fruit tea and frappe! See
-                    youuuu, Katambay! 🤗💛</h5>
+                <h4>Posted on June 01, 2022</h4>
+                <h5>Take a break from your busy schedule and make time for some pizza with us this Friday. 
+🍕 Come and visit us we have a live acoustic band with 4th Station AP at 7pm. See you! 🤗💛</h5>
             </div>
             <!-- UPDATE 2 -->
             <div class="col">
                 <div class="image-cont">
-                    <img src="./assets/images/2021-12-28.jpg" alt="">
+                
+                <img src="./assets/images/pizzatime.jpg" alt="">
                 </div>
-                <h4>Posted on Dec 28, 2021</h4>
-                <h5>Merry Christmas, Katambay!<3 </h5> </div> <!-- UPDATE 3 -->
+                <h4>Posted on June 01, 2022</h4>
+                <h5>We're having an acoustic night session every Wednesday until Sunday. 
+                    This coming June 1 to 5, 2022, from 8pm to 12mn. Visit Us!<3 </h5> </div> <!-- UPDATE 3 -->
                         <div class="col">
                             <div class="image-cont">
-                                <img src="./assets/images/2021-12-21.jpg" alt="">
+                            <img src="./assets/images/wingsss.png" alt="">
                             </div>
-                            <h4>Posted on Dec 21, 2021</h4>
-                            <h5>Jumpstart your day with Amarah's ALL-DAY BREAKFAST MEALS! Calling all SILOG lovers out
-                                there! Namnamin ang sarap ng almusal anytime of the day! 🤗 Tara na sa Amarahs,
-                                Katambay! 💛 <br> #amarahscorner <br> #amarahscornerph <br> #katambay<3 </h5> </div>
+                            <h4>Posted on June 01, 2022</h4>
+                            <h5>On a scale of 1 to 5 pano mo kainin ang chicken wings mo? Unlimited Chicken wings 
+                                + Rice for only 349php is still available. 
+                                Visit us today we have an acoustic jam session at 7 pm. See you! 💛 <br> #amarahscorner <br> #amarahscornerph <br> #katambay<3 </h5> </div>
                                     </div> <div id="load-more">
                                     <input type="submit" class="load-more" value="LOAD MORE">
                         </div>

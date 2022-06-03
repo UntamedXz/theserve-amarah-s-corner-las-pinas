@@ -12,12 +12,13 @@ while ($result = mysqli_fetch_assoc($getCategoryTitle)) {
     $categoryTitle = $result['category_title'];
 }
 
-if(isset($_SESSION['userEmail'])) {
-    $userEmail = $_SESSION['userEmail'];
+if(isset($_SESSION['id'])) {
+    $user_id = $_SESSION['id'];
 
-    $getUserId = mysqli_query($conn, "SELECT * FROM customers WHERE email = '$userEmail'");
+    $getUserId = mysqli_query($conn, "SELECT * FROM customers WHERE user_id = $user_id");
     $row = mysqli_fetch_array($getUserId);
     $userId = $row['user_id'];
+    $userProfileIcon = $row['user_profile_image'];
 
     $getCartCount = mysqli_query($conn, "SELECT COUNT(user_id) FROM cart WHERE user_id = $userId");
     $rowCount = mysqli_fetch_array($getCartCount);
@@ -55,6 +56,18 @@ if(isset($_SESSION['userEmail'])) {
 
     <?php include './includes/navbar.php'; ?>
     <input type="hidden" name="" id="cartCount" value="<?php echo $cartCount; ?>">
+
+    <input type="hidden" id="profileIconCheck" value="<?php echo $userProfileIcon; ?>">
+
+    <script>
+        $(window).on('load', function() {
+            if($('#profileIconCheck').val() == '') {
+                $('#profileIcon').attr("src","./assets/images/no_profile_pic.png");
+            } else {
+                $('#profileIcon').attr("src","./assets/images/" + $('#profileIconCheck').val());
+            }
+        })
+    </script>
 
     <!-- MENU SECTION -->
     <section class="menu" id="menu">
@@ -102,20 +115,21 @@ if(isset($_SESSION['userEmail'])) {
                     foreach ($getProduct as $rowProduct) {
                     ?>
                         <a href="product?link=<?php echo $rowProduct['product_slug']; ?>" class="catalog-box">
-                            
+                            <?php
+                            if(!empty($rowProduct['product_img1'])) {
+                            ?>
                             <div class="img-cont">
-                                <?php
-                                if(!empty($rowProduct['product_img1'])) {
-                                ?>
                                 <img src="./assets/images/<?php echo $rowProduct['product_img1']; ?>" alt="">
-                                <?php
-                                } else {
-                                ?>
-                                <img src="./assets/images/image_not_available-yellow.png" alt="">
-                                <?php
-                                }
-                                ?>
                             </div>
+                            <?php
+                            } else {
+                            ?>
+                            <div class="no-img-cont">
+                                <img src="./assets/images/image_not_available-yellow.png" alt="">
+                            </div>
+                            <?php
+                            }
+                            ?>
                             <div class="details">
                                 <h4><?php echo $rowProduct['product_title'] ?></h4>
                                 <h5 style="color: #ffaf08; font-weight: 400;"><?php echo $rowProduct['subcategory_title']; ?></h5>
