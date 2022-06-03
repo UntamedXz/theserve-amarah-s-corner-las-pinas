@@ -91,7 +91,7 @@ if(isset($_SESSION['userEmail'])) {
 
                     foreach($getUserCart as $row) {
                     ?>
-                    <div class="box" id="catalog-box" data-id="<?php echo $row['cart_id']; ?>">
+                    <div class="box" id="catalog-box">
                         <?php
                         if($row['product_img1'] != '') { 
                         ?>
@@ -147,14 +147,6 @@ if(isset($_SESSION['userEmail'])) {
 
         window.addEventListener("load", function () {
             loader.style.display = "none";
-        })
-    </script>
-
-    <script type="text/javascript">
-        $('.btn-2').on('click', function(e) {
-            e.preventDefault();
-            var id = $('#catalog-box').data(id);
-            alert(id);
         })
     </script>
 </body>
