@@ -12,6 +12,20 @@ $getUserId = mysqli_query($conn, "SELECT * FROM customers WHERE email = '$userEm
 while($row = mysqli_fetch_array($getUserId)) {
     $userId = $row['user_id'];
 }
+
+if(isset($_SESSION['userEmail'])) {
+    $userEmail = $_SESSION['userEmail'];
+
+    $getUserId = mysqli_query($conn, "SELECT * FROM customers WHERE email = '$userEmail'");
+    $row = mysqli_fetch_array($getUserId);
+    $userId = $row['user_id'];
+
+    $getCartCount = mysqli_query($conn, "SELECT COUNT(user_id) FROM cart WHERE user_id = $userId");
+    $rowCount = mysqli_fetch_array($getCartCount);
+    $cartCount = $rowCount['COUNT(user_id)'];
+} else {
+    $cartCount = '0';
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -68,7 +82,7 @@ while($row = mysqli_fetch_array($getUserId)) {
             <div class="project">
                 <div class="shop">
                     <?php
-                    $getUserCart = mysqli_query($conn, "SELECT product.product_title, product.product_img1, subcategory.subcategory_title, product.product_price, cart.product_qty, cart.product_total
+                    $getUserCart = mysqli_query($conn, "SELECT, cart.cart_id, product.product_title, product.product_img1, subcategory.subcategory_title, product.product_price, cart.product_qty, cart.product_total
                     FROM cart
                     LEFT JOIN product
                     ON cart.product_id = product.product_id
@@ -77,11 +91,23 @@ while($row = mysqli_fetch_array($getUserId)) {
 
                     foreach($getUserCart as $row) {
                     ?>
-                    <div class="box">
+                    <div class="box" id="catalog-box" data-id="<?php echo $row['cart_id']; ?>">
+                        <?php
+                        if($row['product_img1'] != '') { 
+                        ?>
                         <div class="img" style="background:
                             url(./assets/images/<?php echo $row['product_img1']; ?>) no-repeat; background-size: cover;
                             background-position: center;">
                         </div>
+                        <?php
+                        } else {
+                        ?>
+                        <div class="img" style="display: flex; align-items: center; justify-content: center; color: #6b6b6b;">
+                            <span>NO IMAGE AVAILABLE</span>
+                        </div>
+                        <?php
+                        }
+                        ?>
                         <div class="content">
                             <h3><?php echo $row['product_title']; ?></h3>
                             <h5><?php echo $row['subcategory_title']; ?></h5>
@@ -121,6 +147,14 @@ while($row = mysqli_fetch_array($getUserId)) {
 
         window.addEventListener("load", function () {
             loader.style.display = "none";
+        })
+    </script>
+
+    <script type="text/javascript">
+        $('.btn-2').on('click', function(e) {
+            e.preventDefault();
+            var id = $('#catalog-box').data(id);
+            alert(id);
         })
     </script>
 </body>
