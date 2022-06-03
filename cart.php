@@ -82,7 +82,7 @@ if(isset($_SESSION['userEmail'])) {
             <div class="project">
                 <div class="shop">
                     <?php
-                    $getUserCart = mysqli_query($conn, "SELECT, cart.cart_id, product.product_title, product.product_img1, subcategory.subcategory_title, product.product_price, cart.product_qty, cart.product_total
+                    $getUserCart = mysqli_query($conn, "SELECT product.product_title, product.product_img1, subcategory.subcategory_title, product.product_price, cart.product_qty, cart.product_total
                     FROM cart
                     LEFT JOIN product
                     ON cart.product_id = product.product_id
@@ -91,7 +91,7 @@ if(isset($_SESSION['userEmail'])) {
 
                     foreach($getUserCart as $row) {
                     ?>
-                    <div class="box" id="catalog-box">
+                    <div class="box">
                         <?php
                         if($row['product_img1'] != '') { 
                         ?>
@@ -147,6 +147,13 @@ if(isset($_SESSION['userEmail'])) {
 
         window.addEventListener("load", function () {
             loader.style.display = "none";
+        })
+    </script>
+
+    <script type="text/javascript">
+        $('.btn-2').on('click', function(e) {
+            e.preventDefault();
+            
         })
     </script>
 </body>
