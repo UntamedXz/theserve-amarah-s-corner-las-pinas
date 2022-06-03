@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once "./includes/database_conn.php";
 
 $id = $_GET['id'];
@@ -110,7 +111,7 @@ if(isset($_SESSION['userEmail'])) {
                                 <?php
                                 } else {
                                 ?>
-                                <span style="color: #6b6b6b;">NO IMAGE AVAILABLE</span>
+                                <img src="./assets/images/image_not_available-yellow.png" alt="">
                                 <?php
                                 }
                                 ?>

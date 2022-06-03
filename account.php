@@ -95,7 +95,7 @@ if(isset($_SESSION['userEmail'])) {
                     </div>
                 </div>
                 <div class="tab-content" id="profile-details">
-                    <form>
+                    <form id="profile_details">
                         <h1 class="profile-details">PROFILE DETAILS</h1>
                         <hr>
                         <div class="form-group">

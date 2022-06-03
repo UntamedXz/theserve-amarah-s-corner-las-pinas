@@ -75,6 +75,41 @@ if(isset($_SESSION['userEmail'])) {
     <?php include './includes/navbar.php'; ?>
     <input type="hidden" name="" id="cartCount" value="<?php echo $cartCount; ?>">
 
+    <!-- DELETE -->
+    <div id="popup-box" class="popup-box delete-modal">
+        <div class="top">
+            <h3>Delete Category</h3>
+            <div id="modalClose" class="fa-solid fa-xmark"></div>
+        </div>
+        <hr>
+        <form id="delete">
+            <input type="text" name="" id="cartId" value="">
+            <p>Are you sure, you want to delete this item?</p>
+        </form>
+        <hr>
+        <div class="bottom">
+            <div class="buttons">
+                <button id="modalClose" type="button" class="cancel">CLOSE</button>
+                <button form="delete" id="delete-btn" type="submit" class="save">DELETE</button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- TOAST -->
+    <div class="toast" id="toast">
+        <div class="toast-content" id="toast-content">
+            <i id="toast-icon" class="fa-solid fa-triangle-exclamation warning"></i>
+
+            <div class="message">
+                <span class="text text-1" id="text-1"></span>
+                <span class="text text-2" id="text-2"></span>
+            </div>
+        </div>
+        <i class="fa-solid fa-xmark close"></i>
+        <div class="progress"></div>
+    </div>
+
     <section class="cart">
         <div class="wrapper">
             <h1>Shopping Cart</h1>
@@ -82,7 +117,7 @@ if(isset($_SESSION['userEmail'])) {
             <div class="project">
                 <div class="shop">
                     <?php
-                    $getUserCart = mysqli_query($conn, "SELECT product.product_title, product.product_img1, subcategory.subcategory_title, product.product_price, cart.product_qty, cart.product_total
+                    $getUserCart = mysqli_query($conn, "SELECT cart.cart_id, product.product_title, product.product_img1, subcategory.subcategory_title, product.product_price, cart.product_qty, cart.product_total
                     FROM cart
                     LEFT JOIN product
                     ON cart.product_id = product.product_id
@@ -91,7 +126,8 @@ if(isset($_SESSION['userEmail'])) {
 
                     foreach($getUserCart as $row) {
                     ?>
-                    <div class="box">
+                    <form id="cart_item">
+                    <div class="box" data-id="<?php echo $row['cart_id']; ?>">
                         <?php
                         if($row['product_img1'] != '') { 
                         ?>
@@ -116,12 +152,13 @@ if(isset($_SESSION['userEmail'])) {
                                 <p class="unit">Quantity: <input value="<?php echo $row['product_qty']; ?>"></p>
                                 <h4 class="subTotal">Subtotal <strong>P<?php echo $row['product_total']; ?></strong></h4>
                             </div>
-                            <p class="btn-area">
+                            <p form="cart_item" class="btn-area" data-id="<?php echo $row['cart_id']; ?>">
                                     <i class='bx bxs-trash'></i>
                                     <span class="btn-2">Remove</span>
-                                </p>
+                            </p>
                         </div>
                     </div>
+                    </form>
                     <?php
                     }
                     ?>
@@ -151,9 +188,36 @@ if(isset($_SESSION['userEmail'])) {
     </script>
 
     <script type="text/javascript">
-        $('.btn-2').on('click', function(e) {
+        // CLICK REMOVE
+        $('.btn-area').on('click', function(e) {
             e.preventDefault();
-            
+            var id = $(this).data('id');
+            $('.delete-modal').addClass('active');
+            $('#cartId').val(id);
+        })
+
+        // SUBMIT DELETE
+        $('#delete').on('submit', function(e) {
+            e.preventDefault();
+            var cart_id = $('#cartId').val();
+
+            $.ajax({
+                type: "POST",
+                url: "delete-cart-item",
+                data: {
+                    'cart_id': cart_id,
+                },
+                success: function(response) {
+                    if(response == 'success') {
+                        location.reload();
+                    }
+                }
+            })
+        })
+
+        // CLOSE MODAL
+        $(document).on('click', '#modalClose', function () {
+                $(".delete-modal").removeClass("active");
         })
     </script>
 </body>

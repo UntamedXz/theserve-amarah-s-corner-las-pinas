@@ -116,6 +116,10 @@ if(isset($_SESSION['userEmail'])) {
                     ?>
                     <img src="./assets/images/<?php echo $row['product_img1']; ?>" alt="">
                     <?php
+                    } else {
+                    ?>
+                    <img src="./assets/images/image_not_available-black.png" alt="">
+                    <?php
                     }
                     ?>
                 </div>
@@ -223,18 +227,7 @@ if(isset($_SESSION['userEmail'])) {
                     },
                     success: function (response) {
                         if (response == 'success') {
-                            $('#toast').addClass('active');
-                            $('.progress').addClass('active');
-                            $('#toast-icon').removeClass(
-                                'fa-solid fa-triangle-exclamation').addClass(
-                                'fa-solid fa-check warning');
-                            $('.text-1').text('Success!');
-                            $('.text-2').text('Added to cart successfully!');
-
-                            setTimeout(() => {
-                                $('#toast').removeClass("active");
-                                $('.progress').removeClass("active");
-                            }, 5000);
+                            location.href = 'http://localhost/theserve-amarah-s-corner-las-pinas/cart';
                         }
                     }
                 })
