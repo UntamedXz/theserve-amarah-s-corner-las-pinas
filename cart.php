@@ -12,13 +12,6 @@ $getUserId = mysqli_query($conn, "SELECT * FROM customers WHERE email = '$userEm
 while($row = mysqli_fetch_array($getUserId)) {
     $userId = $row['user_id'];
 }
-
-// $getCartNumber = mysqli_query($conn, "SELECT COUNT(user_id) FROM cart WHERE user_id = $userId");
-
-// while($rowCartNum = mysqli_fetch_array($getCartNumber)) {
-//     $cartNumber = $row['COUNT(user_id)'];
-// }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -66,6 +59,7 @@ while($row = mysqli_fetch_array($getUserId)) {
     <div id="preloader"></div>
 
     <?php include './includes/navbar.php'; ?>
+    <input type="hidden" name="" id="cartCount" value="<?php echo $cartCount; ?>">
 
     <section class="cart">
         <div class="wrapper">

@@ -10,6 +10,19 @@ if(isset($_SESSION['userEmail'])) {
     $userEmail = '';
 }
 
+if(isset($_SESSION['userEmail'])) {
+    $userEmail = $_SESSION['userEmail'];
+
+    $getUserId = mysqli_query($conn, "SELECT * FROM customers WHERE email = '$userEmail'");
+    $row = mysqli_fetch_array($getUserId);
+    $userId = $row['user_id'];
+
+    $getCartCount = mysqli_query($conn, "SELECT COUNT(user_id) FROM cart WHERE user_id = $userId");
+    $rowCount = mysqli_fetch_array($getCartCount);
+    $cartCount = $rowCount['COUNT(user_id)'];
+} else {
+    $cartCount = '0';
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -41,6 +54,7 @@ if(isset($_SESSION['userEmail'])) {
     <div id="preloader"></div>
 
     <?php include './includes/navbar.php';?>
+    <input type="hidden" name="" id="cartCount" value="<?php echo $cartCount; ?>">
 
     <!-- TOAST -->
     <div class="toast" id="toast">

@@ -1,4 +1,21 @@
-<?php session_start(); ?>
+<?php 
+session_start();
+require_once './includes/database_conn.php';
+
+if(isset($_SESSION['userEmail'])) {
+    $userEmail = $_SESSION['userEmail'];
+
+    $getUserId = mysqli_query($conn, "SELECT * FROM customers WHERE email = '$userEmail'");
+    $row = mysqli_fetch_array($getUserId);
+    $userId = $row['user_id'];
+
+    $getCartCount = mysqli_query($conn, "SELECT COUNT(user_id) FROM cart WHERE user_id = $userId");
+    $rowCount = mysqli_fetch_array($getCartCount);
+    $cartCount = $rowCount['COUNT(user_id)'];
+} else {
+    $cartCount = '0';
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,6 +46,7 @@
     <div id="preloader"></div>
 
     <?php include './includes/navbar.php'; ?>
+    <input type="hidden" name="" id="cartCount" value="<?php echo $cartCount; ?>">
 
     <!-- TOAST -->
     <div class="toast" id="toast">
@@ -51,20 +69,14 @@
             <h3>sign up</h3>
             <span>Username</span>
             <input type="text" name="reg-username" class="box" placeholder="enter your username" id="username"
-                value="<?php if (isset($_POST['username'])) {
-                                                                                                                            echo $_POST['username'];
-                                                                                                                        } ?>">
+                value="<?php if (isset($_POST['username'])) { echo $_POST['username']; } ?>">
             <input type="hidden" name="" id="error-username">
             <span>email</span>
-            <input type="email" name="reg-email" class="box" placeholder="enter your email" id="email" value="<?php if (isset($_POST['email'])) {
-                                                                                                                    echo $_POST['email'];
-                                                                                                                } ?>">
+            <input type="email" name="reg-email" class="box" placeholder="enter your email" id="email" value="<?php if (isset($_POST['email'])) { echo $_POST['email']; } ?>">
             <input type="hidden" name="" id="error-email">
             <span>password</span>
             <input type="password" name="reg-password" class="box" placeholder="enter your password" id="password"
-                value="<?php if (isset($_POST['password'])) {
-                                                                                                                                echo $_POST['password'];
-                                                                                                                            } ?>">
+                value="<?php if (isset($_POST['password'])) { echo $_POST['password']; } ?>">
             <input type="hidden" name="" id="error-password">
             <input type="submit" name="register" value="sign up" class="btn">
             <p>have an account? <a href="login">login now</a></p>

@@ -1,4 +1,8 @@
 <script>
     var cartCount = $('#cartCount').val();
-    $('.badge').text(cartCount);
+    if(cartCount == 0) {
+        $('.badge').hide();
+    } else {
+        $('.badge').text(cartCount);
+    }
 </script>
