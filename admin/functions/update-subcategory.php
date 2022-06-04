@@ -8,7 +8,7 @@ if ($_POST['update_category-list'] == "CATEGORY" && empty($_POST['update-subcate
 } else if (empty($_POST['update-subcategory'])) {
     echo 'empty subcategory';
 } else {
-    $category =  $_POST['update_category-list'];
+    $category = $_POST['update_category-list'];
     $subcategoryId = $_POST['update_subcategory_id'];
     $subcategoryTitle = ucwords($_POST['update-subcategory']);
 

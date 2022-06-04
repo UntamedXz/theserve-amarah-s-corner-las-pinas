@@ -585,7 +585,7 @@ if(isset($_SESSION['id'])) {
             }
 
             if($.trim(confirm_password).length == 0) {
-                $('.error-confirm_password').text('Input new password!');
+                $('.error-confirm_password').text('Input confirm password!');
             } else if($.trim(confirm_password).length < 6) {
                 $('.error-confirm_password').text('Password is too short!');
             } else {

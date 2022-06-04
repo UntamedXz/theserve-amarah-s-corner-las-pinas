@@ -1,5 +1,5 @@
 <?php 
-require_once '../includes/database_conn.php';
+require_once '../../includes/database_conn.php';
 
 if(!empty($_POST['delete_subcategory_id'])) {
     $deleteSubcategoryId = $_POST['delete_subcategory_id'];

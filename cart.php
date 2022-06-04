@@ -149,6 +149,7 @@ if(isset($_SESSION['id'])) {
 
     <section class="cart">
         <div class="wrapper">
+            <input type="hidden" name="user_id" id="user_id" value="<?php echo $userId; ?>">
             <h1>Shopping Cart</h1>
             <hr>
             <div class="project">
@@ -184,10 +185,10 @@ if(isset($_SESSION['id'])) {
                         <div class="content">
                             <h3><?php echo $row['product_title']; ?></h3>
                             <h5><?php echo $row['subcategory_title']; ?></h5>
-                            <h4>Price <strong>P<?php echo $row['product_price']; ?></strong></h4>
+                            <h4>Price <strong>P<span data-price="<?php echo $row['cart_id']; ?>"><?php echo $row['product_price']; ?></span> </strong></h4>
                             <div class="qty-remove">
-                                <p class="unit">Quantity: <input value="<?php echo $row['product_qty']; ?>"></p>
-                                <h4 class="subTotal">Subtotal <strong>P<?php echo $row['product_total']; ?></strong></h4>
+                                <p class="unit">Quantity: <input id="qty" min="1" class="qty" onkeypress='return event.charCode >= 48 && event.charCode <= 57' value="<?php echo $row['product_qty']; ?>" data-id="<?php echo $row['cart_id']; ?>"></p>
+                                <h4 class="subTotal">Subtotal <strong>P<span class="subtotal" data-sub_total="<?php echo $row['cart_id']; ?>"><?php echo $row['product_total']; ?></span> </strong></h4>
                             </div>
                             <p form="cart_item" class="btn-area" data-id="<?php echo $row['cart_id']; ?>">
                                     <i class='bx bxs-trash'></i>
@@ -225,6 +226,61 @@ if(isset($_SESSION['id'])) {
     </script>
 
     <script type="text/javascript">
+        // PREVENT TO TYPE 0 
+
+        // GET SUBTOTAL 
+        $('.qty').each(function() {
+            $(this).keyup(function() {
+                if($(this).val() == '' || $(this).val() == '0') {
+                    var user_id = $('#user_id').val();
+                    var id = $(this).data('id');
+                    var price = $('*[data-price= '+ id +']').text();
+                    var priceFloat = parseFloat(price).toFixed(2);
+                    var qty = 1;
+                    var subtotal = parseFloat((priceFloat * qty)).toFixed(2);
+                    $('*[data-sub_total= '+ id +']').text(subtotal);
+
+                    $.ajax({
+                        type: "POST",
+                        url: "./functions/update-cart",
+                        data: {
+                            'update': true,
+                            'price': priceFloat,
+                            'cart_id': id,
+                            'qty': qty,
+                            'subtotal': subtotal,
+                            'user_id': user_id,
+                        },
+                        success: function(response) {
+                        }
+                    })
+                } else {
+                    var user_id = $('#user_id').val();
+                    var id = $(this).data('id');
+                    var price = $('*[data-price= '+ id +']').text();
+                    var priceFloat = parseFloat(price).toFixed(2);
+                    var qty = parseInt($(this).val());
+                    var subtotal = parseFloat((priceFloat * qty)).toFixed(2);
+                    $('*[data-sub_total= '+ id +']').text(subtotal);
+
+                    $.ajax({
+                        type: "POST",
+                        url: "./functions/update-cart",
+                        data: {
+                            'update': true,
+                            'price': priceFloat,
+                            'cart_id': id,
+                            'qty': qty,
+                            'subtotal': subtotal,
+                            'user_id': user_id,
+                        },
+                        success: function(response) {
+                        }
+                    })
+                }
+            })
+        })
+
         // CLICK REMOVE
         $('.btn-area').on('click', function(e) {
             e.preventDefault();

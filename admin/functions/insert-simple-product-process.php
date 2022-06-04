@@ -1,5 +1,5 @@
 <?php
-require_once '../includes/database_conn.php';
+require_once '../../includes/database_conn.php';
 
 $productCategory = $_POST['category-list'];
 $productSubcategory = $_POST['subcategory-list'];

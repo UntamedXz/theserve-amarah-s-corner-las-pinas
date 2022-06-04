@@ -1,5 +1,5 @@
 <?php 
-require_once '../includes/database_conn.php';
+require_once '../../includes/database_conn.php';
 
 if(!empty($_POST['delete_category_id'])) {
     $deleteCategoryId = $_POST['delete_category_id'];
@@ -16,6 +16,6 @@ if(!empty($_POST['delete_category_id'])) {
 
     if($deleteCategory) {
         echo 'deleted';
-        unlink('../assets/images/' . $categoryImg);
+        unlink('../../assets/images/' . $categoryImg);
     }
 }

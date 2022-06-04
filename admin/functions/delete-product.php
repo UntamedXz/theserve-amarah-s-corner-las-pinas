@@ -1,5 +1,5 @@
 <?php
-require_once '../includes/database_conn.php';
+require_once '../../includes/database_conn.php';
 
 if (!empty($_POST['delete_product_id'])) {
     $deleteProductId = $_POST['delete_product_id'];
@@ -17,7 +17,7 @@ if (!empty($_POST['delete_product_id'])) {
 
         if ($deleteProduct) {
             echo 'deleted';
-            unlink('../assets/images/' . $productImg);
+            unlink('../../assets/images/' . $productImg);
         }
     } else {
         $deleteProduct = mysqli_query($conn, "DELETE FROM product WHERE product_id = $deleteProductId");

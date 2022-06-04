@@ -21,6 +21,8 @@ require_once '../includes/database_conn.php';
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.min.js"></script>
 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;500;600;700;800&family=Poppins:wght@200;300;400;500;600;700&display=swap">
+
     <link rel="stylesheet" href="../assets/css/admin.css">
 
     <style>
@@ -227,91 +229,6 @@ require_once '../includes/database_conn.php';
 
         <section class="insert-product">
             <div class="insert-product-wrapper">
-                <!-- <div class="panel-wrapper">
-                    <div class="left-panel">
-                        <div class="form-group">
-                            <span>Product Title</span>
-                            <input type="text" name="" id="">
-                        </div>
-                        <div class="form-group">
-                            <span>Product Url</span>
-                            <input type="text" name="" id="">
-                        </div>
-                        <div class="tab-wrapper">
-                            <span>Product Tabs</span>
-                            <div class="tabs">
-                                <div class="btn-tabs">
-                                    <button id="btn1" onclick="openVariant()">Product Variant</button>
-                                    <button onclick="openAttribute()" id="btn2">Product Attributes</button>
-                                </div>
-                                <div class="tab-cont">
-                                    <div class="tab-container">
-                                        <div id="product-variant" class="tab-content">
-                                            <table id="attrTbl">
-                                                <thead>
-                                                    <tr style="background: none;">
-                                                        <th>
-                                                            <span style="color: #ffaf08; font-size: 16px;">Variant Options:</span>
-                                                        </th>
-                                                    </tr>
-                                                </thead>
-                                            </table>
-                                        </div>
-                                        <div id="product-attribute" class="tab-content">
-                                            <select name="" id="test1">
-                                                <option value="testoption1">testoption1</option>
-                                                <option value="testoption2">testoption2</option>
-                                            </select>
-                                            <select name="" id="test2">
-                                                <option value="test2option1">test2option1</option>
-                                                <option value="test2option2">test2option2</option>
-                                            </select>
-                                            <button class="add-variation" id="add" type="submit">ADD VARIATION</button>
-                                            <table id="dynamic_field">
-                                                
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="right-panel">
-                        <div class="form-group">
-                            <span>Select a Product Category</span>
-                            <select name="" id="">
-                                <option value="">TEST</option>
-                                <option value="">TEST</option>
-                                <option value="">TEST</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <span>Select a Product Subcategory</span>
-                            <select name="" id="">
-                                <option value="">TEST</option>
-                                <option value="">TEST</option>
-                                <option value="">TEST</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <span>Product Image 1</span>
-                            <input type="file" name="" id="">
-                        </div>
-                        <div class="form-group">
-                            <span>Product Image 2</span>
-                            <input type="file" name="" id="">
-                        </div>
-                        <div class="form-group">
-                            <span>Product Image 3</span>
-                            <input type="file" name="" id="">
-                        </div>
-                        <div class="form-group">
-                            <span>Product Keyword</span>
-                            <input type="text" name="" id="">
-                        </div>
-                    </div>
-                </div>
-                <button type="submit">INSERT</button> -->
 
                 <div class="product-container">
                     <h1>Product Details</h1>
@@ -403,7 +320,7 @@ require_once '../includes/database_conn.php';
                 $("#category-list").change(function() {
                     var category_id = $(this).val();
                     $.ajax({
-                        url: "get-subcategory",
+                        url: "./functions/get-subcategory",
                         type: "POST",
                         data: {
                             category_id: category_id
@@ -498,7 +415,7 @@ require_once '../includes/database_conn.php';
                         }, 5000);
                     } else {
                         $.ajax({
-                            url: "insert-simple-product-process",
+                            url: "./functions/insert-simple-product-process",
                             type: "POST",
                             data: new FormData(this),
                             dataType: 'text',
@@ -599,7 +516,7 @@ require_once '../includes/database_conn.php';
                 ],
                 "iDisplayLength": 5,
                 "ajax": {
-                    url: "category-table",
+                    url: "./functions/category-table",
                     type: "post"
                 }
             });
@@ -707,7 +624,7 @@ require_once '../includes/database_conn.php';
                     e.preventDefault();
                     $.ajax({
                         type: "POST",
-                        url: "insert-category",
+                        url: "./functions/insert-category",
                         data: new FormData(this),
                         dataType: 'text',
                         contentType: false,
@@ -810,7 +727,7 @@ require_once '../includes/database_conn.php';
                     e.preventDefault();
                     $.ajax({
                         type: "POST",
-                        url: "delete-category",
+                        url: "./functions/delete-category",
                         data: new FormData(this),
                         dataType: 'text',
                         contentType: false,

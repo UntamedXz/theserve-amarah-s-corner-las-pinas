@@ -1,5 +1,5 @@
 <?php
-require_once '../includes/database_conn.php';
+require_once '../../includes/database_conn.php';
 
 if(empty($_POST['insert_category_title']) && $_FILES['insert_category_thumbnail']['error'] === 4) {
     echo 'empty fields';
@@ -31,7 +31,7 @@ if(empty($_POST['insert_category_title']) && $_FILES['insert_category_thumbnail'
         } else {
             $newThumbnailName = uniqid() . '.' . $imgExt;
 
-            move_uploaded_file($categoryThumbnailTmpName, '../assets/images/' . $newThumbnailName);
+            move_uploaded_file($categoryThumbnailTmpName, '../../assets/images/' . $newThumbnailName);
 
             $insertCategory = mysqli_query($conn, "INSERT INTO category VALUES ('', '$categoryTitle', '$newThumbnailName')");
 

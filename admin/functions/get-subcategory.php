@@ -1,5 +1,5 @@
 <?php
-require_once '../includes/database_conn.php';
+require_once '../../includes/database_conn.php';
 
 if (isset($_POST['category_id'])) {
     $categoryId = $_POST['category_id'];

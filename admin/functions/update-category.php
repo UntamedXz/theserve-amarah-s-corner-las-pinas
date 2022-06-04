@@ -1,5 +1,5 @@
 <?php
-require_once '../includes/database_conn.php';
+require_once '../../includes/database_conn.php';
 
 // echo '<pre>';
 // print_r($_FILES);
@@ -71,8 +71,8 @@ if (!empty($_POST['update_category_title']) && $_FILES['update_category_thumbnai
 
                 $newCategoryThumbnailName = uniqid() . '.' .$thumbnailExt;
 
-                move_uploaded_file($categoryThumbnailTmpName, '../assets/images/' . $newCategoryThumbnailName);
-                unlink('../assets/images/' . $oldCategoryThumbnail);
+                move_uploaded_file($categoryThumbnailTmpName, '../../assets/images/' . $newCategoryThumbnailName);
+                unlink('../../assets/images/' . $oldCategoryThumbnail);
 
                 $updateCategory = mysqli_query($conn, "UPDATE category SET category_title = '$categoryTitle', categoty_thumbnail = '$newCategoryThumbnailName' WHERE category_id = $categoryId");
 
@@ -87,8 +87,8 @@ if (!empty($_POST['update_category_title']) && $_FILES['update_category_thumbnai
 
             $newCategoryThumbnailName = uniqid() . '.' . $thumbnailExt;
 
-            move_uploaded_file($categoryThumbnailTmpName, '../assets/images/' . $newCategoryThumbnailName);
-            unlink('../assets/images/' . $oldCategoryThumbnail);
+            move_uploaded_file($categoryThumbnailTmpName, '../../assets/images/' . $newCategoryThumbnailName);
+            unlink('../../assets/images/' . $oldCategoryThumbnail);
 
             $updateCategory = mysqli_query($conn, "UPDATE category SET category_title = '$categoryTitle', categoty_thumbnail = '$newCategoryThumbnailName' WHERE category_id = $categoryId");
 

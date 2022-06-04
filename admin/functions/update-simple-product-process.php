@@ -1,5 +1,5 @@
 <?php
-require_once '../includes/database_conn.php';
+require_once '../../includes/database_conn.php';
 
 $productId = $_POST['product_id'];
 $productCategory = $_POST['category-list'];
@@ -51,8 +51,8 @@ if ($_FILES['product_image1']['error'] === 0) {
 
             $newImageName = uniqid() . '.' . $imgExt;
 
-            move_uploaded_file($productImage1TmpName, '../assets/images/' . $newImageName);
-            unlink('../assets/images/' . $productOldImage);
+            move_uploaded_file($productImage1TmpName, '../../assets/images/' . $newImageName);
+            unlink('../../assets/images/' . $productOldImage);
 
             $updateProduct = mysqli_query($conn, "UPDATE product SET category_id = '$productCategory', subcategory_id = '$productSubcategory', product_title = '$productTitle', product_slug = '$productUrl', product_img1 = '$newImageName', product_keyword = '$productKeyword', product_price = '$productPrice', product_sale = '$productSalePrice' WHERE product_id = $productId");
 
@@ -66,8 +66,8 @@ if ($_FILES['product_image1']['error'] === 0) {
 
         $newImageName = uniqid() . '.' . $imgExt;
 
-        move_uploaded_file($productImage1TmpName, '../assets/images/' . $newImageName);
-        unlink('../assets/images/' . $productOldImage);
+        move_uploaded_file($productImage1TmpName, '../../assets/images/' . $newImageName);
+        unlink('../../assets/images/' . $productOldImage);
 
         $updateProduct = mysqli_query($conn, "UPDATE product SET category_id = '$productCategory', subcategory_id = '$productSubcategory', product_title = '$productTitle', product_slug = '$productUrl', product_img1 = '$newImageName', product_keyword = '$productKeyword', product_price = '$productPrice', product_sale = '$productSalePrice' WHERE product_id = $productId");
 

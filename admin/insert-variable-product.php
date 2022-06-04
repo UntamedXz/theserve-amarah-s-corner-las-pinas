@@ -18,77 +18,81 @@ require_once '../includes/database_conn.php';
 
     <!-- datatable lib -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.0/css/jquery.dataTables.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.min.js"></script>
+
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;500;600;700;800&family=Poppins:wght@200;300;400;500;600;700&display=swap">
 
     <link rel="stylesheet" href="../assets/css/admin.css">
 
     <style>
-        .dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody::-webkit-scrollbar {
-            width: 0px;
-        }
+    .dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody::-webkit-scrollbar {
+        width: 0px;
+    }
 
-        .dataTables_wrapper .dataTables_info {
-            color: #936500 !important;
-        }
+    .dataTables_wrapper .dataTables_info {
+        color: #936500 !important;
+    }
 
-        .dataTables_filter {
-            margin-bottom: 10px;
-        }
+    .dataTables_filter {
+        margin-bottom: 10px;
+    }
 
-        .dataTables_filter label {
-            color: #ffaf08;
-        }
+    .dataTables_filter label {
+        color: #ffaf08;
+    }
 
-        .dataTables_wrapper .dataTables_filter input {
-            border: 1px solid #ffaf08;
-            color: #ffaf08;
-        }
+    .dataTables_wrapper .dataTables_filter input {
+        border: 1px solid #ffaf08;
+        color: #ffaf08;
+    }
 
-        table.dataTable thead {
-            border-radius: 5px !important;
-        }
+    table.dataTable thead {
+        border-radius: 5px !important;
+    }
 
-        table.dataTable thead tr {
-            background-color: #ffaf08;
-            color: #070506;
-            white-space: nowrap;
-        }
+    table.dataTable thead tr {
+        background-color: #ffaf08;
+        color: #070506;
+        white-space: nowrap;
+    }
 
-        .dataTables_wrapper .dataTables_paginate .paginate_button {
-            padding: 5px 10px;
-            background-color: #ffaf08 !important;
-            color: #070506 !important;
-        }
+    .dataTables_wrapper .dataTables_paginate .paginate_button {
+        padding: 5px 10px;
+        background-color: #ffaf08 !important;
+        color: #070506 !important;
+    }
 
-        .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
-            background: #070506 !important;
-            border-color: #ffaf08;
-            color: #ffaf08 !important;
-        }
+    .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+        background: #070506 !important;
+        border-color: #ffaf08;
+        color: #ffaf08 !important;
+    }
 
-        .dataTables_wrapper .dataTables_paginate .paginate_button.disabled {
-            background-color: #936500 !important;
-            color: #070506 !important;
-        }
+    .dataTables_wrapper .dataTables_paginate .paginate_button.disabled {
+        background-color: #936500 !important;
+        color: #070506 !important;
+    }
 
-        .dataTables_wrapper .dataTables_length select {
-            color: #ffaf08 !important;
-            border-color: #936500;
-            background: #070506 !important;
-        }
+    .dataTables_wrapper .dataTables_length select {
+        color: #ffaf08 !important;
+        border-color: #936500;
+        background: #070506 !important;
+    }
 
-        .dataTables_wrapper .dataTables_length label {
-            color: #936500 !important;
-        }
+    .dataTables_wrapper .dataTables_length label {
+        color: #936500 !important;
+    }
 
-        table thead tr th:first-child {
-            border-top-left-radius: 5px !important;
-        }
+    table thead tr th:first-child {
+        border-top-left-radius: 5px !important;
+    }
 
-        table thead tr th:last-child {
-            border-top-right-radius: 5px !important;
-        }
+    table thead tr th:last-child {
+        border-top-right-radius: 5px !important;
+    }
     </style>
     <title>Admin Panel</title>
 </head>
@@ -141,7 +145,8 @@ require_once '../includes/database_conn.php';
         <hr>
         <form enctype="multipart/form-data">
             <h5>Category: <span style="color: #ffaf08; padding-left: 5px;" id="category_title_view"></span></h5>
-            <h5>Category Thumbnail: <br> <img id="category_thumbnail_view" style="width: 150px; margin-top: 5px;" src=""></h5>
+            <h5>Category Thumbnail: <br> <img id="category_thumbnail_view" style="width: 150px; margin-top: 5px;"
+                    src=""></h5>
         </form>
         <hr>
         <div class="bottom">
@@ -169,11 +174,13 @@ require_once '../includes/database_conn.php';
             </div>
             <div class="form-group">
                 <span>Category Image Name:</span>
-                <input style="background-color: #3b3b3b; color: #949494;" type="text" class="file" name="category_thumbnailDB" id="category_thumbnailDB" readonly>
+                <input style="background-color: #3b3b3b; color: #949494;" type="text" class="file"
+                    name="category_thumbnailDB" id="category_thumbnailDB" readonly>
             </div>
             <div class="form-group">
                 <span>Select Category Image</span>
-                <input type="file" accept=".jpg, .jpeg, .png" class="file" name="update_category_thumbnail" id="update_category_thumbnail">
+                <input type="file" accept=".jpg, .jpeg, .png" class="file" name="update_category_thumbnail"
+                    id="update_category_thumbnail">
             </div>
         </form>
         <hr>
@@ -200,19 +207,21 @@ require_once '../includes/database_conn.php';
             </div>
             <div class="form-group">
                 <span>Select Category Image</span>
-                <input type="file" accept=".jpg, .jpeg, .png" class="file" name="insert_category_thumbnail" id="insert_category_thumbnail">
+                <input type="file" accept=".jpg, .jpeg, .png" class="file" name="insert_category_thumbnail"
+                    id="insert_category_thumbnail">
             </div>
         </form>
         <hr>
         <div class="bottom">
             <div class="buttons">
                 <button id="modalClose" type="button" class="cancel">CANCEL</button>
-                <button form="insert-category" type="submit" id="insert_category_btn" name="insert_category_btn" class="save">INSERT</button>
+                <button form="insert-category" type="submit" id="insert_category_btn" name="insert_category_btn"
+                    class="save">INSERT</button>
             </div>
         </div>
     </div>
 
-    <?php include 'top.php'; ?>
+    <?php include 'top.php';?>
 
     <!-- MAIN -->
     <main>
@@ -226,518 +235,223 @@ require_once '../includes/database_conn.php';
         </ul>
         <section class="insert-product">
             <div class="insert-product-wrapper">
-                <!-- <div class="panel-wrapper">
-                    <div class="left-panel">
-                        <div class="form-group">
+                <div class="form_container_variable">
+                    <span class="product_tab">Product Tab</span>
+                    <div class="tabs">
+                        <button id="details_btn">PRODUCT DETAILS</button>
+                        <button id="variant_btn">PRODUCT VARIANT</button>
+                        <button id="variations_btn">PRODUCT VARIATIONS</button>
+                    </div>
+                    <form action="" id="details_tab">
+                        <div class="form_group">
+                            <span>Product Category</span>
+                            <select name="category-list" id="category-list">
+                                <option selected="selected" value="SELECT CATEGORY">SELECT CATEGORY</option>
+                                <?php
+$fetchCategory = mysqli_query($conn, "SELECT * FROM category");
+
+foreach ($fetchCategory as $categoryRow) {
+    ?>
+                                <option value="<?php echo $categoryRow['category_id']; ?>">
+                                    <?php echo $categoryRow['category_title']; ?></option>
+                                <?php
+}
+?>
+                            </select>
+                            <span class="error error-category"></span>
+                        </div>
+                        <div class="form_group subcategory-group">
+                            <span>Product Subcategory</span>
+                            <select name="subcategory-list" id="subcategory-list">
+                                <option selected="selected" value="SELECT SUBCATEGORY">SELECT SUBCATEGORY</option>
+                            </select>
+                            <span class="error error-subcategory"></span>
+                        </div>
+                        <div class="form_group">
                             <span>Product Title</span>
-                            <input type="text" name="" id="">
+                            <input type="text" name="product_title" id="simpleProduct-title">
+                            <span class="error error-title"></span>
                         </div>
-                        <div class="form-group">
+                        <div class="form_group">
                             <span>Product Url</span>
-                            <input type="text" name="" id="">
+                            <input type="text" name="product_url" id="simpleProduct-url" readonly>
+                            <span class="error error-url"></span>
                         </div>
-                        <div class="tab-wrapper">
-                            <span>Product Tabs</span>
-                            <div class="tabs">
-                                <div class="btn-tabs">
-                                    <button id="btn1" onclick="openVariant()">Product Variant</button>
-                                    <button onclick="openAttribute()" id="btn2">Product Attributes</button>
-                                </div>
-                                <div class="tab-cont">
-                                    <div class="tab-container">
-                                        <div id="product-variant" class="tab-content">
-                                            <table id="attrTbl">
-                                                <thead>
-                                                    <tr style="background: none;">
-                                                        <th>
-                                                            <span style="color: #ffaf08; font-size: 16px;">Variant Options:</span>
-                                                        </th>
-                                                    </tr>
-                                                </thead>
-                                            </table>
-                                        </div>
-                                        <div id="product-attribute" class="tab-content">
-                                            <select name="" id="test1">
-                                                <option value="testoption1">testoption1</option>
-                                                <option value="testoption2">testoption2</option>
-                                            </select>
-                                            <select name="" id="test2">
-                                                <option value="test2option1">test2option1</option>
-                                                <option value="test2option2">test2option2</option>
-                                            </select>
-                                            <button class="add-variation" id="add" type="submit">ADD VARIATION</button>
-                                            <table id="dynamic_field">
-                                                
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
+                        <div class="form_group">
+                            <span>Product Price</span>
+                            <input type="text" name="product_price" id="simpleProduct-price">
+                            <span class="error error-price"></span>
+                        </div>
+                        <div class="form_group">
+                            <span>Product Sale Price</span>
+                            <input type="text" name="product_salePrice" id="simpleProduct-salePrice">
+                            <span class="error error-salePrice"></span>
+                        </div>
+                        <div class="form_group">
+                            <span>Product Image 1</span>
+                            <input type="file" accept=".jpg, .jpeg, .png" name="product_image1"
+                                id="simpleProduct-image1">
+                            <span class="error error-image"></span>
+                        </div>
+                        <div class="form_group">
+                            <span>Image Preview</span>
+                            <img id="file" style="width: 100px;" src="">
+                        </div>
+                        <div class="form_group">
+                            <span>Product Keyword</span>
+                            <input type="text" name="product_keyword" id="simpleProduct-keyword">
+                            <span class="error error-keyword"></span>
+                        </div>
+                        <button type="submit" id="details_insert">NEXT</button>
+                    </form>
+
+                    <form action="" id="variant_tab">
+                        <div class="form_group">
+                            <span>Select Variant</span>
+                            <div class="variant">
+                                <select name="" id="variant_list">
+                                    <?php
+$get_variant = mysqli_query($conn, "SELECT * FROM product_variant");
+
+foreach ($get_variant as $row_variant) {
+    ?>
+                                    <option value="<?php echo $row_variant['variant_id']; ?>">
+                                        <?php echo $row_variant['variant_title']; ?></option>
+                                    <?php
+}
+?>
+                                </select>
+                                <button id="add_variant">ADD</button>
                             </div>
                         </div>
-                    </div>
-                    <div class="right-panel">
-                        <div class="form-group">
-                            <span>Select a Product Category</span>
-                            <select name="" id="">
-                                <option value="">TEST</option>
-                                <option value="">TEST</option>
-                                <option value="">TEST</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <span>Select a Product Subcategory</span>
-                            <select name="" id="">
-                                <option value="">TEST</option>
-                                <option value="">TEST</option>
-                                <option value="">TEST</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <span>Product Image 1</span>
-                            <input type="file" name="" id="">
-                        </div>
-                        <div class="form-group">
-                            <span>Product Image 2</span>
-                            <input type="file" name="" id="">
-                        </div>
-                        <div class="form-group">
-                            <span>Product Image 3</span>
-                            <input type="file" name="" id="">
-                        </div>
-                        <div class="form-group">
-                            <span>Product Keyword</span>
-                            <input type="text" name="" id="">
-                        </div>
-                    </div>
-                </div>
-                <button type="submit">INSERT</button> -->
+                        <hr>
+                        <?php
+$get_variant_field = mysqli_query($conn, "SELECT * FROM product_variant");
 
-                <div class="product-container">
-                    <h1>Product Details</h1>
-                    <hr>
-                    <div class="form-group">
-                        <span>Product Category</span>
-                        <select name="" id="">
-                            <option value="">Pizza</option>
-                            <option value="">Pasta</option>
-                            <option value="">Milktea</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <span>Product Subcategory</span>
-                        <select name="" id="">
-                            <option value="">Classic Flavor</option>
-                            <option value="">Special Flavor</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <span>Product Title</span>
-                        <input type="text" name="" id="">
-                    </div>
-                    <div class="form-group">
-                        <span>Product Url</span>
-                        <input type="text" name="" id="">
-                    </div>
-                    <div class="form-group">
-                        <span>Product Price</span>
-                        <input type="text" name="" id="">
-                    </div>
-                    <div class="form-group">
-                        <span>Product Sale Price</span>
-                        <input type="text" name="" id="">
-                    </div>
-                    <div class="form-group">
-                        <span>Product Image 1</span>
-                        <input type="file" name="" id="">
-                    </div>
-                    <div class="form-group">
-                        <span>Product Image 2</span>
-                        <input type="file" name="" id="">
-                    </div>
-                    <div class="form-group">
-                        <span>Product Image 3</span>
-                        <input type="file" name="" id="">
-                    </div>
-                    <button type="submit">NEXT</button>
+foreach ($get_variant_field as $row_variant_field) {
+    ?>
+                        <div class="group_form_group" data-group_form_group="<?php echo $row_variant_field['variant_id']; ?>">
+                            <div class="form_group left">
+                                <span>Name: </span>
+                                <span><?php echo $row_variant_field['variant_title']; ?></span>
+                            </div>
+                            <div class="form_group right">
+                                <span>Value(s): </span>
+                                <input type="text" name="" id="" placeholder="Insert attributes separated by comma" class="attribute" data-attribute="<?php echo $row_variant_field['variant_id']; ?>">
+                            </div>
+                            <div class="form_group btn_variant">
+                                <button data-remove="<?php echo $row_variant_field['variant_id']; ?>" id="remove_variant" class="remove_variant"><i class="fa-solid fa-trash"></i></button>
+                            </div>
+                        </div>
+                        <?php
+}
+?>
+<hr>
+<button type="submit" id="variant_insert">NEXT</button>
+                    </form>
                 </div>
             </div>
         </section>
 
-        <!-- <script>
-            function tabsHeight() {
-                var childHeight = $('.insert-product-wrapper').height();
-                $('.insert-product').css({
-                    'height': childHeight
-                });
-            }
-
-            tabsHeight();
-        </script> -->
-
         <script>
-            // TABS
-            var variant = document.getElementById("product-variant");
-            var attribute = document.getElementById("product-attribute");
-            var general = document.getElementById("product-general");
-            var btn1 = document.getElementById("btn1");
-            var btn2 = document.getElementById("btn2");
-            var btn3 = document.getElementById("btn3");
-
-            function openVariant() {
-                variant.style.opacity = '1';
-                variant.style.pointerEvents = 'visible';
-                attribute.style.opacity = '0';
-                attribute.style.pointerEvents = 'none';
-                btn1.style.color = '#fff';
-                btn2.style.color = '#ffaf08';
+        // DATA TABLES
+        var dataTable = $('#example').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "paging": true,
+            "pagingType": "simple",
+            "scrollX": true,
+            "sScrollXInner": "100%",
+            "aLengthMenu": [
+                [5, 10, 15, 100],
+                [5, 10, 15, 100]
+            ],
+            "iDisplayLength": 5,
+            "ajax": {
+                url: "./functions/category-table",
+                type: "post"
             }
+        });
 
-            function openAttribute() {
-                variant.style.opacity = '0';
-                variant.style.pointerEvents = 'none';
-                attribute.style.opacity = '1';
-                attribute.style.pointerEvents = 'visible';
-                btn1.style.color = '#ffaf08';
-                btn2.style.color = '#fff';
+        var dataTables = $('#attrTbl').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "pagingType": "simple",
+            "scrollX": true,
+            "sScrollXInner": "100%",
+            "paging": false,
+            "ordering": false,
+            "info": false,
+            scrollY: "165px",
+            "ajax": {
+                url: "./functions/product-attributes-table",
+                type: "post"
             }
+        });
         </script>
 
         <script>
-            // DATA TABLES
-            var dataTable = $('#example').DataTable({
-                "processing": true,
-                "serverSide": true,
-                "paging": true,
-                "pagingType": "simple",
-                "scrollX": true,
-                "sScrollXInner": "100%",
-                "aLengthMenu": [
-                    [5, 10, 15, 100],
-                    [5, 10, 15, 100]
-                ],
-                "iDisplayLength": 5,
-                "ajax": {
-                    url: "category-table",
-                    type: "post"
-                }
-            });
-
-            var dataTables = $('#attrTbl').DataTable({
-                "processing": true,
-                "serverSide": true,
-                "pagingType": "simple",
-                "scrollX": true,
-                "sScrollXInner": "100%",
-                "paging": false,
-                "ordering": false,
-                "info": false,
-                scrollY: "165px",
-                "ajax": {
-                    url: "product-attributes-table",
-                    type: "post"
-                }
-            });
-        </script>
-
-        <script>
-            //  GET VIEW
-            $(document).on('click', '#getView', function(e) {
-                e.preventDefault();
-                var category_id_view = $(this).data('id');
+        // CATEGORY | SUBCATEGORY AJAX
+        $(document).ready(function() {
+            $("#category-list").change(function() {
+                var category_id = $(this).val();
                 $.ajax({
-                    url: 'processing',
-                    type: 'POST',
-                    data: 'category_id_view=' + category_id_view,
-                    success: function(res) {
-                        var obj = JSON.parse(res);
-                        $(".view-modal").addClass("active");
-                        $("#category_title_view").text(obj.category_title);
-                        $("#category_thumbnail_view").attr("src", "../assets/images/" + obj
-                            .category_thumbnail);
+                    url: "./functions/get-subcategory",
+                    type: "POST",
+                    data: {
+                        category_id: category_id
+                    },
+                    success: function(data) {
+                        if (data === 'empty') {
+                            $('.subcategory-group').hide();
+                        } else {
+                            $('.subcategory-group').show();
+                            $('#subcategory-list').html(data);
+                        }
                     }
                 })
             });
+        });
 
-            // GET EDIT
-            $(document).on('click', '#getEdit', function(e) {
-                e.preventDefault();
-                var category_id_edit = $(this).data('id');
-                $.ajax({
-                    url: 'processing',
-                    type: 'POST',
-                    data: 'category_id_edit=' + category_id_edit,
-                    success: function(res) {
-                        var obj = JSON.parse(res);
-                        $(".edit-modal").addClass("active");
-                        $("#update_category_id").val(obj.category_id);
-                        $("#update_category_title").val(obj.category_title);
-                        $("#category_thumbnailDB").val(obj.category_thumbnail);
-                        $("#update_category_thumbnail").attr("src", "../assets/images/" + obj
-                            .category_thumbnail);
-                    }
-                })
-            });
+        $(window).on('load', function() {
+            $('#variant_tab').css("display", "none");
+        })
 
-            // GET INSERT
-            $(document).on('click', '#getInsert', function(e) {
-                e.preventDefault();
-                $('.insert-modal').addClass('active');
-            });
+        // TAB
+        $('#details_insert').on('click', function(e) {
+            e.preventDefault();
+            $('#details_btn').css("background-color", "#070506");
+            $('#details_btn').css("color", "#ffaf08");
+            $('#variant_btn').css("background-color", "#ffaf08");
+            $('#variant_btn').css("color", "#070506");
+            $('#details_tab').css("display", "none");
+            $('#variant_tab').css("display", "flex");
+        })
 
-            // GET DELETE
-            $(document).on('click', '#getDelete', function(e) {
-                e.preventDefault();
-                $('.delete-modal').addClass('active');
-                var category_id_edit = $(this).data('id');
-                $("#delete_category_id").val(category_id_edit);
-            });
+        $('#add_variant').on('click', function(e) {
+            e.preventDefault();
+            var selected_variant = $('#variant_list').find(":selected").val();
+            var group_form_group =  $('*[data-group_form_group= '+ selected_variant +']');
 
-            // CLOSE MODAL
-            $(document).on('click', '#modalClose', function() {
-                $('.edit-modal').removeClass("active");
-                $('.view-modal').removeClass("active");
-                $('.insert-modal').removeClass("active");
-                $(".delete-modal").removeClass("active");
-                $("#edit-category")[0].reset();
-                $("#insert-category")[0].reset();
-            })
-        </script>
+            group_form_group.css("display", "flex");
+        })
 
-        <script>
-            // SUBMIT EDIT
-            $(document).ready(function() {
-                $("#edit-category").on('submit', function(e) {
-                    e.preventDefault();
-                    $.ajax({
-                        type: "POST",
-                        url: "update-category",
-                        data: new FormData(this),
-                        dataType: 'text',
-                        contentType: false,
-                        cache: false,
-                        processData: false,
-                        success: function(response) {
-                            if (response === 'category is empty') {
-                                $('#toast').addClass('active');
-                                $('.progress').addClass('active');
-                                // $('#toast-icon').removeClass('fa-solid fa-triangle-exclamation').addClass('fa-solid fa-circle-exclamation');
-                                $('.text-1').text('Error!');
-                                $('.text-2').text('Category title field is empty!');
-                                setTimeout(() => {
-                                    $('#toast').removeClass("active");
-                                    $('.progress').removeClass("active");
-                                }, 5000);
-                            }
+        $('.remove_variant').each(function() {
+            $(this).on('click', function(e) {
+            e.preventDefault();
+            var id = $(this).data('remove');
+            var group_form_group =  $('*[data-group_form_group= '+ id +']');
+            var attribute =  $('*[data-attribute= '+ id +']');
 
-                            if (response === 'category title already exist') {
-                                $('#toast').addClass('active');
-                                $('.progress').addClass('active');
-                                $('.text-1').text('Error!');
-                                $('.text-2').text('Category title already exist!');
-                                setTimeout(() => {
-                                    $('#toast').removeClass("active");
-                                    $('.progress').removeClass("active");
-                                }, 5000);
-                            }
+            group_form_group.css("display", "none");
+            attribute.val('');
 
-                            if (response === 'title updated') {
-                                $('.edit-modal').removeClass("active");
-                                $('#toast').addClass('active');
-                                $('.progress').addClass('active');
-                                $('#toast-icon').removeClass(
-                                    'fa-solid fa-triangle-exclamation').addClass(
-                                    'fa-solid fa-check warning');
-                                $('.text-1').text('Success!');
-                                $('.text-2').text('Category title updated successfully!');
-                                setTimeout(() => {
-                                    $('#toast').removeClass("active");
-                                    $('.progress').removeClass("active");
-                                }, 5000);
-                                $('#example').DataTable().ajax.reload();
-                            }
-
-                            if (response === 'invalid file') {
-                                $('#toast').addClass('active');
-                                $('.progress').addClass('active');
-                                $('.text-1').text('Error!');
-                                $('.text-2').text('File not supported!');
-                                setTimeout(() => {
-                                    $('#toast').removeClass("active");
-                                    $('.progress').removeClass("active");
-                                }, 5000);
-                                $('#example').DataTable().ajax.reload();
-                            }
-                            if (response === 'invalid file') {
-                                $('#toast').addClass('active');
-                                $('.progress').addClass('active');
-                                $('.text-1').text('Error!');
-                                $('.text-2').text('File is too large!');
-                                setTimeout(() => {
-                                    $('#toast').removeClass("active");
-                                    $('.progress').removeClass("active");
-                                }, 5000);
-                                $('#example').DataTable().ajax.reload();
-                            }
-
-                            if (response === 'updated successfully') {
-                                $('.edit-modal').removeClass("active");
-                                $('#toast').addClass('active');
-                                $('.progress').addClass('active');
-                                $('#toast-icon').removeClass(
-                                    'fa-solid fa-triangle-exclamation').addClass(
-                                    'fa-solid fa-check warning');
-                                $('.text-1').text('Success!');
-                                $('.text-2').text(
-                                    'Category title and thumbnail updated successfully!'
-                                );
-                                setTimeout(() => {
-                                    $('#toast').removeClass("active");
-                                    $('.progress').removeClass("active");
-                                }, 5000);
-                                $('#example').DataTable().ajax.reload();
-                            }
-                        }
-                    })
-                })
-
-                // SUBMIT INSERT
-                $('#insert-category').on('submit', function(e) {
-                    e.preventDefault();
-                    $.ajax({
-                        type: "POST",
-                        url: "insert-category",
-                        data: new FormData(this),
-                        dataType: 'text',
-                        contentType: false,
-                        cache: false,
-                        processData: false,
-                        success: function(response) {
-                            if (response === 'empty fields') {
-                                $('#toast').addClass('active');
-                                $('.progress').addClass('active');
-                                // $('#toast-icon').removeClass('fa-solid fa-triangle-exclamation').addClass('fa-solid fa-circle-exclamation');
-                                $('.text-1').text('Error!');
-                                $('.text-2').text('All fields are required!');
-                                setTimeout(() => {
-                                    $('#toast').removeClass("active");
-                                    $('.progress').removeClass("active");
-                                }, 5000);
-                            }
-
-                            if (response === 'empty category title') {
-                                $('#toast').addClass('active');
-                                $('.progress').addClass('active');
-                                // $('#toast-icon').removeClass('fa-solid fa-triangle-exclamation').addClass('fa-solid fa-circle-exclamation');
-                                $('.text-1').text('Error!');
-                                $('.text-2').text('Category title is empty!');
-                                setTimeout(() => {
-                                    $('#toast').removeClass("active");
-                                    $('.progress').removeClass("active");
-                                }, 5000);
-                            }
-
-                            if (response === 'empty thumbnail') {
-                                $('#toast').addClass('active');
-                                $('.progress').addClass('active');
-                                // $('#toast-icon').removeClass('fa-solid fa-triangle-exclamation').addClass('fa-solid fa-circle-exclamation');
-                                $('.text-1').text('Error!');
-                                $('.text-2').text('Category thumbnail is empty!');
-                                setTimeout(() => {
-                                    $('#toast').removeClass("active");
-                                    $('.progress').removeClass("active");
-                                }, 5000);
-                            }
-
-                            if (response === 'file not supported') {
-                                $('#toast').addClass('active');
-                                $('.progress').addClass('active');
-                                // $('#toast-icon').removeClass('fa-solid fa-triangle-exclamation').addClass('fa-solid fa-circle-exclamation');
-                                $('.text-1').text('Error!');
-                                $('.text-2').text('File is not supported!');
-                                setTimeout(() => {
-                                    $('#toast').removeClass("active");
-                                    $('.progress').removeClass("active");
-                                }, 5000);
-                            }
-
-                            if (response === 'file too large') {
-                                $('#toast').addClass('active');
-                                $('.progress').addClass('active');
-                                // $('#toast-icon').removeClass('fa-solid fa-triangle-exclamation').addClass('fa-solid fa-circle-exclamation');
-                                $('.text-1').text('Error!');
-                                $('.text-2').text('File is too large!');
-                                setTimeout(() => {
-                                    $('#toast').removeClass("active");
-                                    $('.progress').removeClass("active");
-                                }, 5000);
-                            }
-
-                            if (response === 'title already exist') {
-                                $('#toast').addClass('active');
-                                $('.progress').addClass('active');
-                                // $('#toast-icon').removeClass('fa-solid fa-triangle-exclamation').addClass('fa-solid fa-circle-exclamation');
-                                $('.text-1').text('Error!');
-                                $('.text-2').text('Category title already exists!');
-                                setTimeout(() => {
-                                    $('#toast').removeClass("active");
-                                    $('.progress').removeClass("active");
-                                }, 5000);
-                            }
-
-                            if (response === 'successful') {
-                                $('.insert-modal').removeClass("active");
-                                $('#toast').addClass('active');
-                                $('.progress').addClass('active');
-                                $('#toast-icon').removeClass(
-                                    'fa-solid fa-triangle-exclamation').addClass(
-                                    'fa-solid fa-check warning');
-                                $('.text-1').text('Success!');
-                                $('.text-2').text('Category successfully added!!');
-                                setTimeout(() => {
-                                    $('#toast').removeClass("active");
-                                    $('.progress').removeClass("active");
-                                }, 5000);
-                                $('#example').DataTable().ajax.reload();
-                            }
-                        }
-                    })
-                })
-
-                // SUBMIT DELETE
-                $("#delete_category").on('submit', function(e) {
-                    e.preventDefault();
-                    $.ajax({
-                        type: "POST",
-                        url: "delete-category",
-                        data: new FormData(this),
-                        dataType: 'text',
-                        contentType: false,
-                        cache: false,
-                        processData: false,
-                        success: function(response) {
-                            if (response === 'deleted') {
-                                $('.delete-modal').removeClass("active");
-                                $('#toast').addClass('active');
-                                $('.progress').addClass('active');
-                                $('#toast-icon').removeClass(
-                                    'fa-solid fa-triangle-exclamation').addClass(
-                                    'fa-solid fa-check warning');
-                                $('.text-1').text('Success!');
-                                $('.text-2').text('Category deleted successfully!');
-                                setTimeout(() => {
-                                    $('#toast').removeClass("active");
-                                    $('.progress').removeClass("active");
-                                }, 5000);
-                                $('#example').DataTable().ajax.reload();
-                            }
-                        }
-                    })
-                })
-            });
+        })
+        })
         </script>
 
 
-        <?php include 'bottom.php' ?>
+        <?php include 'bottom.php'?>
 
 </body>
 

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;500;600;700;800&family=Poppins:wght@200;300;400;500;600;700&display=swap">
     <link rel="stylesheet" href="../assets/css/admin.css">
     <title>Login - Admin Panel</title>
 
@@ -122,7 +123,7 @@
 
     <!-- LOGIN FORM -->
     <div class="login-form-container">
-        <form action="./processing" method="POST">
+        <form action="./functions/processing" method="POST">
             <a href="#" class="logo"><img src="../assets/images/official_logo.png" alt=""></a>
             <h3>sign in</h3>
             <span>email</span>

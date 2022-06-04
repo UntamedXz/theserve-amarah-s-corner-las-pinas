@@ -1,5 +1,5 @@
 <?php
-require_once '../includes/database_conn.php';
+require_once '../../includes/database_conn.php';
 
 if(empty($_POST['insert_variant_title'])) {
     echo 'empty field';

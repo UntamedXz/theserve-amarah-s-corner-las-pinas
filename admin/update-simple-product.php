@@ -3,7 +3,7 @@ session_start();
 if (!isset($_SESSION['adminloggedin']) && $_SESSION['adminloggedin'] == false) {
     header("Location: ./login");
 }
-require_once '../includes/database_conn.php';
+require_once '../../includes/database_conn.php';
 
 $id = $_GET['id'];
 $decode_id = base64_decode(urldecode($id));
@@ -38,6 +38,8 @@ while ($result = mysqli_fetch_assoc($getSimpleProduct)) {
     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.0/css/jquery.dataTables.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.min.js"></script>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;500;600;700;800&family=Poppins:wght@200;300;400;500;600;700&display=swap">
 
     <link rel="stylesheet" href="../assets/css/admin.css">
 
@@ -126,7 +128,7 @@ while ($result = mysqli_fetch_assoc($getSimpleProduct)) {
         <div class="progress"></div>
     </div>
 
-    <?php include 'top.php'; ?>
+    <?php include 'top.php';?>
 
     <!-- MAIN -->
     <main>
@@ -155,51 +157,51 @@ while ($result = mysqli_fetch_assoc($getSimpleProduct)) {
                             <select name="category-list" id="category-list">
                                 <option selected="selected" value="SELECT CATEGORY">SELECT CATEGORY</option>
                                 <?php
-                                $fetchCategory = mysqli_query($conn, "SELECT * FROM category");
+$fetchCategory = mysqli_query($conn, "SELECT * FROM category");
 
-                                foreach ($fetchCategory as $categoryRow) {
-                                    $isSelected = '';
-                                    if ($result_array['category_id'] == $categoryRow['category_id']) {
-                                        $isSelected = "selected";
-                                    }
-                                ?>
+foreach ($fetchCategory as $categoryRow) {
+    $isSelected = '';
+    if ($result_array['category_id'] == $categoryRow['category_id']) {
+        $isSelected = "selected";
+    }
+    ?>
 
                                     <option value="<?php echo $categoryRow['category_id']; ?>" <?php echo $isSelected; ?>><?php echo $categoryRow['category_title']; ?></option>
                                 <?php
-                                }
-                                ?>
+}
+?>
                             </select>
                             <span class="error error-category"></span>
                         </div>
                         <?php
-                        $categoryId = $result_array['category_id'];
-                        $getSubcategory = mysqli_query($conn, "SELECT * FROM subcategory WHERE category_id = '$categoryId'");
+$categoryId = $result_array['category_id'];
+$getSubcategory = mysqli_query($conn, "SELECT * FROM subcategory WHERE category_id = '$categoryId'");
 
-                        if (mysqli_num_rows($getSubcategory) > 0) {
-                        ?>
+if (mysqli_num_rows($getSubcategory) > 0) {
+    ?>
                             <div class="form-group subcategory-group">
                                 <span>Product Subcategory</span>
                                 <select name="subcategory-list" id="subcategory-list">
                                     <option selected="selected" value="SELECT SUBCATEGORY">SELECT SUBCATEGORY</option>
                                     <?php
-                                    $getSubcategoryOptions = mysqli_query($conn, "SELECT * FROM subcategory WHERE category_id = '$categoryId'");
+$getSubcategoryOptions = mysqli_query($conn, "SELECT * FROM subcategory WHERE category_id = '$categoryId'");
 
-                                    foreach ($getSubcategoryOptions as $subcategoryOptions) {
-                                        $isSelected = '';
-                                        if ($result_array['subcategory_id'] == $subcategoryOptions['subcategory_id']) {
-                                            $isSelected = "selected";
-                                        }
-                                    ?>
+    foreach ($getSubcategoryOptions as $subcategoryOptions) {
+        $isSelected = '';
+        if ($result_array['subcategory_id'] == $subcategoryOptions['subcategory_id']) {
+            $isSelected = "selected";
+        }
+        ?>
                                         <option value="<?php echo $subcategoryOptions['subcategory_id']; ?>" <?php echo $isSelected; ?>><?php echo $subcategoryOptions['subcategory_title']; ?></option>
                                     <?php
-                                    }
-                                    ?>
+}
+    ?>
                                 </select>
                                 <span class="error error-subcategory"></span>
                             </div>
                         <?php
-                        }
-                        ?>
+}
+?>
                         <div class="form-group">
                             <span>Product Title</span>
                             <input type="text" name="product_title" id="simpleProduct-title" value="<?php echo $result_array['product_title']; ?>">
@@ -268,7 +270,7 @@ while ($result = mysqli_fetch_assoc($getSimpleProduct)) {
                 $("#category-list").change(function() {
                     var category_id = $(this).val();
                     $.ajax({
-                        url: "get-subcategory",
+                        url: "./functions/get-subcategory",
                         type: "POST",
                         data: {
                             category_id: category_id
@@ -358,7 +360,7 @@ while ($result = mysqli_fetch_assoc($getSimpleProduct)) {
                         }, 5000);
                     } else {
                         $.ajax({
-                            url: "update-simple-product-process",
+                            url: "./functions/update-simple-product-process",
                             type: "POST",
                             data: new FormData(this),
                             dataType: 'text',
@@ -419,7 +421,7 @@ while ($result = mysqli_fetch_assoc($getSimpleProduct)) {
             });
         </script>
 
-        <?php include 'bottom.php' ?>
+        <?php include 'bottom.php'?>
 
 </body>
 

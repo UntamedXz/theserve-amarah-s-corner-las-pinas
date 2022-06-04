@@ -2024,7 +2024,10 @@ footer .footer-wrapper .copyright span {
   color: #ffaf08;
   border-color: #ffaf08;
 }
-.account .account-wrapper .first-row .img-cont .form-group {
+.account .account-wrapper .first-row .img-cont #update_img {
+  width: 100%;
+}
+.account .account-wrapper .first-row .img-cont #update_img .form-group {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -2032,7 +2035,7 @@ footer .footer-wrapper .copyright span {
   flex-wrap: wrap;
   gap: 10px;
 }
-.account .account-wrapper .first-row .img-cont .form-group input {
+.account .account-wrapper .first-row .img-cont #update_img .form-group input {
   background-color: #fff;
   height: 30px;
   line-height: 30px;

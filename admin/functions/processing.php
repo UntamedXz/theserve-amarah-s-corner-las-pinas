@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../includes/database_conn.php';
+require_once '../../includes/database_conn.php';
 
 // LOGIN
 if (isset($_POST['login'])) {
@@ -37,7 +37,7 @@ if (isset($_POST['login'])) {
                 }
                 $_SESSION['adminloggedin'] = true;
                 $_SESSION['adminEmail'] = $email;
-                header("Location: ./index");
+                header("Location: ../index");
             } else {
                 $_SESSION['status'] = "wrong password";
                 $_SESSION['admin_email'] = $_POST['email'];

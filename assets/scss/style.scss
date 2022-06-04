@@ -2224,22 +2224,25 @@ footer {
           }
         }
 
-        .form-group {
+        #update_img {
           width: 100%;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          flex-wrap: wrap;
-          gap: 10px;
-
-          input {
-            background-color: #fff;
-            height: 30px;
-            line-height: 30px;
-            padding: 0 5px;
-            border: none;
-            outline: none;
-            border-radius: 5px;
+          .form-group {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+  
+            input {
+              background-color: #fff;
+              height: 30px;
+              line-height: 30px;
+              padding: 0 5px;
+              border: none;
+              outline: none;
+              border-radius: 5px;
+            }
           }
         }
       }

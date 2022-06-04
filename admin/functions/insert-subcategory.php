@@ -1,5 +1,5 @@
 <?php
-require_once '../includes/database_conn.php';
+require_once '../../includes/database_conn.php';
 
 if($_POST['category-list'] == "CATEGORY" && empty($_POST['insert-subcategory'])) {
     echo 'empty field';

@@ -21,6 +21,8 @@ require_once '../includes/database_conn.php';
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.min.js"></script>
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;500;600;700;800&family=Poppins:wght@200;300;400;500;600;700&display=swap">
 
     <link rel="stylesheet" href="../assets/css/admin.css">
 
@@ -265,7 +267,7 @@ require_once '../includes/database_conn.php';
                 ],
                 "iDisplayLength": 5,
                 "ajax": {
-                    url: "category-table",
+                    url: "./functions/category-table",
                     type: "post"
                 }
             });
@@ -308,7 +310,7 @@ require_once '../includes/database_conn.php';
                 e.preventDefault();
                 var category_id_edit = $(this).data('id');
                 $.ajax({
-                    url: 'processing',
+                    url: './functions/processing',
                     type: 'POST',
                     data: 'category_id_edit=' + category_id_edit,
                     success: function (res) {
@@ -354,7 +356,7 @@ require_once '../includes/database_conn.php';
                     e.preventDefault();
                     $.ajax({
                         type: "POST",
-                        url: "update-category",
+                        url: "./functions/update-category",
                         data: new FormData(this),
                         dataType: 'text',
                         contentType: false,
@@ -456,7 +458,7 @@ require_once '../includes/database_conn.php';
                     e.preventDefault();
                     $.ajax({
                         type: "POST",
-                        url: "insert-category",
+                        url: "./functions/insert-category",
                         data: new FormData(this),
                         dataType: 'text',
                         contentType: false,
@@ -554,7 +556,7 @@ require_once '../includes/database_conn.php';
                     e.preventDefault();
                     $.ajax({
                         type: "POST",
-                        url: "delete-category",
+                        url: "./functions/delete-category",
                         data: new FormData(this),
                         dataType: 'text',
                         contentType: false,
