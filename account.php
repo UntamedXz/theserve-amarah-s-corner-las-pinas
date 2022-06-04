@@ -14,7 +14,7 @@ while($row = mysqli_fetch_array($getAccountInfo)) {
     $userProfileIcon = $row['user_profile_image'];
 }
 
-if(isset($_SESSION['userEmail'])) {
+if(isset($_SESSION['id'])) {
     $user_id = $_SESSION['id'];
 
     $getAccountInfo = mysqli_query($conn, "SELECT * FROM customers WHERE user_id = '$user_id'");
@@ -36,6 +36,7 @@ if(isset($_SESSION['userEmail'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -70,6 +71,20 @@ if(isset($_SESSION['userEmail'])) {
             }
         })
     </script>
+
+    <!-- TOAST -->
+    <div class="toast" id="toast">
+        <div class="toast-content" id="toast-content">
+            <i id="toast-icon" class="fa-solid fa-triangle-exclamation warning"></i>
+
+            <div class="message">
+                <span class="text text-1" id="text-1"></span>
+                <span class="text text-2" id="text-2"></span>
+            </div>
+        </div>
+        <i class="fa-solid fa-xmark close"></i>
+        <div class="progress"></div>
+    </div>
     
     <?php 
     $getProfileInfo = mysqli_query($conn, "SELECT * FROM customers WHERE user_id = $userId");
@@ -181,7 +196,6 @@ if(isset($_SESSION['userEmail'])) {
                         </div>
                         <button type="submit">UPDATE</button>
                     </form>
-
                     <form id="contact">
                         <h1 class="profile-details">CONTACT</h1>
                         <hr>
@@ -200,17 +214,21 @@ if(isset($_SESSION['userEmail'])) {
                     <form id="password">
                         <h1 class="profile-details">PASSWORD</h1>
                         <hr>
+                        <input type="hidden" name="password_id" id="" value="<?php echo $userId ?>">
                         <div class="form-group">
                             <span>Old Password</span>
-                            <input type="text" name="" id="old_password" placeholder="Input old password">
+                            <input type="password" name="old_password" id="old_password" placeholder="Input old password">
+                            <span style="color: #dc3545; font-size: 12px;" class="error-old_password"></span>
                         </div>
                         <div class="form-group">
                             <span>New Password</span>
-                            <input type="text" name="" id="new_password">
+                            <input type="password" name="new_password" id="new_password" placeholder="Input new password">
+                            <span style="color: #dc3545; font-size: 12px;" class="error-new_password"></span>
                         </div>
                         <div class="form-group">
                             <span>Confirm Password</span>
-                            <input type="text" name="" id="confirm_password">
+                            <input type="password" name="confirm_password" id="confirm_password" placeholder="Input confirm password">
+                            <span style="color: #dc3545; font-size: 12px;" class="error-confirm_password"></span>
                         </div>
                         <button type="submit">UPDATE</button>
                     </form>
@@ -218,6 +236,185 @@ if(isset($_SESSION['userEmail'])) {
             </div>
         </div>
     </section>
+
+    <!-- FOR PROFILE VALIDATION -->
+    <?php
+    if(isset($_SESSION['profile'])) {
+        $alert = $_SESSION['profile'];
+        if($alert == 'success') {
+            echo "
+            <script>
+                $('.tab-content #profile_details').css('display', 'flex');
+                $('.tab-content #profile_details').addClass('active');
+                $('.tab-content #contact').removeClass('active');
+                $('.tab-content #password').removeClass('active');
+                $('#toast').addClass('active');
+                $('.progress').addClass('active');
+                $('#toast-icon').removeClass('fa-solid fa-triangle-exclamation').addClass('fa-solid fa-check warning');
+                $('.text-1').text('Success!');
+                $('.text-2').text('Profile updated successfully!');
+    
+                setTimeout(() => {
+                $('#toast').removeClass('active');
+                $('.progress').removeClass('active');
+                }, 5000);
+                </script>
+            ";
+            unset($_SESSION['profile']);
+        } else if($alert == 'failed') {
+            echo "
+            <script>
+                $('.tab-content #profile_details').css('display', 'flex');
+                $('.tab-content #profile_details').addClass('active');
+                $('.tab-content #contact').removeClass('active');
+                $('.tab-content #password').removeClass('active');
+                $('#toast').addClass('active');
+                $('.progress').addClass('active');
+                $('.text-1').text('Error!');
+                $('.text-2').text('Email already used!');
+                setTimeout(() => {
+                $('#toast').removeClass('active');
+                $('.progress').removeClass('active');
+                }, 5000);
+                </script>
+            ";
+            unset($_SESSION['profile']);
+        } else {
+            echo "
+            <script>
+                $('.tab-content #profile_details').css('display', 'flex');
+                $('.tab-content #profile_details').addClass('active');
+                $('.tab-content #contact').removeClass('active');
+                $('.tab-content #password').removeClass('active');
+                $('#toast').addClass('active');
+                $('.progress').addClass('active');
+                $('.text-1').text('Error!');
+                $('.text-2').text('Something went wrong!');
+                setTimeout(() => {
+                $('#toast').removeClass('active');
+                $('.progress').removeClass('active');
+                }, 5000);
+                </script>
+            ";
+            unset($_SESSION['profile']);
+        }
+    } else {
+        $alert = '';
+    }
+    ?>
+
+    <!-- FOR CONTACT VALIDATION -->
+    <?php
+    if(isset($_SESSION['contact'])) {
+        $alert = $_SESSION['contact'];
+        if($alert == 'success') {
+            echo "
+            <script>
+                $('.tab-content #profile_details').css('display', 'none');
+                $('.tab-content #profile_details').removeClass('active');
+                $('.tab-content #contact').addClass('active');
+                $('.tab-content #password').removeClass('active');
+                $('#toast').addClass('active');
+                $('.progress').addClass('active');
+                $('#toast-icon').removeClass('fa-solid fa-triangle-exclamation').addClass('fa-solid fa-check warning');
+                $('.text-1').text('Success!');
+                $('.text-2').text('Contact updated successfully!');
+    
+                setTimeout(() => {
+                $('#toast').removeClass('active');
+                $('.progress').removeClass('active');
+                }, 5000);
+                </script>
+            ";
+            unset($_SESSION['contact']);
+        } else if($alert == 'failed') {
+            echo "
+            <script>
+                $('.tab-content #profile_details').css('display', 'none');
+                $('.tab-content #profile_details').removeClass('active');
+                $('.tab-content #contact').addClass('active');
+                $('.tab-content #password').removeClass('active');
+                $('#toast').addClass('active');
+                $('.progress').addClass('active');
+                $('.text-1').text('Error!');
+                $('.text-2').text('Email already used!');
+                setTimeout(() => {
+                $('#toast').removeClass('active');
+                $('.progress').removeClass('active');
+                }, 5000);
+                </script>
+            ";
+            unset($_SESSION['contact']);
+        } else {
+            echo "
+            <script>
+                $('.tab-content #profile_details').css('display', 'none');
+                $('.tab-content #profile_details').removeClass('active');
+                $('.tab-content #contact').addClass('active');
+                $('.tab-content #password').removeClass('active');
+                $('#toast').addClass('active');
+                $('.progress').addClass('active');
+                $('.text-1').text('Error!');
+                $('.text-2').text('Something went wrong!');
+                setTimeout(() => {
+                $('#toast').removeClass('active');
+                $('.progress').removeClass('active');
+                }, 5000);
+                </script>
+            ";
+            unset($_SESSION['contact']);
+        }
+    } else {
+        $alert = '';
+    }
+    ?>
+
+<?php
+    if(isset($_SESSION['password'])) {
+        $alert = $_SESSION['password'];
+        if($alert == 'success') {
+            echo "
+            <script>
+                $('.tab-content #profile_details').css('display', 'none');
+                $('.tab-content #profile_details').removeClass('active');
+                $('.tab-content #contact').removeClass('active');
+                $('.tab-content #password').addClass('active');
+                $('#toast').addClass('active');
+                $('.progress').addClass('active');
+                $('#toast-icon').removeClass('fa-solid fa-triangle-exclamation').addClass('fa-solid fa-check warning');
+                $('.text-1').text('Success!');
+                $('.text-2').text('Password updated successfully!');
+    
+                setTimeout(() => {
+                $('#toast').removeClass('active');
+                $('.progress').removeClass('active');
+                }, 5000);
+                </script>
+            ";
+            unset($_SESSION['password']);
+        } else {
+            echo "
+            <script>
+                $('.tab-content #profile_details').css('display', 'none');
+                $('.tab-content #profile_details').removeClass('active');
+                $('.tab-content #contact').addClass('active');
+                $('.tab-content #password').removeClass('active');
+                $('#toast').addClass('active');
+                $('.progress').addClass('active');
+                $('.text-1').text('Error!');
+                $('.text-2').text('Something went wrong!');
+                setTimeout(() => {
+                $('#toast').removeClass('active');
+                $('.progress').removeClass('active');
+                }, 5000);
+                </script>
+            ";
+            unset($_SESSION['password']);
+        }
+    } else {
+        $alert = '';
+    }
+    ?>
 
     <?php include './includes/cart-count.php' ?>
     <script>
@@ -227,12 +424,9 @@ if(isset($_SESSION['userEmail'])) {
             loader.style.display = "none";
         })
 
-        $(window).on('load', function() {
-            $('.tab-content #profile_details').addClass('active');
-        })
-
         $('#profile-btn').on('click', function(e) {
             e.preventDefault();
+            $('.tab-content #profile_details').css("display", "flex");
             $('.tab-content #profile_details').addClass('active');
             $('.tab-content #contact').removeClass('active');
             $('.tab-content #password').removeClass('active');
@@ -240,6 +434,7 @@ if(isset($_SESSION['userEmail'])) {
 
         $('#contact-btn').on('click', function(e) {
             e.preventDefault();
+            $('.tab-content #profile_details').css("display", "none");
             $('.tab-content #profile_details').removeClass('active');
             $('.tab-content #contact').addClass('active');
             $('.tab-content #password').removeClass('active');
@@ -247,6 +442,7 @@ if(isset($_SESSION['userEmail'])) {
 
         $('#password-btn').on('click', function(e) {
             e.preventDefault();
+            $('.tab-content #profile_details').css("display", "none");
             $('.tab-content #profile_details').removeClass('active');
             $('.tab-content #contact').removeClass('active');
             $('.tab-content #password').addClass('active');
@@ -270,7 +466,7 @@ if(isset($_SESSION['userEmail'])) {
 
                     $.ajax({
                         type: "POST",
-                        url: "delete-profile-image",
+                        url: "./functions/delete-profile-image",
                         data: {
                             'delete': true,
                             'user_id': user_id,
@@ -304,7 +500,7 @@ if(isset($_SESSION['userEmail'])) {
                         $('.error-image').text('File too large!');
                     } else {
                         $.ajax({
-                            url: "update-profile-picture",
+                            url: "./functions/update-profile-picture",
                             type: "POST",
                             data: new FormData(this),
                             contentType: false,
@@ -328,7 +524,7 @@ if(isset($_SESSION['userEmail'])) {
             e.preventDefault()
 
             $.ajax({
-                url: "update-profile-details",
+                url: "./functions/update-profile-details",
                 type: "POST",
                 data: new FormData(this),
                 contentType: false,
@@ -349,7 +545,7 @@ if(isset($_SESSION['userEmail'])) {
             e.preventDefault()
 
             $.ajax({
-                url: "update-contact",
+                url: "./functions/update-contact",
                 type: "POST",
                 data: new FormData(this),
                 contentType: false,
@@ -358,11 +554,87 @@ if(isset($_SESSION['userEmail'])) {
                 success: function(response) {
                     if(response == 'success') {
                         location.reload();
-                    } else {
-                        alert(response);
+                    } else if(response == 'failed') {
+                        location.reload();
                     }
                 }
             })
+        })
+
+        // SUBMIT UPDATE PASSWORD
+        $('#password').on('submit', function(e) {
+            e.preventDefault();
+            var old_password = $('#old_password').val();
+            var new_password = $('#new_password').val();
+            var confirm_password = $('#confirm_password').val();
+
+            if($.trim(old_password).length == 0) {
+                $('.error-old_password').text('Input old password!');
+            } else if($.trim(old_password).length < 6) {
+                $('.error-old_password').text('Password is too short!');
+            } else {
+                $('.error-old_password').text('');
+            }
+
+            if($.trim(new_password).length == 0) {
+                $('.error-new_password').text('Input new password!');
+            } else if($.trim(new_password).length < 6) {
+                $('.error-new_password').text('Password is too short!');
+            } else {
+                $('.error-new_password').text('');
+            }
+
+            if($.trim(confirm_password).length == 0) {
+                $('.error-confirm_password').text('Input new password!');
+            } else if($.trim(confirm_password).length < 6) {
+                $('.error-confirm_password').text('Password is too short!');
+            } else {
+                $('.error-confirm_password').text('');
+            }
+
+            if($('.error-old_password').text() != '' || $('.error-new_password').text() != '' || $('.error-confirm_password').text() != '') {
+                $('#toast').addClass('active');
+                $('.progress').addClass('active');
+                $('.text-1').text('Error!');
+                $('.text-2').text('Fill all required fields!');
+                setTimeout(() => {
+                    $('#toast').removeClass("active");
+                    $('.progress').removeClass("active");
+                }, 5000);
+            } else {
+                $.ajax({
+                    type: "POST",
+                    url: "./functions/update-password",
+                    data: new FormData(this),
+                    dataType: 'text',
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    success: function(response) {
+                        if(response == 'wrong password') {
+                            $('#toast').addClass('active');
+                            $('.progress').addClass('active');
+                            $('.text-1').text('Error!');
+                            $('.text-2').text('Wrong password!');
+                            setTimeout(() => {
+                                $('#toast').removeClass("active");
+                                $('.progress').removeClass("active");
+                            }, 5000);
+                        } else if(response == 'password not matched!') {
+                            $('#toast').addClass('active');
+                            $('.progress').addClass('active');
+                            $('.text-1').text('Error!');
+                            $('.text-2').text('The password confirmation does not match!');
+                            setTimeout(() => {
+                                $('#toast').removeClass("active");
+                                $('.progress').removeClass("active");
+                            }, 5000);
+                        } else if(response == 'success') {
+                            location.reload();
+                        }
+                    }
+                })
+            }
         })
     </script>
 </body>

@@ -15,10 +15,9 @@ if(isset($_SESSION['id'])) {
 
     $getUserId = mysqli_query($conn, "SELECT * FROM customers WHERE user_id = $user_id");
     $row = mysqli_fetch_array($getUserId);
-    $userId = $row['user_id'];
     $userProfileIcon = $row['user_profile_image'];
 
-    $getCartCount = mysqli_query($conn, "SELECT COUNT(user_id) FROM cart WHERE user_id = $userId");
+    $getCartCount = mysqli_query($conn, "SELECT COUNT(user_id) FROM cart WHERE user_id = $user_id");
     $rowCount = mysqli_fetch_array($getCartCount);
     $cartCount = $rowCount['COUNT(user_id)'];
 } else {
@@ -35,9 +34,10 @@ if(isset($_SESSION['id'])) {
     <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.0/css/jquery.dataTables.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.min.js"></script>
     <title>Amarah's Corner - BF Resort Las Piñas</title>
 
     <style>
@@ -83,6 +83,30 @@ if(isset($_SESSION['id'])) {
         <div class="progress"></div>
     </div>
 
+    <?php
+    if(isset($_SESSION['alert'])) {
+        $alert = $_SESSION['alert'];
+        if($alert == 'success') {
+            echo "
+            <script>
+                $('#toast').addClass('active');
+                $('.progress').addClass('active');
+                $('#toast-icon').removeClass('fa-solid fa-triangle-exclamation').addClass('fa-solid fa-check warning');
+                $('.text-1').text('Success!');
+                $('.text-2').text('Item added to cart successfully!');
+                setTimeout(() => {
+                $('#toast').removeClass('active');
+                $('.progress').removeClass('active');
+                }, 5000);
+            </script>
+            ";
+            unset($_SESSION['alert']);
+        }
+    } else {
+        $alert = '';
+    }
+    ?>
+
     <!-- MENU SECTION -->
     <section class="menu" id="menu">
         <h3 class="title-header">Menu</h3>
@@ -122,7 +146,7 @@ if(isset($_SESSION['id'])) {
         <div class="product-details__wrapper">
             <div class="left">
                 <input type="hidden" name="" id="product_id" value="<?php echo $row['product_id']; ?>">
-                <input type="hidden" name="" id="userEmail" value="<?php echo $userEmail; ?>">
+                <input type="hidden" name="" id="user_id" value="<?php echo $user_id; ?>">
                 <?php
                 if (!empty($row['product_img1'])) {
                 ?>
@@ -222,27 +246,27 @@ if(isset($_SESSION['id'])) {
     <script>
         $('#addToCart').on('click', function (e) {
             e.preventDefault();
-            var userEmail = $('#userEmail').val();
+            var userId = $('#user_id').val();
             var product_id = $('#product_id').val();
             var qty = $('.number-spinner').val();
             var total = $('.totalPriceSpan').text();
 
-            if(userEmail == '') {
+            if(userId == '') {
                 location.href = 'http://localhost/theserve-amarah-s-corner-las-pinas/login';
             } else {
                 $.ajax ({
                     type: "POST",
-                    url: "add-to-cart",
+                    url: "./functions/add-to-cart",
                     data: {
                         'add-to-cart': true,
-                        'userEmail': userEmail,
+                        'userId': userId,
                         'product_id': product_id,
                         'qty': qty,
                         'total': total,
                     },
                     success: function (response) {
                         if (response == 'success') {
-                            location.href = 'http://localhost/theserve-amarah-s-corner-las-pinas/cart';
+                            location.reload();
                         }
                     }
                 })

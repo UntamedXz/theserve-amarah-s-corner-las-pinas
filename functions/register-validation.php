@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once './includes/database_conn.php';
+require_once '../includes/database_conn.php';
 
 // REGISTER
 $reg_username = mysqli_real_escape_string($conn, $_POST['reg-username']);

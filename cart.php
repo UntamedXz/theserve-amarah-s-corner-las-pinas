@@ -14,7 +14,7 @@ while($row = mysqli_fetch_array($getAccountInfo)) {
     $userProfileIcon = $row['user_profile_image'];
 }
 
-if(isset($_SESSION['userEmail'])) {
+if(isset($_SESSION['id'])) {
     $user_id = $_SESSION['id'];
 
     $getAccountInfo = mysqli_query($conn, "SELECT * FROM customers WHERE user_id = '$user_id'");
@@ -96,7 +96,7 @@ if(isset($_SESSION['userEmail'])) {
         </div>
         <hr>
         <form id="delete">
-            <input type="text" name="" id="cartId" value="">
+            <input type="hidden" name="" id="cartId" value="">
             <p>Are you sure, you want to delete this item?</p>
         </form>
         <hr>
@@ -122,6 +122,30 @@ if(isset($_SESSION['userEmail'])) {
         <i class="fa-solid fa-xmark close"></i>
         <div class="progress"></div>
     </div>
+
+    <?php
+    if(isset($_SESSION['alert'])) {
+        $alert = $_SESSION['alert'];
+        if($alert == 'success') {
+            echo "
+            <script>
+                $('#toast').addClass('active');
+                $('.progress').addClass('active');
+                $('#toast-icon').removeClass('fa-solid fa-triangle-exclamation').addClass('fa-solid fa-check warning');
+                $('.text-1').text('Success!');
+                $('.text-2').text('Cart item deleted successfully!');
+                setTimeout(() => {
+                $('#toast').removeClass('active');
+                $('.progress').removeClass('active');
+                }, 5000);
+            </script>
+            ";
+            unset($_SESSION['alert']);
+        }
+    } else {
+        $alert = '';
+    }
+    ?>
 
     <section class="cart">
         <div class="wrapper">
@@ -216,7 +240,7 @@ if(isset($_SESSION['userEmail'])) {
 
             $.ajax({
                 type: "POST",
-                url: "delete-cart-item",
+                url: "./functions/delete-cart-item",
                 data: {
                     'cart_id': cart_id,
                 },

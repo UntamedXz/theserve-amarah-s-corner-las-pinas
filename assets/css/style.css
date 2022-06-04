@@ -1826,6 +1826,9 @@ footer .footer-wrapper .copyright span {
   flex-direction: row;
   gap: 5px;
 }
+.product-footer .product-footer__wrapper .qty-container .qtyBtn {
+  cursor: pointer;
+}
 .product-footer .product-footer__wrapper .qty-container .prev {
   font-size: 20px;
   font-weight: 500;
@@ -1840,6 +1843,7 @@ footer .footer-wrapper .copyright span {
   border: 2px solid #ffaf08;
   outline: none;
   color: #070506;
+  cursor: pointer;
 }
 .product-footer .product-footer__wrapper .qty-container .prev.hide {
   opacity: 0;
@@ -1864,6 +1868,7 @@ footer .footer-wrapper .copyright span {
   border: 2px solid #ffaf08;
   outline: none;
   color: #070506;
+  cursor: pointer;
 }
 .product-footer .product-footer__wrapper .qty-container .next:hover {
   background-color: transparent;
@@ -2275,7 +2280,8 @@ footer .footer-wrapper .copyright span {
 }
 .account .account-wrapper .second-row .tab-content form .form-group input[type=text],
 .account .account-wrapper .second-row .tab-content form .form-group input[type=email],
-.account .account-wrapper .second-row .tab-content form .form-group input[type=tel] {
+.account .account-wrapper .second-row .tab-content form .form-group input[type=tel],
+.account .account-wrapper .second-row .tab-content form .form-group input[type=password] {
   height: 40px;
   width: 100%;
   border: none;
@@ -2326,7 +2332,7 @@ footer .footer-wrapper .copyright span {
   color: #070506;
 }
 .account .account-wrapper .second-row .tab-content #profile_details {
-  display: none;
+  display: flex;
 }
 .account .account-wrapper .second-row .tab-content #profile_details.active {
   display: flex;

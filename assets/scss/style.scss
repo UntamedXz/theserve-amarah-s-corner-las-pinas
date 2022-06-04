@@ -2011,6 +2011,10 @@ footer {
       flex-direction: row;
       gap: 5px;
 
+      .qtyBtn {
+        cursor: pointer;
+      }
+
       .prev {
         font-size: 20px;
         font-weight: 500;
@@ -2025,6 +2029,7 @@ footer {
         border: 2px solid #ffaf08;
         outline: none;
         color: #070506;
+        cursor: pointer;
 
         &.hide {
           opacity: 0;
@@ -2052,6 +2057,7 @@ footer {
         border: 2px solid #ffaf08;
         outline: none;
         color: #070506;
+        cursor: pointer;
 
         &:hover {
           background-color: transparent;
@@ -2493,7 +2499,8 @@ footer {
 
             input[type="text"],
             input[type="email"],
-            input[type="tel"] {
+            input[type="tel"],
+            input[type="password"] {
               height: 40px;
               width: 100%;
               border: none;
@@ -2553,7 +2560,7 @@ footer {
         }
 
         #profile_details {
-          display: none;
+          display: flex;
 
           &.active {
             display: flex;

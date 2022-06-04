@@ -1,5 +1,5 @@
 <?php 
-require_once './includes/database_conn.php';
+require_once '../includes/database_conn.php';
 
 $image = $_FILES['profile_pic']['name'];
 $image_tmp = $_FILES['profile_pic']['tmp_name'];
@@ -17,7 +17,7 @@ if($oldImgDatabase == '') {
     $imgExt = strtolower(end($imgExt));
 
     $newImageName = uniqid() . '.' . $imgExt;
-    move_uploaded_file($image_tmp, './assets/images/' . $newImageName);
+    move_uploaded_file($image_tmp, '../assets/images/' . $newImageName);
 
     $updateProfileImg = mysqli_query($conn, "UPDATE customers SET user_profile_image = '$newImageName' WHERE user_id = $userId");
 
@@ -29,8 +29,8 @@ if($oldImgDatabase == '') {
     $imgExt = strtolower(end($imgExt));
 
     $newImageName = uniqid() . '.' . $imgExt;
-    move_uploaded_file($image_tmp, './assets/images/' . $newImageName);
-    unlink('./assets/images/' . $oldImage);
+    move_uploaded_file($image_tmp, '../assets/images/' . $newImageName);
+    unlink('../assets/images/' . $oldImage);
 
     $updateProfileImg = mysqli_query($conn, "UPDATE customers SET user_profile_image = '$newImageName'");
 

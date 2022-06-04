@@ -160,7 +160,7 @@ if(isset($_SESSION['id'])) {
             } else {
                 $.ajax({
                     type: "POST",
-                    url: "register-validation",
+                    url: "./functions/register-validation",
                     data: new FormData(this),
                     contentType: false,
                     cache: false,

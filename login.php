@@ -144,7 +144,7 @@ if(isset($_SESSION['id'])) {
             } else {
                 $.ajax({
                     type: "POST",
-                    url: "login-validation",
+                    url: "./functions/login-validation",
                     data: new FormData(this),
                     contentType: false,
                     cache: false,
