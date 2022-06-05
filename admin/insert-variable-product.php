@@ -4,6 +4,14 @@ if (!isset($_SESSION['adminloggedin']) && $_SESSION['adminloggedin'] == false) {
     header("Location: ./login");
 }
 require_once '../includes/database_conn.php';
+
+if (isset($_SESSION['alert'])) {
+    $product_id = $_SESSION['product_id'];
+    $alert = $_SESSION['alert'];
+} else {
+    $alert = '';
+    $product_id = '0';
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -136,91 +144,6 @@ require_once '../includes/database_conn.php';
         </div>
     </div>
 
-    <!-- VIEW -->
-    <div id="popup-box" class="popup-box view-modal">
-        <div class="top">
-            <h3>Edit Category</h3>
-            <div id="modalClose" class="fa-solid fa-xmark"></div>
-        </div>
-        <hr>
-        <form enctype="multipart/form-data">
-            <h5>Category: <span style="color: #ffaf08; padding-left: 5px;" id="category_title_view"></span></h5>
-            <h5>Category Thumbnail: <br> <img id="category_thumbnail_view" style="width: 150px; margin-top: 5px;"
-                    src=""></h5>
-        </form>
-        <hr>
-        <div class="bottom">
-            <div class="buttons">
-                <button id="modalClose" type="button" class="cancel">CLOSE</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- UPDATE -->
-    <div id="popup-box" class="popup-box edit-modal">
-        <div class="top">
-            <h3>Edit Category</h3>
-            <div id="modalClose" class="fa-solid fa-xmark"></div>
-        </div>
-        <hr>
-        <form enctype="multipart/form-data" id="edit-category">
-            <div style="display: none;" class="form-group">
-                <span>Category ID</span>
-                <input type="text" id="update_category_id" name="update_category_id" value="">
-            </div>
-            <div class="form-group">
-                <span>Category Title</span>
-                <input type="text" id="update_category_title" name="update_category_title" value="">
-            </div>
-            <div class="form-group">
-                <span>Category Image Name:</span>
-                <input style="background-color: #3b3b3b; color: #949494;" type="text" class="file"
-                    name="category_thumbnailDB" id="category_thumbnailDB" readonly>
-            </div>
-            <div class="form-group">
-                <span>Select Category Image</span>
-                <input type="file" accept=".jpg, .jpeg, .png" class="file" name="update_category_thumbnail"
-                    id="update_category_thumbnail">
-            </div>
-        </form>
-        <hr>
-        <div class="bottom">
-            <div class="buttons">
-                <button id="modalClose" type="button" class="cancel">CANCEL</button>
-                <button form="edit-category" type="submit" id="update_category" name="update_category" class="save">SAVE
-                    CHANGES</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- INSERT -->
-    <div id="popup-box" class="popup-box insert-modal">
-        <div class="top">
-            <h3>INSERT Category</h3>
-            <div id="modalClose" class="fa-solid fa-xmark"></div>
-        </div>
-        <hr>
-        <form enctype="multipart/form-data" id="insert-category">
-            <div class="form-group">
-                <span>Category Title</span>
-                <input type="text" id="insert_category_title" name="insert_category_title" value="">
-            </div>
-            <div class="form-group">
-                <span>Select Category Image</span>
-                <input type="file" accept=".jpg, .jpeg, .png" class="file" name="insert_category_thumbnail"
-                    id="insert_category_thumbnail">
-            </div>
-        </form>
-        <hr>
-        <div class="bottom">
-            <div class="buttons">
-                <button id="modalClose" type="button" class="cancel">CANCEL</button>
-                <button form="insert-category" type="submit" id="insert_category_btn" name="insert_category_btn"
-                    class="save">INSERT</button>
-            </div>
-        </div>
-    </div>
-
     <?php include 'top.php';?>
 
     <!-- MAIN -->
@@ -242,25 +165,27 @@ require_once '../includes/database_conn.php';
                         <button id="variant_btn">PRODUCT VARIANT</button>
                         <button id="variations_btn">PRODUCT VARIATIONS</button>
                     </div>
-                    <form action="" id="details_tab">
+
+                    <!-- DETAILS TAB -->
+                    <form id="details_tab">
                         <div class="form_group">
                             <span>Product Category</span>
                             <select name="category-list" id="category-list">
                                 <option selected="selected" value="SELECT CATEGORY">SELECT CATEGORY</option>
                                 <?php
-$fetchCategory = mysqli_query($conn, "SELECT * FROM category");
+                                $fetchCategory = mysqli_query($conn, "SELECT * FROM category");
 
-foreach ($fetchCategory as $categoryRow) {
-    ?>
+                                foreach ($fetchCategory as $categoryRow) {
+                                ?>
                                 <option value="<?php echo $categoryRow['category_id']; ?>">
                                     <?php echo $categoryRow['category_title']; ?></option>
                                 <?php
-}
-?>
+                                }
+                                ?>
                             </select>
                             <span class="error error-category"></span>
                         </div>
-                        <div class="form_group subcategory-group">
+                        <div class="form_group subcategory-group" id="row_<?php echo $count; ?>">
                             <span>Product Subcategory</span>
                             <select name="subcategory-list" id="subcategory-list">
                                 <option selected="selected" value="SELECT SUBCATEGORY">SELECT SUBCATEGORY</option>
@@ -269,28 +194,27 @@ foreach ($fetchCategory as $categoryRow) {
                         </div>
                         <div class="form_group">
                             <span>Product Title</span>
-                            <input type="text" name="product_title" id="simpleProduct-title">
+                            <input type="text" name="product_title" id="product_title">
                             <span class="error error-title"></span>
                         </div>
                         <div class="form_group">
                             <span>Product Url</span>
-                            <input type="text" name="product_url" id="simpleProduct-url" readonly>
+                            <input type="text" name="product_url" id="product_url" readonly>
                             <span class="error error-url"></span>
                         </div>
                         <div class="form_group">
-                            <span>Product Price</span>
-                            <input type="text" name="product_price" id="simpleProduct-price">
+                            <span>Product Regular Price</span>
+                            <input type="text" name="product_price" id="product_price">
                             <span class="error error-price"></span>
                         </div>
                         <div class="form_group">
                             <span>Product Sale Price</span>
-                            <input type="text" name="product_salePrice" id="simpleProduct-salePrice">
-                            <span class="error error-salePrice"></span>
+                            <input type="text" name="product_salePrice" id="product_sale">
+                            <span class="error error-sale"></span>
                         </div>
                         <div class="form_group">
                             <span>Product Image 1</span>
-                            <input type="file" accept=".jpg, .jpeg, .png" name="product_image1"
-                                id="simpleProduct-image1">
+                            <input type="file" accept=".jpg, .jpeg, .png" name="product_image1" id="productimage1">
                             <span class="error error-image"></span>
                         </div>
                         <div class="form_group">
@@ -299,59 +223,133 @@ foreach ($fetchCategory as $categoryRow) {
                         </div>
                         <div class="form_group">
                             <span>Product Keyword</span>
-                            <input type="text" name="product_keyword" id="simpleProduct-keyword">
+                            <input type="text" name="product_keyword" id="product_keyword">
                             <span class="error error-keyword"></span>
                         </div>
                         <button type="submit" id="details_insert">NEXT</button>
                     </form>
 
-                    <form action="" id="variant_tab">
+                    <!-- VARIANT TAB -->
+                    <form id="variant_tab">
+                    <input type="text" name="product_id" id="" value="<?php echo $product_id; ?>">
+                        <h5>*Ignore if product don't have variations</h5>
+                        <div class="variant_group">
+                            <select name="variant_list" id="variant_list">
+                                <?php
+                                $get_variant = mysqli_query($conn, "SELECT * FROM product_variant");
+
+                                foreach ($get_variant as $variant_row) {
+                                ?>
+                                <option value="<?php echo $variant_row['variant_id'] ?>">
+                                    <?php echo $variant_row['variant_title'] ?></option>
+                                <?php
+                                }
+                                ?>
+                            </select>
+                            <button id="add_variant">ADD</button>
+                        </div>
+                        <div class="table">
+                            <input type="hidden" name="product_slug" id="product_slug">
+                            <table id="variant_attribute">
+                            </table>
+                        </div>
+                        <button id="submit_variant">NEXT</button>
+                    </form>
+
+                    <!-- VARIATIONS TAB -->
+                    <form id="variations_tab">
+                        <input type="hidden" name="product_id" id="" value="<?php echo $product_id; ?>">
                         <div class="form_group">
-                            <span>Select Variant</span>
-                            <div class="variant">
-                                <select name="" id="variant_list">
-                                    <?php
-$get_variant = mysqli_query($conn, "SELECT * FROM product_variant");
+                            <span>Attributes</span>
+                            
+                            <div class="select-wrapper">
+                                <?php
+                                $get_variant_product = mysqli_query($conn, "SELECT product_variant.variant_title, product_variant.variant_id FROM product_variant INNER JOIN product_attribute ON product_variant.variant_id = product_attribute.variant_id WHERE product_id = 193 GROUP BY product_variant.variant_title");
 
-foreach ($get_variant as $row_variant) {
-    ?>
-                                    <option value="<?php echo $row_variant['variant_id']; ?>">
-                                        <?php echo $row_variant['variant_title']; ?></option>
+                                foreach ($get_variant_product as $product_variant) {
+                                    $variant_id = $product_variant['variant_id'];
+                                ?>
+                                <span><?php echo $product_variant['variant_title']; ?></span>
+                                <select name="attribute[]" class="attribute" id="attribute" onchange="getSelectedItems()">
                                     <?php
-}
-?>
+                                    $get_product_attribute = mysqli_query($conn, "SELECT * FROM product_attribute WHERE product_id = 193 AND variant_id = $variant_id");
+
+                                    foreach ($get_product_attribute as $product_attribute) {
+                                    ?>
+                                    <option value="<?php echo $product_attribute['attribute_id']; ?>"><?php echo $product_attribute['attribute_title']; ?></option>
+                                    <?php
+                                    }
+                                    ?>
                                 </select>
-                                <button id="add_variant">ADD</button>
+                                <?php
+                                }
+                                ?>
+                                <button id="add_variations">ADD</button>
                             </div>
                         </div>
-                        <hr>
-                        <?php
-$get_variant_field = mysqli_query($conn, "SELECT * FROM product_variant");
 
-foreach ($get_variant_field as $row_variant_field) {
-    ?>
-                        <div class="group_form_group" data-group_form_group="<?php echo $row_variant_field['variant_id']; ?>">
-                            <div class="form_group left">
-                                <span>Name: </span>
-                                <span><?php echo $row_variant_field['variant_title']; ?></span>
-                            </div>
-                            <div class="form_group right">
-                                <span>Value(s): </span>
-                                <input type="text" name="" id="" placeholder="Insert attributes separated by comma" class="attribute" data-attribute="<?php echo $row_variant_field['variant_id']; ?>">
-                            </div>
-                            <div class="form_group btn_variant">
-                                <button data-remove="<?php echo $row_variant_field['variant_id']; ?>" id="remove_variant" class="remove_variant"><i class="fa-solid fa-trash"></i></button>
-                            </div>
-                        </div>
-                        <?php
-}
-?>
-<hr>
-<button type="submit" id="variant_insert">NEXT</button>
+                        <table id="variations_table">
+                            <tr>
+                                <td>
+                                    <div class="form_group">
+                                        <span>Variations</span>
+                                        <input type="text" name="variations" id="variations">
+                                    </div>
+                                    <div class="group_form_group_2">
+                                        <div class="form_group price">
+                                            <span>Additional Price</span>
+                                            <input type="text" name="" id="">
+                                        </div>
+                                        <div class="form_group select">
+                                            <span>In Stock</span>
+                                            <select name="" id="">
+                                                <option value="">SELECT STATUS</option>
+                                                <option value="YES">YES</option>
+                                                <option value="NO">NO</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        <input type="text" name="combi" id="showValue">
                     </form>
                 </div>
             </div>
         </section>
+
+        <?php
+        if ($alert == 'success') {
+            echo '
+                    <script>
+                        $("#details_btn").css("background-color", "#070506");
+                        $("#details_btn").css("color", "#ffaf08");
+                        $("#variant_btn").css("background-color", "#ffaf08");
+                        $("#variant_btn").css("color", "#070506");
+                        $("#details_tab").css("display", "none");
+                        $("#variant_tab").css("display", "flex");
+                        $("#variations_tab").css("display", "none");
+                        $("#product_slug").val($("#product_url").val());
+                    </script>
+                    ';
+            unset($_SESSION['alert']);
+        } else if ($alert == 'success_variant') {
+            echo '
+                    <script>
+                        $("#details_btn").css("background-color", "#070506");
+                        $("#details_btn").css("color", "#ffaf08");
+                        $("#variant_btn").css("background-color", "#070506");
+                        $("#variant_btn").css("color", "#ffaf08");
+                        $("#variations_btn").css("background-color", "#ffaf08");
+                        $("#variations_btn").css("color", "#070506");
+                        $("#details_tab").css("display", "none");
+                        $("#variant_tab").css("display", "none");
+                        $("#variations_tab").css("display", "flex");
+                    </script>
+                    ';
+            unset($_SESSION['alert']);
+        }
+        ?>
 
         <script>
         // DATA TABLES
@@ -413,43 +411,221 @@ foreach ($get_variant_field as $row_variant_field) {
             });
         });
 
-        $(window).on('load', function() {
-            $('#variant_tab').css("display", "none");
+        $('#product_title').keyup(function() {
+            var str = $(this).val();
+            var trims = $.trim(str)
+            var slug = trims.replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-').replace(/^|-$/g, '')
+            $('#product_url').val(slug.toLowerCase());
+            $('#product_keyword').val(str);
         })
 
-        // TAB
-        $('#details_insert').on('click', function(e) {
+        $('#details_tab').on('submit', function(e) {
             e.preventDefault();
-            $('#details_btn').css("background-color", "#070506");
-            $('#details_btn').css("color", "#ffaf08");
-            $('#variant_btn').css("background-color", "#ffaf08");
-            $('#variant_btn').css("color", "#070506");
-            $('#details_tab').css("display", "none");
-            $('#variant_tab').css("display", "flex");
-        })
+
+            if ($('#category-list').val() == 'SELECT CATEGORY') {
+                $('.error-category').text('Category required');
+            } else {
+                $('.error-category').text('');
+            }
+
+            if ($('.subcategory-group').css('display') == 'none') {
+                $('#subcategory-list').val('SELECT SUBCATEGORY')
+                $('.error-subcategory').text('');
+            } else {
+                if ($('#subcategory-list').val() == 'SELECT SUBCATEGORY') {
+                    $('.error-subcategory').text('Subcategory required');
+                } else {
+                    $('.error-subcategory').text('');
+                }
+            }
+            if ($.trim($('#product_title').val()).length == 0) {
+                $('.error-title').text('Product Title required');
+            } else {
+                $('.error-title').text('');
+            }
+            if ($.trim($('#product_url').val()).length == 0) {
+                $('.error-url').text('Product URL required');
+            } else {
+                $('.error-url').text('');
+            }
+            if ($.trim($('#product_price').val()).length == 0) {
+                $('.error-price').text('Product Price required');
+            } else {
+                $('.error-price').text('');
+            }
+            if ($.trim($('#product_image1').val()).length == 0) {
+                $('.error-image').text('');
+            } else {
+                var imgExt = $('#product_image1').val().split('.').pop().toLowerCase();
+
+                if ($.inArray(imgExt, ['gif', 'png', 'jpg', 'jpeg']) == -1) {
+                    $('.error-image').text('File not supported');
+                } else {
+                    var imgSize = $('#product_image1')[0].files[0].size;
+
+                    if (imgSize > 10485760) {
+                        $('.error-image').text('File too large');
+                    } else {
+                        $('.error-image').text('');
+                    }
+                }
+            }
+            if ($.trim($('#product_keyword').val()).length == 0) {
+                $('.error-keyword').text('Product Keyword required');
+            } else {
+                $('.error-keyword').text('');
+            }
+            if ($('.error-category').text() != '' || $('.error-subcategory').text() != '' || $('.error-title')
+                .text() != '' || $('.error-url').text() != '' || $('.error-price').text() != '' || $(
+                    '.error-price').text() != '' || $('.error-salePrice').text() != '' || $('.error-image')
+                .text() != '' || $('.error-keyword').text() != '') {
+                $('#toast').addClass('active');
+                $('.progress').addClass('active');
+                $('.text-1').text('Error!');
+                $('.text-2').text('Fill all required fields!');
+                setTimeout(() => {
+                    $('#toast').removeClass("active");
+                    $('.progress').removeClass("active");
+                }, 5000);
+            } else {
+                $.ajax({
+                    url: "./functions/insert-variable-product-process",
+                    type: "POST",
+                    data: new FormData(this),
+                    dataType: 'text',
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    success: function(data) {
+                        if (data == 'success') {
+                            location.reload();
+                        } else if (data == 'failed') {
+                            $('#toast').addClass('active');
+                            $('.progress').addClass('active');
+                            $('.text-1').text('Error!');
+                            $('.text-2').text('Something went wrong!');
+                            setTimeout(() => {
+                                $('#toast').removeClass("active");
+                                $('.progress').removeClass("active");
+                            }, 5000);
+                            $('#example').DataTable().ajax.reload();
+                        } else if (data == 'product already exist') {
+                            $('#toast').addClass('active');
+                            $('.progress').addClass('active');
+                            $('.text-1').text('Error!');
+                            $('.text-2').text('Product already exist!');
+                            setTimeout(() => {
+                                $('#toast').removeClass("active");
+                                $('.progress').removeClass("active");
+                            }, 5000);
+                        } else {
+                            $('#toast').addClass('active');
+                            $('.progress').addClass('active');
+                            $('.text-1').text('Error!');
+                            $('.text-2').text(data);
+                            setTimeout(() => {
+                                $('#toast').removeClass("active");
+                                $('.progress').removeClass("active");
+                            }, 5000);
+                        }
+                    }
+                })
+            }
+        });
+
+        // TAB
+        // $('#details_insert').on('click', function(e) {
+        //     e.preventDefault();
+        //     $('#details_btn').css("background-color", "#070506");
+        //     $('#details_btn').css("color", "#ffaf08");
+        //     $('#variant_btn').css("background-color", "#ffaf08");
+        //     $('#variant_btn').css("color", "#070506");
+        //     $('#details_tab').css("display", "none");
+        //     $('#variant_tab').css("display", "flex");
+        // })
+
+        // ADDING ATTRIBUTES
+        var count = 0;
 
         $('#add_variant').on('click', function(e) {
             e.preventDefault();
-            var selected_variant = $('#variant_list').find(":selected").val();
-            var group_form_group =  $('*[data-group_form_group= '+ selected_variant +']');
+            var selected_variant_id = $('#variant_list').find(":selected").val();
+            var selected_variant = $('#variant_list').find(":selected").text();
 
-            group_form_group.css("display", "flex");
+            var trim = $.trim(selected_variant);
+
+            count = count + 1;
+
+            output = '<tr id="row_' + count + '">';
+            output += '<td> <div class="group_form_group">';
+            output +=
+                '<div class="form_group left"> <span>Variant: </span> <input type="text" name="variant_name" id="variant_name" value="' +
+                trim + '"> <input type="hidden" name="variant_id[]" value="'+selected_variant_id+'"> </div>';
+            output +=
+                '<div class="form_group center"> <span>Attributes: </span> <input type="text" name="attributes[]" id="attributes" placeholder="Input attributes separated by comma" value=""> </div>';
+
+            output +=
+                '<div class="form_group right"> <button id="'+count+'" class="remove_variant"><i class="fa-solid fa-trash"></i></button> </div>';
+
+            output += '</div>';
+
+            output += '</td>';
+            output += '</tr>';
+
+            $('#variant_attribute').append(output);
+
         })
 
-        $('.remove_variant').each(function() {
-            $(this).on('click', function(e) {
+        $(document).on('click', '.remove_variant', function() {
+            var row_id = $(this).attr("id");
+            $('#row_'+row_id+'').remove();
+        })
+
+        $('#variant_tab').on('submit', function(e) {
             e.preventDefault();
-            var id = $(this).data('remove');
-            var group_form_group =  $('*[data-group_form_group= '+ id +']');
-            var attribute =  $('*[data-attribute= '+ id +']');
-
-            group_form_group.css("display", "none");
-            attribute.val('');
-
+            $.ajax({
+                type: "POST",
+                url: "./functions/variant-attributes",
+                dataType: 'text',
+                contentType: false,
+                cache: false,
+                processData: false,
+                data: new FormData(this),
+                success: function(response) {
+                    if(response == 'success') {
+                        location.reload();
+                    } else {
+                        alert(response);
+                    }
+                }
+            })
         })
+
+        // ADDING VARIATIONS
+        function getSelectedItems() {
+            var elements = document.getElementsByClassName('attribute');
+
+            var results = [];
+
+            for (var i = 0; i < elements.length; i++) {
+                var element = elements[i];
+                var strSel = element.options[element.selectedIndex].value;
+                    results.push(strSel);
+            }
+            var newArr = results.join(',').replace(/,/g, '/').split();
+            document.getElementById("showValue").value = newArr;
+        }
+
+        var countV = 0;
+
+        $('#add_variations').on('click', function(e) {
+            e.preventDefault();
+            if($('#showValue').val() == ',' || $('#showValue').val() == '') {
+                alert('bawal yan');
+            }
         })
+
         </script>
-
 
         <?php include 'bottom.php'?>
 

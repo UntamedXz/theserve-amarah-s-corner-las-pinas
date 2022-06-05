@@ -47,12 +47,12 @@ if(isset($_SESSION['id'])) {
 
 
 <script>
-    $(document).ready(function () {
-        $('#table_id').dataTable({
-            responsive: true,
-            scrollX: true,
-        });
+$(document).ready(function() {
+    $('#table_id').dataTable({
+        responsive: true,
+        scrollX: true,
     });
+});
 </script>
 </script>
 
@@ -60,13 +60,13 @@ if(isset($_SESSION['id'])) {
 <title>Amarah's Corner - BF Resort Las Piñas</title>
 
 <style>
-    body {
-        background: url(./assets/images/background.png) no-repeat;
-        background-size: cover;
-        background-position: center;
-        background-attachment: fixed;
-        height: 100%;
-    }
+body {
+    background: url(./assets/images/background.png) no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    height: 100%;
+}
 </style>
 </head>
 
@@ -79,13 +79,13 @@ if(isset($_SESSION['id'])) {
     <input type="hidden" id="profileIconCheck" value="<?php echo $userProfileIcon; ?>">
 
     <script>
-        $(window).on('load', function() {
-            if($('#profileIconCheck').val() == '') {
-                $('#profileIcon').attr("src","./assets/images/no_profile_pic.png");
-            } else {
-                $('#profileIcon').attr("src","./assets/images/" + $('#profileIconCheck').val());
-            }
-        })
+    $(window).on('load', function() {
+        if ($('#profileIconCheck').val() == '') {
+            $('#profileIcon').attr("src", "./assets/images/no_profile_pic.png");
+        } else {
+            $('#profileIcon').attr("src", "./assets/images/" + $('#profileIconCheck').val());
+        }
+    })
     </script>
 
     <!-- DELETE -->
@@ -165,45 +165,52 @@ if(isset($_SESSION['id'])) {
                     foreach($getUserCart as $row) {
                     ?>
                     <form id="cart_item">
-                    <div class="box" data-id="<?php echo $row['cart_id']; ?>">
-                        <?php
+                        <div class="box" data-id="<?php echo $row['cart_id']; ?>">
+                            <?php
                         if($row['product_img1'] != '') { 
                         ?>
-                        <div class="img" style="background:
+                            <div class="img" style="background:
                             url(./assets/images/<?php echo $row['product_img1']; ?>) no-repeat; background-size: cover;
                             background-position: center;">
-                        </div>
-                        <?php
+                            </div>
+                            <?php
                         } else {
                         ?>
-                        <div class="img" style="display: flex; align-items: center; justify-content: center; color: #6b6b6b;">
-                            <span>NO IMAGE AVAILABLE</span>
-                        </div>
-                        <?php
+                            <div class="img"
+                                style="display: flex; align-items: center; justify-content: center; color: #6b6b6b;">
+                                <span>NO IMAGE AVAILABLE</span>
+                            </div>
+                            <?php
                         }
                         ?>
-                        <div class="content">
-                            <h3><?php echo $row['product_title']; ?></h3>
-                            <h5><?php echo $row['subcategory_title']; ?></h5>
-                            <h4>Price <strong>P<span data-price="<?php echo $row['cart_id']; ?>"><?php echo $row['product_price']; ?></span> </strong></h4>
-                            <div class="qty-remove">
-                                <p class="unit">Quantity: <input id="qty" min="1" class="qty" onkeypress='return event.charCode >= 48 && event.charCode <= 57' value="<?php echo $row['product_qty']; ?>" data-id="<?php echo $row['cart_id']; ?>"></p>
-                                <h4 class="subTotal">Subtotal <strong>P<span class="subtotal" data-sub_total="<?php echo $row['cart_id']; ?>"><?php echo $row['product_total']; ?></span> </strong></h4>
-                            </div>
-                            <p form="cart_item" class="btn-area" data-id="<?php echo $row['cart_id']; ?>">
+                            <div class="content">
+                                <h3><?php echo $row['product_title']; ?></h3>
+                                <h5><?php echo $row['subcategory_title']; ?></h5>
+                                <h4>Price <strong>P<span
+                                            data-price="<?php echo $row['cart_id']; ?>"><?php echo $row['product_price']; ?></span>
+                                    </strong></h4>
+                                <div class="qty-remove">
+                                    <p class="unit">Quantity: <input id="qty" min="1" class="qty"
+                                            onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+                                            value="<?php echo $row['product_qty']; ?>"
+                                            data-id="<?php echo $row['cart_id']; ?>"></p>
+                                    <h4 class="subTotal">Subtotal <strong>P<span class="subtotal"
+                                                data-sub_total="<?php echo $row['cart_id']; ?>"><?php echo $row['product_total']; ?></span>
+                                        </strong></h4>
+                                </div>
+                                <p form="cart_item" class="btn-area" data-id="<?php echo $row['cart_id']; ?>">
                                     <i class='bx bxs-trash'></i>
                                     <span class="btn-2">Remove</span>
-                            </p>
+                                </p>
+                            </div>
                         </div>
-                    </div>
                     </form>
                     <?php
                     }
                     ?>
                 </div>
                 <div class="right-bar">
-                    <p><span>Total</span> <span><strong>P1,394.00</strong></span></p>
-
+                    <p><span>Total</span> <span class="total"><strong>1194</strong></span></p>
                     <a href="#"><i class='bx bxs-cart'></i>Proceed to Checkout</a>
                 </div>
             </div>
@@ -218,100 +225,123 @@ if(isset($_SESSION['id'])) {
     </script>
     <script src="./assets/js/script.js"></script>
     <script>
-        var loader = document.getElementById("preloader");
+    var loader = document.getElementById("preloader");
 
-        window.addEventListener("load", function () {
-            loader.style.display = "none";
-        })
+    window.addEventListener("load", function() {
+        loader.style.display = "none";
+    })
     </script>
 
     <script type="text/javascript">
-        // PREVENT TO TYPE 0 
+    // PREVENT TO TYPE 0 
 
-        // GET SUBTOTAL 
-        $('.qty').each(function() {
-            $(this).keyup(function() {
-                if($(this).val() == '' || $(this).val() == '0') {
-                    var user_id = $('#user_id').val();
-                    var id = $(this).data('id');
-                    var price = $('*[data-price= '+ id +']').text();
-                    var priceFloat = parseFloat(price).toFixed(2);
-                    var qty = 1;
-                    var subtotal = parseFloat((priceFloat * qty)).toFixed(2);
-                    $('*[data-sub_total= '+ id +']').text(subtotal);
+    // GET SUBTOTAL 
+    $('.qty').each(function() {
+        $(this).keyup(function() {
+            if ($(this).val() == '' || $(this).val() == '0') {
+                var user_id = $('#user_id').val();
+                var id = $(this).data('id');
+                var price = $('*[data-price= ' + id + ']').text();
+                var priceFloat = parseFloat(price).toFixed(2);
+                var qty = 1;
+                var subtotal = parseFloat((priceFloat * qty)).toFixed(2);
+                $('*[data-sub_total= ' + id + ']').text(subtotal);
 
-                    $.ajax({
-                        type: "POST",
-                        url: "./functions/update-cart",
-                        data: {
-                            'update': true,
-                            'price': priceFloat,
-                            'cart_id': id,
-                            'qty': qty,
-                            'subtotal': subtotal,
-                            'user_id': user_id,
-                        },
-                        success: function(response) {
-                        }
-                    })
-                } else {
-                    var user_id = $('#user_id').val();
-                    var id = $(this).data('id');
-                    var price = $('*[data-price= '+ id +']').text();
-                    var priceFloat = parseFloat(price).toFixed(2);
-                    var qty = parseInt($(this).val());
-                    var subtotal = parseFloat((priceFloat * qty)).toFixed(2);
-                    $('*[data-sub_total= '+ id +']').text(subtotal);
+                $.ajax({
+                    type: "POST",
+                    url: "./functions/update-cart",
+                    data: {
+                        'update': true,
+                        'price': priceFloat,
+                        'cart_id': id,
+                        'qty': qty,
+                        'subtotal': subtotal,
+                        'user_id': user_id,
+                    },
+                    success: function(response) {}
+                })
+            } else {
+                var user_id = $('#user_id').val();
+                var id = $(this).data('id');
+                var price = $('*[data-price= ' + id + ']').text();
+                var priceFloat = parseFloat(price).toFixed(2);
+                var qty = parseInt($(this).val());
+                var subtotal = parseFloat((priceFloat * qty)).toFixed(2);
+                $('*[data-sub_total= ' + id + ']').text(subtotal);
 
-                    $.ajax({
-                        type: "POST",
-                        url: "./functions/update-cart",
-                        data: {
-                            'update': true,
-                            'price': priceFloat,
-                            'cart_id': id,
-                            'qty': qty,
-                            'subtotal': subtotal,
-                            'user_id': user_id,
-                        },
-                        success: function(response) {
-                        }
-                    })
-                }
+                $.ajax({
+                    type: "POST",
+                    url: "./functions/update-cart",
+                    data: {
+                        'update': true,
+                        'price': priceFloat,
+                        'cart_id': id,
+                        'qty': qty,
+                        'subtotal': subtotal,
+                        'user_id': user_id,
+                    },
+                    success: function(response) {}
+                })
+            }
+            var gdtotal = 0;
+            $('.subtotal').each(function() {
+                var subtotal = parseFloat($(this).text());
+                gdtotal += subtotal;
             })
+            $('.total').text(gdtotal.toFixed(2));
         })
+    })
 
-        // CLICK REMOVE
-        $('.btn-area').on('click', function(e) {
-            e.preventDefault();
-            var id = $(this).data('id');
-            $('.delete-modal').addClass('active');
-            $('#cartId').val(id);
-        })
-
-        // SUBMIT DELETE
-        $('#delete').on('submit', function(e) {
-            e.preventDefault();
-            var cart_id = $('#cartId').val();
-
-            $.ajax({
-                type: "POST",
-                url: "./functions/delete-cart-item",
-                data: {
-                    'cart_id': cart_id,
-                },
-                success: function(response) {
-                    if(response == 'success') {
-                        location.reload();
-                    }
-                }
+    $(window).on('load', function() {
+        var gdtotal = 0;
+            $('.subtotal').each(function() {
+                var subtotal = parseFloat($(this).text());
+                gdtotal += subtotal;
             })
-        })
+            $('.total').text(gdtotal.toFixed(2));
+    })
 
-        // CLOSE MODAL
-        $(document).on('click', '#modalClose', function () {
-                $(".delete-modal").removeClass("active");
+    $(document).on('change', '.subtotal', function() {
+        var sum = 0;
+
+        $('.subtotal').each(function() {
+            var subtotal = parseFloat($(this).text()).toFixed(2);
+            sum += subtotal;
+        });
+        $('.total').val(sum);
+    })
+
+    // CLICK REMOVE
+    $('.btn-area').on('click', function(e) {
+        e.preventDefault();
+        var id = $(this).data('id');
+        $('.delete-modal').addClass('active');
+        $('#cartId').val(id);
+    })
+
+    // SUBMIT DELETE
+    $('#delete').on('submit', function(e) {
+        e.preventDefault();
+        var cart_id = $('#cartId').val();
+
+        $.ajax({
+            type: "POST",
+            url: "./functions/delete-cart-item",
+            data: {
+                'cart_id': cart_id,
+            },
+            success: function(response) {
+                if (response == 'success') {
+                    location.reload();
+                }
+            }
         })
+    })
+
+    // CLOSE MODAL
+    $(document).on('click', '#modalClose', function() {
+        $(".delete-modal").removeClass("active");
+    })
     </script>
 </body>
 
