@@ -210,8 +210,13 @@ body {
                     ?>
                 </div>
                 <div class="right-bar">
-                    <p><span>Total</span> <span class="total"><strong>1194</strong></span></p>
-                    <a href="#"><i class='bx bxs-cart'></i>Proceed to Checkout</a>
+                    <div class="overall_total">
+                        <span>Total</span>
+                        <div class="total_value">
+                            <span><strong>P</strong></span><span class="total">0.00</span>
+                        </div>
+                    </div>
+                    <button id="go_to_checkout">PROCEED TO CHECKOUT</button>
                 </div>
             </div>
         </div>
@@ -301,16 +306,6 @@ body {
             $('.total').text(gdtotal.toFixed(2));
     })
 
-    $(document).on('change', '.subtotal', function() {
-        var sum = 0;
-
-        $('.subtotal').each(function() {
-            var subtotal = parseFloat($(this).text()).toFixed(2);
-            sum += subtotal;
-        });
-        $('.total').val(sum);
-    })
-
     // CLICK REMOVE
     $('.btn-area').on('click', function(e) {
         e.preventDefault();
@@ -336,6 +331,11 @@ body {
                 }
             }
         })
+    })
+
+    $('#go_to_checkout').on('click', function(e) {
+        e.preventDefault();
+        location.href = 'checkout'
     })
 
     // CLOSE MODAL

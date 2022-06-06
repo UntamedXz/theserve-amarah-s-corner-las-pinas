@@ -311,7 +311,7 @@ require_once '../includes/database_conn.php';
                     $('#subcategory-list').val('SELECT SUBCATEGORY')
                     $('.error-subcategory').text('');
                 } else {
-                    if ($('#subcategory-list').val() == 'SELECT SUBCATEGORY' || $('#subcategory-list').val() == '') {
+                    if ($('#subcategory-list').val() == 'SELECT SUBCATEGORY' || $('#subcategory-list').val() == '' || $('#subcategory-list').val() == 'none') {
                         $('.error-subcategory').text('Subcategory required');
                     } else {
                         $('.error-subcategory').text('');
